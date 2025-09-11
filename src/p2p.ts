@@ -24,10 +24,10 @@ private peers: Set<WebSocket> = new Set();
 
 /**
  * Constructs a new P2P instance.
- * @param onTx A callback function to handle incoming transactions.
+ * @param onTx A callback function to handle incoming transactions (async).
  * @param onBlock A callback function to handle incoming blocks.
  */
-constructor(private onTx: (tx: SignedTx) => void, private onBlock: (b: Block) => void) {}
+constructor(private onTx: (tx: SignedTx) => Promise<void>, private onBlock: (b: Block) => void) {}
 
 
 /**
@@ -57,12 +57,18 @@ ws.on("open", () => this.register(ws));
  */
 private register(ws: WebSocket) {
 this.peers.add(ws);
-ws.on("message", (raw) => {
+ws.on("message", async (raw) => {
 try {
 const msg = JSON.parse(raw.toString()) as Msg;
-if (msg.kind === "tx") this.onTx(msg.data);
-if (msg.kind === "block") this.onBlock(msg.data);
-} catch {}
+if (msg.kind === "tx") {
+  await this.onTx(msg.data);
+}
+if (msg.kind === "block") {
+  this.onBlock(msg.data);
+}
+} catch (error) {
+  console.error(`[p2p] Message processing error: ${(error as Error).message}`);
+}
 });
 ws.on("close", () => this.peers.delete(ws));
 }

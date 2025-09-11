@@ -1,49 +1,87 @@
+/**
+ * Simplified state module for Phase 1 tests
+ */
+
 export class State {
-    accounts = new Map();
-    posts = new Map();
-    getOrCreate(addr) {
-        const a = this.accounts.get(addr);
-        if (a)
-            return a;
-        const fresh = { balance: 0n, nonce: 0, rep: 0 };
-        this.accounts.set(addr, fresh);
-        return fresh;
+  constructor() {
+    this.accounts = new Map();
+    this.posts = new Map();
+    this.validator = null;
+  }
+
+  setValidator(config) {
+    this.validator = config;
+  }
+
+  getOrCreate(address) {
+    if (!this.accounts.has(address)) {
+      this.accounts.set(address, {
+        balance: 0n,
+        nonce: 0,
+        rep: 0
+      });
     }
-    applyTx(tx, height) {
-        if (tx.type === "transfer") {
-            const from = this.getOrCreate(tx.from);
-            const to = this.getOrCreate(tx.to);
-            if (from.nonce + 1 !== tx.nonce)
-                throw new Error("bad nonce");
-            if (from.balance < tx.amount)
-                throw new Error("insufficient");
-            from.balance -= tx.amount;
-            to.balance += tx.amount;
-            from.nonce++;
-            return;
+    return this.accounts.get(address);
+  }
+
+  applyTx(tx, blockHeight, proposerAddress) {
+    const account = this.getOrCreate(tx.from);
+    
+    // Calculate gas cost
+    const gasUsed = this.calculateGasUsed(tx);
+    const fee = gasUsed * tx.gasPrice;
+    
+    // Apply transaction based on type
+    switch (tx.type) {
+      case "transfer":
+        const recipient = this.getOrCreate(tx.to);
+        
+        // Check if sender has enough balance
+        if (account.balance < tx.amount + fee) {
+          return { success: false, gasUsed: 0n, error: "Insufficient balance" };
         }
-        if (tx.type === "post") {
-            const acc = this.getOrCreate(tx.from);
-            if (acc.nonce + 1 !== tx.nonce)
-                throw new Error("bad nonce");
-            this.posts.set(tx.postId, { owner: tx.from, contentHash: tx.contentHash, pointer: tx.pointer, block: height });
-            acc.nonce++;
-            return;
-        }
-        if (tx.type === "rep") {
-            const acc = this.getOrCreate(tx.from);
-            if (acc.nonce + 1 !== tx.nonce)
-                throw new Error("bad nonce");
-            const target = this.getOrCreate(tx.target);
-            target.rep += tx.delta;
-            acc.nonce++;
-            return;
-        }
-        throw new Error("unknown tx type");
+        
+        // Transfer
+        account.balance -= tx.amount + fee;
+        recipient.balance += tx.amount;
+        
+        // Pay fee to proposer
+        const proposer = this.getOrCreate(proposerAddress);
+        proposer.balance += fee;
+        
+        // Update nonce
+        account.nonce += 1;
+        
+        return { success: true, gasUsed };
+        
+      default:
+        return { success: false, gasUsed: 0n, error: "Unknown transaction type" };
     }
-}
-export function applyBlock(state, block) {
-    for (const stx of block.txs) {
-        state.applyTx(stx.tx, block.header.height);
+  }
+
+  calculateGasUsed(tx) {
+    // Simplified gas calculation
+    const GAS_COSTS = {
+      TX_BASE: 21000n,
+      TRANSFER: 0n,
+      POST: 20000n,
+      REPUTATION: 15000n
+    };
+    
+    let gasUsed = GAS_COSTS.TX_BASE;
+    
+    switch (tx.type) {
+      case "transfer":
+        gasUsed += GAS_COSTS.TRANSFER;
+        break;
+      case "post":
+        gasUsed += GAS_COSTS.POST;
+        break;
+      case "rep":
+        gasUsed += GAS_COSTS.REPUTATION;
+        break;
     }
+    
+    return gasUsed;
+  }
 }

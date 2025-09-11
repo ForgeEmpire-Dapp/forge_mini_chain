@@ -8,31 +8,37 @@ import { SignedTx, Tx } from "./types.js";
 
 
 /**
- * Starts the API server.
+ * Starts the API server with enhanced transaction handling.
  * @param port The port to listen on.
  * @param handlers An object containing the handler functions for the API endpoints.
  */
 export function startApi(port: number, handlers: {
-submitTx: (stx: SignedTx) => void;
+submitTx: (stx: SignedTx) => Promise<void>;
 getAccount: (addr: string) => any;
 getHead: () => any;
 }) {
 const app = express();
 app.use(bodyParser.json());
 
-
 app.get("/health", (_req, res) => res.json({ ok: true }));
 app.get("/head", (_req, res) => res.json(handlers.getHead()));
 app.get("/account/:addr", (req, res) => res.json(handlers.getAccount(req.params.addr) || null));
 
-
-app.post("/tx", (req, res) => {
-const stx = req.body as SignedTx;
-if (!stx?.tx?.type) return res.status(400).json({ error: "bad tx" });
-handlers.submitTx(stx);
-res.json({ ok: true, hash: stx.hash });
+app.post("/tx", async (req, res) => {
+  try {
+    const stx = req.body as SignedTx;
+    if (!stx?.tx?.type) {
+      return res.status(400).json({ error: "Invalid transaction format" });
+    }
+    
+    await handlers.submitTx(stx);
+    res.json({ ok: true, hash: stx.hash });
+  } catch (error) {
+    const errorMessage = (error as Error).message;
+    console.error(`[api] Transaction submission failed: ${errorMessage}`);
+    res.status(400).json({ error: errorMessage });
+  }
 });
-
 
 app.listen(port, () => console.log(`[api] http://localhost:${port}`));
 }

@@ -20,9 +20,12 @@ export type KeyPair = {
  * The base structure for all transaction types.
  */
 export type TxBase = {
-type: "transfer" | "post" | "rep";
+type: "transfer" | "post" | "rep" | "deploy" | "call";
 nonce: number; // per-sender monotonic
 from: string; // address (0x...)
+gasLimit: bigint; // maximum gas willing to use
+gasPrice: bigint; // price per gas unit in wei
+data?: Hex; // for smart contracts and general data
 };
 
 
@@ -42,11 +45,31 @@ pointer?: string; // ipfs://... or https://...
  */
 export type RepTx = TxBase & { type: "rep"; target: string; delta: number; reason?: string };
 
+/**
+ * A transaction for deploying a smart contract.
+ */
+export type DeployTx = TxBase & { 
+  type: "deploy"; 
+  bytecode: Hex; // contract bytecode
+  value?: bigint; // ETH to send to contract constructor
+  constructorArgs?: Hex; // ABI-encoded constructor arguments
+};
+
+/**
+ * A transaction for calling a smart contract.
+ */
+export type CallTx = TxBase & { 
+  type: "call"; 
+  to: string; // contract address
+  value: bigint; // ETH to send with call
+  data: Hex; // function call data (method signature + parameters)
+};
+
 
 /**
  * A union type representing any possible transaction.
  */
-export type Tx = TransferTx | PostTx | RepTx;
+export type Tx = TransferTx | PostTx | RepTx | DeployTx | CallTx;
 
 
 /**
@@ -61,7 +84,7 @@ hash: Hex; // sha256(tx bytes)
 
 
 /**
- * The header of a block in the blockchain.
+ * Enhanced block header with gas tracking
  */
 export type BlockHeader = {
 height: number;
@@ -69,6 +92,9 @@ prevHash: Hex;
 timestamp: number; // ms
 txRoot: Hex;
 proposer: string; // address of node that built the block
+gasUsed: bigint; // total gas used in this block
+gasLimit: bigint; // maximum gas allowed in this block
+baseFeePerGas: bigint; // base fee for this block
 };
 
 
@@ -95,16 +121,23 @@ p2pPort: number; // ws port
 apiPort: number; // http api
 dataDir: string; // for persistence
 keypairFile: string; // local key storage
+// Gas mechanism
+blockGasLimit: bigint; // maximum gas per block
+minGasPrice: bigint; // minimum gas price
+baseFeePerGas: bigint; // base fee for transactions
 };
 
 
 /**
- * Represents a user account in the blockchain state.
+ * Represents a user account or smart contract in the blockchain state.
  */
 export type Account = {
 balance: bigint;
 nonce: number;
 rep: number;
+codeHash?: Hex; // for contract accounts - hash of the contract code
+storageRoot?: Hex; // for contract storage - root of the storage trie
+isContract?: boolean; // flag to identify contract accounts
 };
 
 
@@ -114,4 +147,77 @@ rep: number;
 export type AppState = {
 accounts: Map<string, Account>;
 posts: Map<string, { owner: string; contentHash: Hex; pointer?: string; block: number }>; // postId->data
+};
+
+/**
+ * Result of transaction validation
+ */
+export type ValidationResult = {
+valid: boolean;
+error?: string;
+requiredGas?: bigint;
+fee?: bigint;
+};
+
+/**
+ * Gas calculation and management types
+ */
+export type GasCost = {
+base: bigint; // base cost for transaction type
+data: bigint; // cost for data bytes
+total: bigint; // total gas required
+};
+
+/**
+ * Transaction execution result
+ */
+export type TxExecutionResult = {
+success: boolean;
+gasUsed: bigint;
+error?: string;
+returnData?: Hex;
+events?: Array<{ topics: Hex[]; data: Hex }>;
+contractAddress?: string; // For contract deployment
+createdAddresses?: string[]; // Addresses created during execution
+destructedAddresses?: string[]; // Addresses destructed during execution
+};
+
+/**
+ * EVM execution result with detailed information
+ */
+export type EVMResult = {
+success: boolean;
+returnValue: Hex;
+gasUsed: bigint;
+exceptionError?: Error;
+runState?: {
+  programCounter: number;
+  opCode: Hex;
+  gasLeft: bigint;
+  stack: Hex[];
+  memory: Hex;
+  memoryWordCount: number;
+};
+logs: Array<{
+  address: Hex;
+  topics: Hex[];
+  data: Hex;
+}>;
+contractAddress?: Hex;
+};
+
+/**
+ * Smart contract storage state
+ */
+export type ContractStorage = {
+  [key: string]: Hex; // storage slot -> value
+};
+
+/**
+ * Contract account extended information
+ */
+export type ContractAccount = Account & {
+  code: Hex; // Contract bytecode
+  storage: ContractStorage; // Contract storage
+  isContract: true;
 };

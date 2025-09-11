@@ -38,12 +38,15 @@ return sha256(Buffer.from(JSON.stringify(h)));
 
 
 /**
- * Constructs a new block.
+ * Constructs a new block with gas tracking.
  * @param height The height of the block.
  * @param prevHash The hash of the previous block.
  * @param proposer The address of the block proposer.
  * @param proposerPriv The private key of the proposer.
  * @param txs An array of signed transactions to include in the block.
+ * @param gasUsed Total gas used by all transactions.
+ * @param gasLimit Maximum gas allowed in the block.
+ * @param baseFeePerGas Base fee for this block.
  * @returns The newly created block.
  */
 export function buildBlock(
@@ -51,10 +54,22 @@ height: number,
 prevHash: string,
 proposer: string,
 proposerPriv: string,
-txs: SignedTx[]
+txs: SignedTx[],
+gasUsed: bigint = 0n,
+gasLimit: bigint = 10000000n,
+baseFeePerGas: bigint = 1000000000n
 ): Block {
 const txRoot = merkleRoot(txs.map((t) => t.hash));
-const header: BlockHeader = { height, prevHash, timestamp: Date.now(), txRoot, proposer };
+const header: BlockHeader = { 
+  height, 
+  prevHash, 
+  timestamp: Date.now(), 
+  txRoot, 
+  proposer,
+  gasUsed,
+  gasLimit,
+  baseFeePerGas
+};
 const sig = signEd25519(proposerPriv, Buffer.from(headerHash(header)));
 const hash = sha256(Buffer.from(JSON.stringify({ header, signature: sig })));
 return { header, txs, signature: sig, hash };
