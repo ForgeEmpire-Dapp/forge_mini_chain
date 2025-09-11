@@ -27,7 +27,8 @@ isLeader: process.env.LEADER === "1",
 leaderWsURL: process.env.LEADER_WS || "ws://localhost:7071",
 p2pPort: parseInt(process.env.P2P_PORT || (process.env.LEADER === "1" ? "7071" : "0")),
 apiPort: parseInt(process.env.API_PORT || (process.env.LEADER === "1" ? "8080" : "8081")),
-dataDir: process.env.DATA_DIR || ".data",
+// Each node gets its own data directory to avoid database conflicts
+dataDir: process.env.DATA_DIR || (process.env.LEADER === "1" ? ".data" : `.data-follower-${process.env.API_PORT || "8081"}`),
 keypairFile: process.env.KEY_FILE || ".keys/ed25519.json",
 // Gas mechanism configuration
 blockGasLimit: BigInt(process.env.BLOCK_GAS_LIMIT || "10000000"), // 10M gas per block
@@ -109,7 +110,9 @@ shutdownHandler.onShutdown(async () => {
   // Save current mempool state
   try {
     const mempoolPath = path.join(cfg.dataDir, cfg.chainId, 'mempool.json');
-    fs.writeFileSync(mempoolPath, JSON.stringify(chain.mempool, null, 2));
+    fs.writeFileSync(mempoolPath, JSON.stringify(chain.mempool, (key, value) => 
+      typeof value === 'bigint' ? value.toString() : value
+    , 2));
   } catch (error) {
     console.error('[shutdown] Failed to persist mempool:', error);
   }

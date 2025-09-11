@@ -80,7 +80,9 @@ export function verifySignedTx(
  * @returns The transaction as a Buffer.
  */
 export function txToBytes(tx: Tx): Buffer {
-return Buffer.from(JSON.stringify(tx));
+return Buffer.from(JSON.stringify(tx, (key, value) => 
+  typeof value === 'bigint' ? value.toString() : value
+));
 }
 
 

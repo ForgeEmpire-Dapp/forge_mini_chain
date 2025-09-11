@@ -4,6 +4,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 import { Block, ChainConfig, SignedTx } from "./types.js";
 import { State, applyBlock } from "./state.js";
 import { buildBlock } from "./block.js";
@@ -280,7 +281,7 @@ private calculateStateRoot(): string {
   const posts = Array.from(this.state.posts.entries()).sort();
   
   const stateData = JSON.stringify({ accounts, posts });
-  return require('crypto').createHash('sha256').update(stateData).digest('hex');
+  return crypto.createHash('sha256').update(stateData).digest('hex');
 }
 
 /**

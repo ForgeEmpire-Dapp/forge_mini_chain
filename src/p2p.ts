@@ -61,10 +61,14 @@ ws.on("message", async (raw) => {
 try {
 const msg = JSON.parse(raw.toString()) as Msg;
 if (msg.kind === "tx") {
-  await this.onTx(msg.data);
+  // Deserialize BigInt values in transaction
+  const tx = this.deserializeTx(msg.data);
+  await this.onTx(tx);
 }
 if (msg.kind === "block") {
-  this.onBlock(msg.data);
+  // Deserialize BigInt values in block
+  const block = this.deserializeBlock(msg.data);
+  this.onBlock(block);
 }
 } catch (error) {
   console.error(`[p2p] Message processing error: ${(error as Error).message}`);
@@ -73,13 +77,47 @@ if (msg.kind === "block") {
 ws.on("close", () => this.peers.delete(ws));
 }
 
+/**
+ * Deserialize BigInt values in transaction
+ */
+private deserializeTx(txData: any): any {
+  return {
+    ...txData,
+    tx: {
+      ...txData.tx,
+      gasLimit: BigInt(txData.tx.gasLimit),
+      gasPrice: BigInt(txData.tx.gasPrice),
+      ...(txData.tx.amount !== undefined && { amount: BigInt(txData.tx.amount) }),
+      ...(txData.tx.value !== undefined && { value: BigInt(txData.tx.value) })
+    }
+  };
+}
+
+/**
+ * Deserialize BigInt values in block
+ */
+private deserializeBlock(blockData: any): any {
+  return {
+    ...blockData,
+    header: {
+      ...blockData.header,
+      gasUsed: BigInt(blockData.header.gasUsed),
+      gasLimit: BigInt(blockData.header.gasLimit),
+      baseFeePerGas: BigInt(blockData.header.baseFeePerGas)
+    },
+    txs: blockData.txs.map((tx: any) => this.deserializeTx(tx))
+  };
+}
+
 
 /**
  * Broadcasts a message to all connected peers.
  * @param msg The message to broadcast.
  */
 broadcast(msg: Msg) {
-const raw = JSON.stringify(msg);
+const raw = JSON.stringify(msg, (key, value) => 
+  typeof value === 'bigint' ? value.toString() : value
+);
 for (const p of this.peers) {
 if (p.readyState === p.OPEN) p.send(raw);
 }

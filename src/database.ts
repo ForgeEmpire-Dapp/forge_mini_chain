@@ -114,8 +114,11 @@ export class LevelBlockchainDB implements BlockchainDB {
     try {
       const batch = this.db.batch();
       
-      // Save block by hash
-      batch.put(`blocks:hash:${block.hash}`, block);
+      // Save block by hash with BigInt serialization
+      const serializedBlock = JSON.parse(JSON.stringify(block, (key, value) => 
+        typeof value === 'bigint' ? value.toString() : value
+      ));
+      batch.put(`blocks:hash:${block.hash}`, serializedBlock);
       
       // Save block by height for quick lookup
       batch.put(`blocks:height:${block.header.height}`, block.hash);
@@ -141,8 +144,31 @@ export class LevelBlockchainDB implements BlockchainDB {
    */
   async getBlock(hash: string): Promise<Block | null> {
     try {
-      const block = await this.blocksDB.get(`hash:${hash}`);
-      return block || null;
+      const blockData = await this.blocksDB.get(`hash:${hash}`);
+      if (!blockData) return null;
+      
+      // Convert string BigInt values back to BigInt
+      const block = {
+        ...blockData,
+        header: {
+          ...blockData.header,
+          gasUsed: BigInt(blockData.header.gasUsed),
+          gasLimit: BigInt(blockData.header.gasLimit),
+          baseFeePerGas: BigInt(blockData.header.baseFeePerGas)
+        },
+        txs: blockData.txs.map((tx: any) => ({
+          ...tx,
+          tx: {
+            ...tx.tx,
+            gasLimit: BigInt(tx.tx.gasLimit),
+            gasPrice: BigInt(tx.tx.gasPrice),
+            ...(tx.tx.amount !== undefined && { amount: BigInt(tx.tx.amount) }),
+            ...(tx.tx.value !== undefined && { value: BigInt(tx.tx.value) })
+          }
+        }))
+      };
+      
+      return block;
     } catch (error) {
       if ((error as any).code === 'LEVEL_NOT_FOUND') {
         return null;

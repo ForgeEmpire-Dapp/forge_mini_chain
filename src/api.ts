@@ -21,8 +21,18 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get("/health", (_req, res) => res.json({ ok: true }));
-app.get("/head", (_req, res) => res.json(handlers.getHead()));
-app.get("/account/:addr", (req, res) => res.json(handlers.getAccount(req.params.addr) || null));
+app.get("/head", (_req, res) => {
+  const head = handlers.getHead();
+  res.json(JSON.parse(JSON.stringify(head, (key, value) => 
+    typeof value === 'bigint' ? value.toString() : value
+  )));
+});
+app.get("/account/:addr", (req, res) => {
+  const account = handlers.getAccount(req.params.addr) || null;
+  res.json(JSON.parse(JSON.stringify(account, (key, value) => 
+    typeof value === 'bigint' ? value.toString() : value
+  )));
+});
 
 app.post("/tx", async (req, res) => {
   try {

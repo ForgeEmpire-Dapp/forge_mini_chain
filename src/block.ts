@@ -33,7 +33,9 @@ return layer[0];
  * @returns The hash of the header as a hexadecimal string.
  */
 export function headerHash(h: BlockHeader): string {
-return sha256(Buffer.from(JSON.stringify(h)));
+return sha256(Buffer.from(JSON.stringify(h, (key, value) => 
+  typeof value === 'bigint' ? value.toString() : value
+)));
 }
 
 
@@ -71,7 +73,9 @@ const header: BlockHeader = {
   baseFeePerGas
 };
 const sig = signEd25519(proposerPriv, Buffer.from(headerHash(header)));
-const hash = sha256(Buffer.from(JSON.stringify({ header, signature: sig })));
+const hash = sha256(Buffer.from(JSON.stringify({ header, signature: sig }, (key, value) => 
+  typeof value === 'bigint' ? value.toString() : value
+)));
 return { header, txs, signature: sig, hash };
 }
 
