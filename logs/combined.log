@@ -1,0 +1,6 @@
+{"level":"info","message":"Test server started","port":3000,"service":"forge-mini-chain","timestamp":"2025-09-15T10:36:48.210Z"}
+{"hasHead":true,"level":"info","message":"Health check performed","service":"forge-mini-chain","status":"ok","timestamp":"2025-09-15T10:37:11.460Z"}
+{"level":"info","message":"Test server started","port":3000,"service":"forge-mini-chain","timestamp":"2025-09-15T10:43:42.859Z"}
+{"hasHead":true,"level":"info","message":"Health check performed","service":"forge-mini-chain","status":"ok","timestamp":"2025-09-15T10:43:57.875Z"}
+{"level":"info","message":"Test server started","port":3000,"service":"forge-mini-chain","timestamp":"2025-09-15T10:47:55.485Z"}
+{"hasHead":true,"level":"info","message":"Health check performed","service":"forge-mini-chain","status":"ok","timestamp":"2025-09-15T10:49:14.050Z"}

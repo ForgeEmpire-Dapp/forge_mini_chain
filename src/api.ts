@@ -7,7 +7,18 @@ import http from "http";
 import bodyParser from "body-parser";
 import { WebSocketServer, WebSocket } from "ws";
 import { SignedTx, Tx, Block } from "./types.js";
-
+import logger from './logger.js';
+import { 
+  register,
+  blockHeightGauge,
+  mempoolSizeGauge,
+  totalTransactionsCounter,
+  totalBlocksCounter,
+  evmContractCounter,
+  transactionGasUsedHistogram,
+  blockGasUsedHistogram,
+  apiRequestDurationHistogram
+} from "./metrics.js";
 
 /**
  * Starts the API server with enhanced transaction handling.
@@ -46,7 +57,58 @@ const subscriptions: {
 
 app.use(bodyParser.json());
 
-app.get("/health", (_req, res) => res.json({ ok: true }));
+// Add metrics middleware for all routes
+app.use(metricsMiddleware);
+
+app.get("/health", (req, res) => {
+  try {
+    // Perform health checks
+    const healthChecks: any = {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      blockchain: {
+        initialized: handlers.getHead !== undefined,
+        hasHead: handlers.getHead() !== null,
+      },
+      memory: {
+        rss: Math.round(process.memoryUsage().rss / 1024 / 1024), // MB
+        heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024), // MB
+        heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024), // MB
+      }
+    };
+    
+    // Add EVM status if available
+    if (handlers.getEVMStats) {
+      try {
+        const evmStats = handlers.getEVMStats();
+        healthChecks.blockchain.evm = {
+          status: 'ok',
+          contracts: evmStats.contractCount
+        };
+      } catch (error) {
+        healthChecks.blockchain.evm = {
+          status: 'error',
+          error: (error as Error).message
+        };
+      }
+    }
+    
+    logger.info('Health check performed', { 
+      status: healthChecks.status,
+      hasHead: healthChecks.blockchain.hasHead
+    });
+    
+    res.status(200).json(healthChecks);
+  } catch (error) {
+    logger.error('Health check failed', { error: (error as Error).message });
+    res.status(500).json({ 
+      status: 'error', 
+      error: (error as Error).message 
+    });
+  }
+});
+
 app.get("/head", (_req, res) => {
   const head = handlers.getHead();
   res.json(JSON.parse(JSON.stringify(head, (key, value) => 
@@ -140,20 +202,39 @@ app.post("/tx", async (req, res) => {
   try {
     const stx = req.body as SignedTx;
     if (!stx?.tx?.type) {
+      logger.warn('Invalid transaction format received', { body: req.body });
       return res.status(400).json({ error: "Invalid transaction format" });
     }
     
+    logger.info('Transaction submission received', { 
+      txType: stx.tx.type,
+      txHash: stx.hash,
+      from: stx.tx.from
+    });
+    
     await handlers.submitTx(stx);
+    logger.info('Transaction submitted successfully', { 
+      txHash: stx.hash,
+      from: stx.tx.from
+    });
     res.json({ ok: true, hash: stx.hash });
   } catch (error) {
     const errorMessage = (error as Error).message;
-    console.error(`[api] Transaction submission failed: ${errorMessage}`);
+    logger.error('Transaction submission failed', { 
+      error: errorMessage,
+      stack: (error as Error).stack
+    });
     res.status(400).json({ error: errorMessage });
   }
 });
 
 // WebSocket subscription endpoint
 wss.on("connection", (ws, req) => {
+  logger.info('WebSocket connection established', {
+    remoteAddress: req.socket.remoteAddress,
+    url: req.url
+  });
+  
   // Parse the subscription type from the URL
   const url = new URL(req.url || "/", `http://localhost:${port}`);
   const subscriptionType = url.pathname.split("/")[2]; // /subscribe/:type
@@ -181,6 +262,9 @@ wss.on("connection", (ws, req) => {
       
       // Acknowledge the connection
       send({ type: "subscription", subscription: "blocks", status: "active" });
+      logger.info('Blocks subscription established', {
+        remoteAddress: req.socket.remoteAddress
+      });
       
       // If blockchain handler is available, subscribe to blocks
       if (handlers.subscribeToBlocks) {
@@ -212,6 +296,9 @@ wss.on("connection", (ws, req) => {
       
       // Acknowledge the connection
       send({ type: "subscription", subscription: "transactions", status: "active" });
+      logger.info('Transactions subscription established', {
+        remoteAddress: req.socket.remoteAddress
+      });
       
       // If blockchain handler is available, subscribe to transactions
       if (handlers.subscribeToTransactions) {
@@ -243,6 +330,9 @@ wss.on("connection", (ws, req) => {
       
       // Acknowledge the connection
       send({ type: "subscription", subscription: "events", status: "active" });
+      logger.info('Events subscription established', {
+        remoteAddress: req.socket.remoteAddress
+      });
       
       // If blockchain handler is available, subscribe to events
       if (handlers.subscribeToEvents) {
@@ -264,10 +354,80 @@ wss.on("connection", (ws, req) => {
       break;
       
     default:
+      logger.warn('Unknown subscription type requested', {
+        subscriptionType,
+        remoteAddress: req.socket.remoteAddress
+      });
       send({ type: "error", message: "Unknown subscription type" });
       ws.close();
+  }
+  
+  ws.on("close", () => {
+    logger.info('WebSocket connection closed', {
+      remoteAddress: req.socket.remoteAddress
+    });
+  });
+});
+
+// Add metrics endpoint
+app.get("/metrics", async (_req, res) => {
+  try {
+    // Update blockchain metrics
+    const head = handlers.getHead();
+    if (head) {
+      blockHeightGauge.set(Number(head.header.height));
+      if (head.header.gasUsed) {
+        blockGasUsedHistogram.observe(Number(head.header.gasUsed));
+      }
+    }
+    
+    // Update EVM metrics if available
+    if (handlers.getEVMStats) {
+      try {
+        const evmStats = handlers.getEVMStats();
+        evmContractCounter.set(evmStats.contractCount);
+      } catch (error) {
+        console.error('[api] Failed to get EVM stats for metrics:', error);
+      }
+    }
+    
+    // Return metrics
+    res.set('Content-Type', register.contentType);
+    res.end(await register.metrics());
+  } catch (error) {
+    console.error('[api] Metrics collection failed:', error);
+    res.status(500).json({ error: 'Failed to collect metrics' });
   }
 });
 
 server.listen(port, () => console.log(`[api] http://localhost:${port}`));
+}
+
+// Add metrics middleware
+function metricsMiddleware(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const startTime = Date.now();
+  
+  res.on('finish', () => {
+    const duration = (Date.now() - startTime) / 1000;
+    apiRequestDurationHistogram.observe(
+      {
+        method: req.method,
+        route: req.route?.path || req.path,
+        status_code: res.statusCode.toString()
+      },
+      duration
+    );
+    
+    // Log slow requests (> 1 second)
+    if (duration > 1) {
+      logger.warn('Slow API request detected', {
+        method: req.method,
+        url: req.url,
+        duration: duration,
+        statusCode: res.statusCode
+      });
+    }
+  });
+  
+  next();
 }

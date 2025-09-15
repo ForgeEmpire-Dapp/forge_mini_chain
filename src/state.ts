@@ -5,7 +5,8 @@
 import { Account, AppState, SignedTx, Tx, TxExecutionResult, ChainConfig } from "./types.js";
 import { TxValidator, GAS_COSTS } from "./validation.js";
 import { EVMManager } from "./evm.js";
-
+import { evmContractCounter } from "./metrics.js";
+import logger from './logger.js';
 
 /**
  * The main state class for the application.
@@ -52,6 +53,12 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
   let gasUsed = 0n;
   
   try {
+    logger.debug('Applying transaction', { 
+      txType: tx.type,
+      from: tx.from,
+      height
+    });
+    
     // Calculate gas cost
     const gasCost = this.validator?.calculateGasCost(tx) || {
       base: GAS_COSTS.TX_BASE,
@@ -97,6 +104,12 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
       to.balance += transferTx.amount;
       from.nonce++;
       
+      logger.info('Transfer transaction applied', { 
+        from: tx.from,
+        to: transferTx.to,
+        amount: transferTx.amount
+      });
+      
       return {
         success: true,
         gasUsed,
@@ -121,6 +134,11 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
       
       from.nonce++;
       
+      logger.info('Post transaction applied', { 
+        from: tx.from,
+        postId: postTx.postId
+      });
+      
       return {
         success: true,
         gasUsed,
@@ -142,6 +160,12 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
       
       target.rep += repTx.delta;
       from.nonce++;
+      
+      logger.info('Reputation transaction applied', { 
+        from: tx.from,
+        target: repTx.target,
+        delta: repTx.delta
+      });
       
       return {
         success: true,
@@ -166,6 +190,13 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
       
       if (result.success) {
         from.nonce++;
+        // Update EVM contract counter
+        evmContractCounter.inc();
+        
+        logger.info('Contract deployed', { 
+          from: tx.from,
+          contractAddress: result.contractAddress
+        });
       }
       
       return result;
@@ -195,6 +226,12 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
           const contractAccount = this.getOrCreate(callTx.to);
           contractAccount.balance += callTx.value;
         }
+        
+        logger.info('Contract call executed', { 
+          from: tx.from,
+          to: callTx.to,
+          gasUsed: result.gasUsed
+        });
       }
       
       return result;
@@ -213,6 +250,12 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
     
     // Refund unused gas
     from.balance += refund;
+    
+    logger.error('Transaction execution failed', { 
+      txType: tx.type,
+      from: tx.from,
+      error: (error as Error).message
+    });
     
     return {
       success: false,

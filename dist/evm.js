@@ -6,6 +6,8 @@ import { Common, Mainnet, Hardfork } from '@ethereumjs/common';
 import { Address, bytesToHex, hexToBytes } from '@ethereumjs/util';
 import { ErrorHandler } from './errors.js';
 import { keccak256 } from './crypto.js';
+import { evmContractCounter } from './metrics.js';
+import logger from './logger.js';
 /**
  * EVM Manager for smart contract operations
  */
@@ -34,7 +36,7 @@ export class EVMManager {
      */
     async deployContract(tx, blockContext) {
         try {
-            console.log(`[evm] Deploying contract from ${tx.from}`);
+            logger.info('Deploying contract', { from: tx.from });
             // Calculate contract address
             const deployerAccount = this.state.getOrCreate(tx.from);
             const contractAddress = this.calculateContractAddress(tx.from, deployerAccount.nonce);
@@ -67,6 +69,10 @@ export class EVMManager {
                 }
             });
             if (result.execResult.exceptionError) {
+                logger.error('Contract deployment failed', {
+                    from: tx.from,
+                    error: result.execResult.exceptionError?.error?.toString()
+                });
                 return {
                     success: false,
                     gasUsed: result.execResult.executionGasUsed,
@@ -90,7 +96,13 @@ export class EVMManager {
                 storage: {}
             };
             this.state.accounts.set(contractAddress, contractAccount);
-            console.log(`[evm] Contract deployed at ${contractAddress}`);
+            // Update metrics
+            evmContractCounter.set(this.contractCode.size);
+            logger.info('Contract deployed successfully', {
+                from: tx.from,
+                contractAddress,
+                gasUsed: result.execResult.executionGasUsed
+            });
             return {
                 success: true,
                 gasUsed: result.execResult.executionGasUsed,
@@ -101,6 +113,11 @@ export class EVMManager {
         }
         catch (error) {
             this.errorHandler.logError(error, 'Contract Deployment', { from: tx.from });
+            logger.error('Contract deployment error', {
+                from: tx.from,
+                error: error.message,
+                stack: error.stack
+            });
             return {
                 success: false,
                 gasUsed: 21000n,
@@ -114,7 +131,7 @@ export class EVMManager {
      */
     async callContract(tx, blockContext) {
         try {
-            console.log(`[evm] Calling contract ${tx.to} from ${tx.from}`);
+            logger.info('Calling contract', { from: tx.from, to: tx.to });
             // Check if target is a contract
             const contractAccount = this.state.accounts.get(tx.to);
             if (!contractAccount?.isContract) {
@@ -142,6 +159,11 @@ export class EVMManager {
                 }
             });
             if (result.execResult.exceptionError) {
+                logger.error('Contract call failed', {
+                    from: tx.from,
+                    to: tx.to,
+                    error: result.execResult.exceptionError?.error?.toString()
+                });
                 return {
                     success: false,
                     gasUsed: result.execResult.executionGasUsed,
@@ -149,6 +171,11 @@ export class EVMManager {
                     returnData: '0x'
                 };
             }
+            logger.info('Contract call executed successfully', {
+                from: tx.from,
+                to: tx.to,
+                gasUsed: result.execResult.executionGasUsed
+            });
             return {
                 success: true,
                 gasUsed: result.execResult.executionGasUsed,
@@ -158,6 +185,12 @@ export class EVMManager {
         }
         catch (error) {
             this.errorHandler.logError(error, 'Contract Call', { from: tx.from, to: tx.to });
+            logger.error('Contract call error', {
+                from: tx.from,
+                to: tx.to,
+                error: error.message,
+                stack: error.stack
+            });
             return {
                 success: false,
                 gasUsed: 25000n,

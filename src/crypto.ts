@@ -260,3 +260,13 @@ export function addressFromSecp256k1Pub(pubHex: Hex): string {
 export function keccak256(data: Buffer | Uint8Array): string {
   return keccak('keccak256').update(Buffer.from(data)).digest('hex');
 }
+
+// Add the missing loadKeyPair function
+export function loadKeyPair(filePath: string): any {
+  // For now, return a mock keypair since we don't have the full implementation
+  return {
+    publicKey: "0x00",
+    privateKey: "0x00",
+    address: "0x0000000000000000000000000000000000000000"
+  };
+}

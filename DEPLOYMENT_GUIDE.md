@@ -138,12 +138,68 @@ npm start
 curl http://localhost:8080/health
 ```
 
+### Health Check Response
+The health endpoint provides detailed status information including:
+- Node status and uptime
+- Blockchain initialization status
+- EVM status (if available)
+- Memory usage statistics
+
 ### Metrics
-The system exposes metrics through the `/health` endpoint including:
+The system exposes metrics through the `/metrics` endpoint including:
 - Block height
 - Transaction pool size
 - Peer count
 - Gas usage statistics
+- EVM contract count
+- API request durations
+
+Example metrics collection:
+```bash
+curl http://localhost:8080/metrics
+```
+
+### Logging
+The application uses structured logging with Winston:
+
+#### Log Levels
+- **error**: Critical errors that require immediate attention
+- **warn**: Potential issues that should be investigated
+- **info**: General operational information
+- **debug**: Detailed information for debugging (development only)
+
+#### Log Files
+- `logs/error.log`: All error-level logs and above
+- `logs/combined.log`: All logs (info level and above)
+
+#### Log Rotation
+- Maximum file size: 10MB
+- Maximum files: 5 (rolling)
+- Logs are automatically compressed when rotated
+
+#### Environment Variables
+```bash
+LOG_LEVEL=info        # Log level (error, warn, info, debug)
+DATA_DIR=.data        # Directory for log files (default: current directory)
+```
+
+### Prometheus Integration
+To integrate with Prometheus, add the following to your prometheus.yml:
+
+```yaml
+scrape_configs:
+  - job_name: 'forge-mini-chain'
+    static_configs:
+      - targets: ['localhost:8080']
+```
+
+### Grafana Dashboard
+A sample Grafana dashboard is available in [grafana-dashboard.json](grafana-dashboard.json) that visualizes:
+- Block production rate
+- Transaction throughput
+- Gas usage
+- Memory and CPU usage
+- Error rates
 
 ## Backup and Recovery
 

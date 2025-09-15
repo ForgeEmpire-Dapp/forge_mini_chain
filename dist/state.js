@@ -1,5 +1,7 @@
 import { TxValidator, GAS_COSTS } from "./validation.js";
 import { EVMManager } from "./evm.js";
+import { evmContractCounter } from "./metrics.js";
+import logger from './logger.js';
 /**
  * The main state class for the application.
  * It holds all accounts and posts.
@@ -40,6 +42,11 @@ export class State {
     async applyTx(tx, height, proposer) {
         let gasUsed = 0n;
         try {
+            logger.debug('Applying transaction', {
+                txType: tx.type,
+                from: tx.from,
+                height
+            });
             // Calculate gas cost
             const gasCost = this.validator?.calculateGasCost(tx) || {
                 base: GAS_COSTS.TX_BASE,
@@ -75,6 +82,11 @@ export class State {
                 from.balance -= transferTx.amount;
                 to.balance += transferTx.amount;
                 from.nonce++;
+                logger.info('Transfer transaction applied', {
+                    from: tx.from,
+                    to: transferTx.to,
+                    amount: transferTx.amount
+                });
                 return {
                     success: true,
                     gasUsed,
@@ -94,6 +106,10 @@ export class State {
                     block: height
                 });
                 from.nonce++;
+                logger.info('Post transaction applied', {
+                    from: tx.from,
+                    postId: postTx.postId
+                });
                 return {
                     success: true,
                     gasUsed,
@@ -112,6 +128,11 @@ export class State {
                 }
                 target.rep += repTx.delta;
                 from.nonce++;
+                logger.info('Reputation transaction applied', {
+                    from: tx.from,
+                    target: repTx.target,
+                    delta: repTx.delta
+                });
                 return {
                     success: true,
                     gasUsed,
@@ -131,6 +152,12 @@ export class State {
                 const result = await this.evmManager.deployContract(deployTx, { height, proposer });
                 if (result.success) {
                     from.nonce++;
+                    // Update EVM contract counter
+                    evmContractCounter.inc();
+                    logger.info('Contract deployed', {
+                        from: tx.from,
+                        contractAddress: result.contractAddress
+                    });
                 }
                 return result;
             }
@@ -153,6 +180,11 @@ export class State {
                         const contractAccount = this.getOrCreate(callTx.to);
                         contractAccount.balance += callTx.value;
                     }
+                    logger.info('Contract call executed', {
+                        from: tx.from,
+                        to: callTx.to,
+                        gasUsed: result.gasUsed
+                    });
                 }
                 return result;
             }
@@ -167,6 +199,11 @@ export class State {
             const refund = (tx.gasLimit - minGas) * tx.gasPrice;
             // Refund unused gas
             from.balance += refund;
+            logger.error('Transaction execution failed', {
+                txType: tx.type,
+                from: tx.from,
+                error: error.message
+            });
             return {
                 success: false,
                 gasUsed,

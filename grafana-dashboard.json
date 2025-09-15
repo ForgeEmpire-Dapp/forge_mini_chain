@@ -1,0 +1,199 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Forge Mini Chain",
+    "tags": ["blockchain", "forge"],
+    "timezone": "browser",
+    "schemaVersion": 16,
+    "version": 0,
+    "refresh": "5s",
+    "panels": [
+      {
+        "id": 1,
+        "type": "graph",
+        "title": "Block Height",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "forge_block_height",
+            "legendFormat": "Block Height"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "none",
+            "label": "Blocks"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "type": "graph",
+        "title": "Mempool Size",
+        "gridPos": {
+          "x": 12,
+          "y": 0,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "forge_mempool_size",
+            "legendFormat": "Pending Transactions"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "none",
+            "label": "Transactions"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "type": "graph",
+        "title": "Total Transactions",
+        "gridPos": {
+          "x": 0,
+          "y": 8,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "rate(forge_transactions_total[5m])",
+            "legendFormat": "Transactions per second"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "none",
+            "label": "TPS"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "type": "graph",
+        "title": "Total Blocks",
+        "gridPos": {
+          "x": 12,
+          "y": 8,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "rate(forge_blocks_total[5m])",
+            "legendFormat": "Blocks per second"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "none",
+            "label": "BPS"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "type": "graph",
+        "title": "EVM Contracts",
+        "gridPos": {
+          "x": 0,
+          "y": 16,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "forge_evm_contracts_total",
+            "legendFormat": "Deployed Contracts"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "none",
+            "label": "Contracts"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "graph",
+        "title": "Transaction Gas Usage",
+        "gridPos": {
+          "x": 12,
+          "y": 16,
+          "w": 12,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(forge_transaction_gas_used_bucket[5m]))",
+            "legendFormat": "95th Percentile"
+          },
+          {
+            "expr": "histogram_quantile(0.50, rate(forge_transaction_gas_used_bucket[5m]))",
+            "legendFormat": "Median"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "none",
+            "label": "Gas"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "type": "graph",
+        "title": "API Request Duration",
+        "gridPos": {
+          "x": 0,
+          "y": 24,
+          "w": 24,
+          "h": 8
+        },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(forge_api_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "{{method}} {{route}} - 95th percentile"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Seconds"
+          },
+          {
+            "format": "none"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -371,7 +371,7 @@ For detailed production deployment instructions, see [DEPLOYMENT_GUIDE.md](DEPLO
 ### Health Endpoints
 
 ```bash
-# Node health
+# Node health with detailed status
 curl http://localhost:8080/health
 
 # EVM statistics
@@ -379,6 +379,32 @@ curl http://localhost:8080/evm/stats
 
 # Latest block
 curl http://localhost:8080/head
+
+# Prometheus metrics
+curl http://localhost:8080/metrics
+```
+
+### Health Check Response
+The health endpoint provides detailed status information:
+```json
+{
+  "status": "ok",
+  "timestamp": "2023-01-01T00:00:00.000Z",
+  "uptime": 123.45,
+  "blockchain": {
+    "initialized": true,
+    "hasHead": true,
+    "evm": {
+      "status": "ok",
+      "contracts": 5
+    }
+  },
+  "memory": {
+    "rss": 45,
+    "heapTotal": 30,
+    "heapUsed": 20
+  }
+}
 ```
 
 ### Performance Metrics
@@ -387,6 +413,13 @@ curl http://localhost:8080/head
 - **Transaction Throughput:** Limited by gas per block (10M gas default)
 - **Contract Execution:** Full EVM compatibility
 - **Database:** LevelDB with automatic state snapshots
+
+### Logging
+The application uses structured logging with Winston:
+- Console output for development
+- JSON log files for production
+- Log levels: error, warn, info, debug
+- Automatic log rotation (10MB max size, 5 files)
 
 ## 🚀 Phase 3: Enhanced APIs & Developer Experience
 
@@ -442,6 +475,28 @@ const account = await sdk.getAccount('0x...');
 - [ ] Slashing mechanisms
 - [ ] State channels for micropayments
 - [ ] Layer 2 scaling solutions
+
+## 🛠️ Development Environment
+
+### Terminal Usage
+This project was developed primarily on Windows. When running commands, be aware of the following:
+
+**Windows PowerShell:**
+- Use semicolons `;` or separate lines for chaining commands instead of `&&`
+- Example: `cd sdk; npm run build` or run commands on separate lines
+
+**Windows Command Prompt:**
+- Supports `&&` for command chaining
+- Example: `cd sdk && npm run build`
+
+**macOS/Linux:**
+- Use `&&` for command chaining
+- Example: `cd sdk && npm run build`
+
+### Required Tools
+- Node.js (v18+ recommended)
+- npm
+- TypeScript
 
 ## 🤝 Contributing
 

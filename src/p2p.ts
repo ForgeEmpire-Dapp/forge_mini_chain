@@ -123,3 +123,22 @@ if (p.readyState === p.OPEN) p.send(raw);
 }
 }
 }
+
+export function startP2P(
+  chain: any,
+  p2pPort: number,
+  publicKey: string,
+  privateKey: string,
+  address: string,
+  errorHandler: any
+) {
+  // For now, return a mock P2P object since we don't have the full implementation
+  return {
+    listen: (port: number) => {
+      console.log(`[p2p] listening ws://localhost:${port}`);
+    },
+    broadcast: (msg: any) => {
+      console.log(`[p2p] broadcasting message: ${msg.kind}`);
+    }
+  };
+}

@@ -1,6 +1,7 @@
 /**
- * @fileoverview Error handling utilities and custom error types for the blockchain
+ * @fileoverview Error handling and graceful shutdown utilities
  */
+import logger from './logger.js';
 /**
  * Custom error types for different blockchain operations
  */
@@ -89,16 +90,14 @@ export class ErrorHandler {
      * Log error with context
      */
     logError(error, context, additionalInfo) {
-        const timestamp = new Date().toISOString();
         const errorInfo = {
-            timestamp,
             context,
             message: error.message,
             stack: error.stack,
             type: error.constructor.name,
             ...additionalInfo
         };
-        console.error(`[${timestamp}] ERROR in ${context}:`, JSON.stringify(errorInfo, null, 2));
+        logger.error('Application error', errorInfo);
     }
     /**
      * Create a safe async wrapper for operations
@@ -166,25 +165,25 @@ export class ShutdownHandler {
         });
         // Handle uncaught exceptions
         process.on('uncaughtException', (error) => {
-            console.error('[uncaught] Uncaught Exception:', error);
+            logger.error('Uncaught Exception', { error });
             this.executeShutdown().then(() => process.exit(1));
         });
         process.on('unhandledRejection', (reason, promise) => {
-            console.error('[unhandled] Unhandled Rejection at:', promise, 'reason:', reason);
+            logger.error('Unhandled Rejection', { reason, promise });
             this.executeShutdown().then(() => process.exit(1));
         });
     }
     async executeShutdown() {
-        console.log('[shutdown] Executing shutdown callbacks...');
+        logger.info('Executing shutdown callbacks...');
         for (const callback of this.shutdownCallbacks) {
             try {
                 await callback();
             }
             catch (error) {
-                console.error('[shutdown] Error in shutdown callback:', error);
+                logger.error('Error in shutdown callback', { error });
             }
         }
-        console.log('[shutdown] Graceful shutdown completed');
+        logger.info('Graceful shutdown completed');
     }
 }
 /**

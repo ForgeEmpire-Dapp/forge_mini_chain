@@ -11,7 +11,13 @@ import { buildBlock } from "./block.js";
 import { verifySignedTx } from "./tx.js";
 import { TxValidator, RateLimiter } from "./validation.js";
 import { LevelBlockchainDB, DBMigration, BlockchainDB } from "./database.js";
-
+import logger from './logger.js';
+import { 
+  mempoolSizeGauge,
+  totalTransactionsCounter,
+  totalBlocksCounter,
+  transactionGasUsedHistogram
+} from "./metrics.js";
 
 /**
  * The main class representing the blockchain with enhanced database support.
@@ -66,9 +72,12 @@ async init(): Promise<void> {
     await this.loadFromDatabase();
     
     this.isInitialized = true;
-    console.log(`[blockchain] Initialized with ${this.chain.length} blocks`);
+    logger.info('Blockchain initialized', { 
+      blockCount: this.chain.length,
+      chainId: this.cfg.chainId 
+    });
   } catch (error) {
-    console.error('[blockchain] Initialization failed:', error);
+    logger.error('Blockchain initialization failed', { error });
     throw error;
   }
 }
@@ -113,6 +122,12 @@ get head(): Block | undefined { return this.chain[this.chain.length - 1]; }
  */
 async addTx(stx: SignedTx): Promise<void> {
   try {
+    logger.debug('Adding transaction to mempool', { 
+      txHash: stx.hash,
+      from: stx.tx.from,
+      type: stx.tx.type
+    });
+    
     // Basic signature verification
     if (!verifySignedTx(stx, this.cfg.chainId)) {
       throw new Error("Invalid transaction signature");
@@ -141,13 +156,24 @@ async addTx(stx: SignedTx): Promise<void> {
     // Add to mempool
     this.mempool.push(stx);
     
+    // Update metrics
+    mempoolSizeGauge.set(this.mempool.length);
+    
     // Notify subscribers
     this.notifyTransactionSubscribers(stx);
     
-    console.log(`[mempool] Added tx ${stx.hash} from ${stx.tx.from} (pool size: ${this.mempool.length})`);
+    logger.info('Transaction added to mempool', { 
+      txHash: stx.hash,
+      from: stx.tx.from,
+      poolSize: this.mempool.length
+    });
     
   } catch (error) {
-    console.error(`[mempool] Rejected tx: ${(error as Error).message}`);
+    logger.error('Rejected transaction', { 
+      txHash: stx?.hash,
+      from: stx?.tx?.from,
+      error: (error as Error).message 
+    });
     throw error;
   }
 }
@@ -170,6 +196,11 @@ private calculateMempoolGasUsage(): bigint {
  */
 async addBlock(b: Block): Promise<void> {
   try {
+    logger.info('Adding block to chain', { 
+      blockHeight: b.header.height,
+      txCount: b.txs.length
+    });
+    
     // Basic link check
     if (this.head && this.head.hash !== b.header.prevHash) {
       throw new Error("Previous hash mismatch");
@@ -192,7 +223,10 @@ async addBlock(b: Block): Promise<void> {
     
     // Verify reported gas usage matches actual
     if (totalGasUsed !== b.header.gasUsed) {
-      console.warn(`Gas usage mismatch: reported ${b.header.gasUsed}, actual ${totalGasUsed}`);
+      logger.warn('Gas usage mismatch', { 
+        reported: b.header.gasUsed,
+        actual: totalGasUsed
+      });
     }
     
     // Add to in-memory chain
@@ -201,6 +235,12 @@ async addBlock(b: Block): Promise<void> {
     // Save transaction receipts
     const allEvents: any[] = [];
     for (const { txHash, result } of txResults) {
+      // Update transaction metrics
+      totalTransactionsCounter.inc();
+      if (result.gasUsed) {
+        transactionGasUsedHistogram.observe(Number(result.gasUsed));
+      }
+      
       await this.db.saveReceipt(txHash, {
         ...result,
         blockHeight: b.header.height,
@@ -225,6 +265,9 @@ async addBlock(b: Block): Promise<void> {
     // Persist to database
     await this.db.saveBlock(b);
     
+    // Update metrics
+    totalBlocksCounter.inc();
+    
     // Keep only recent blocks in memory (last 100)
     if (this.chain.length > 100) {
       this.chain = this.chain.slice(-100);
@@ -234,7 +277,15 @@ async addBlock(b: Block): Promise<void> {
     const appliedHashes = new Set(b.txs.map(tx => tx.hash));
     this.mempool = this.mempool.filter(tx => !appliedHashes.has(tx.hash));
     
-    console.log(`[blockchain] Added block #${b.header.height} (${b.txs.length} txs, ${totalGasUsed} gas)`);
+    // Update mempool metrics
+    mempoolSizeGauge.set(this.mempool.length);
+    
+    logger.info('Block added successfully', { 
+      blockHeight: b.header.height,
+      txCount: b.txs.length,
+      gasUsed: totalGasUsed,
+      poolSize: this.mempool.length
+    });
     
     // Create snapshot every 1000 blocks
     if (b.header.height % 1000 === 0) {
@@ -242,7 +293,11 @@ async addBlock(b: Block): Promise<void> {
     }
     
   } catch (error) {
-    console.error(`[blockchain] Block validation failed: ${(error as Error).message}`);
+    logger.error('Block validation failed', { 
+      blockHeight: b?.header?.height,
+      error: (error as Error).message,
+      stack: (error as Error).stack
+    });
     throw error;
   }
 }
@@ -253,6 +308,10 @@ async addBlock(b: Block): Promise<void> {
  * @returns The newly built block.
  */
 buildNextBlock(): Block {
+  logger.debug('Building next block', { 
+    mempoolSize: this.mempool.length
+  });
+  
   // Sort mempool by gas price (highest first) for optimal fee collection
   const sortedTxs = [...this.mempool].sort((a, b) => {
     const gasCompare = Number(b.tx.gasPrice - a.tx.gasPrice);
@@ -280,6 +339,12 @@ buildNextBlock(): Block {
   const height = (this.head?.header.height ?? -1) + 1;
   const prev = this.head?.hash ?? "0x00";
   
+  logger.info('Block built', { 
+    blockHeight: height,
+    txCount: selectedTxs.length,
+    gasUsed: blockGasUsed
+  });
+  
   return buildBlock(
     height, 
     prev, 
@@ -301,9 +366,12 @@ private async createSnapshot(height: number): Promise<void> {
     // Calculate state root (simplified for now)
     const stateRoot = this.calculateStateRoot();
     await this.db.saveSnapshot(height, stateRoot);
-    console.log(`[blockchain] Created snapshot at height ${height}`);
+    logger.info('Created snapshot', { height });
   } catch (error) {
-    console.error(`[blockchain] Failed to create snapshot: ${(error as Error).message}`);
+    logger.error('Failed to create snapshot', { 
+      height,
+      error: (error as Error).message 
+    });
   }
 }
 
@@ -379,7 +447,7 @@ async getStats() {
  */
 async shutdown(): Promise<void> {
   try {
-    console.log('[blockchain] Shutting down...');
+    logger.info('Shutting down blockchain');
     
     // Save current mempool
     const mempoolPath = path.join(this.cfg.dataDir, this.cfg.chainId, 'mempool.json');
@@ -390,9 +458,9 @@ async shutdown(): Promise<void> {
     // Close database
     await this.db.close();
     
-    console.log('[blockchain] Shutdown complete');
+    logger.info('Blockchain shutdown complete');
   } catch (error) {
-    console.error('[blockchain] Shutdown error:', error);
+    logger.error('Blockchain shutdown error', { error });
   }
 }
 
