@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Leader node - produces blocks and handles smart contract execution
+  leader:
+    build: .
+    container_name: forge-leader
+    environment:
+      - LEADER=1
+      - CHAIN_ID=mainnet
+      - API_PORT=8080
+      - P2P_PORT=7071
+      - DATA_DIR=/var/lib/forge
+      - BLOCK_MS=2000
+      - BLOCK_GAS_LIMIT=30000000
+    ports:
+      - "8080:8080"
+      - "7071:7071"
+    volumes:
+      - leader-data:/var/lib/forge
+    restart: unless-stopped
+    networks:
+      - forge-network
+
+  # Follower node 1 - syncs with leader
+  follower1:
+    build: .
+    container_name: forge-follower1
+    environment:
+      - CHAIN_ID=mainnet
+      - API_PORT=8081
+      - LEADER_WS=ws://leader:7071
+      - DATA_DIR=/var/lib/forge
+    ports:
+      - "8081:8081"
+    volumes:
+      - follower1-data:/var/lib/forge
+    depends_on:
+      - leader
+    restart: unless-stopped
+    networks:
+      - forge-network
+
+  # Follower node 2 - syncs with leader
+  follower2:
+    build: .
+    container_name: forge-follower2
+    environment:
+      - CHAIN_ID=mainnet
+      - API_PORT=8082
+      - LEADER_WS=ws://leader:7071
+      - DATA_DIR=/var/lib/forge
+    ports:
+      - "8082:8082"
+    volumes:
+      - follower2-data:/var/lib/forge
+    depends_on:
+      - leader
+    restart: unless-stopped
+    networks:
+      - forge-network
+
+  # Block explorer
+  explorer:
+    build: ./explorer
+    container_name: forge-explorer
+    environment:
+      - API_URL=http://leader:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - leader
+    restart: unless-stopped
+    networks:
+      - forge-network
+
+volumes:
+  leader-data:
+  follower1-data:
+  follower2-data:
+
+networks:
+  forge-network:
+    driver: bridge

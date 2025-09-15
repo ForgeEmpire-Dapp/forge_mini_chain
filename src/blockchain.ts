@@ -24,6 +24,15 @@ private validator: TxValidator;
 private rateLimiter: RateLimiter;
 private db: BlockchainDB;
 private isInitialized = false;
+private subscribers: {
+  blocks: Array<(block: Block) => void>;
+  transactions: Array<(tx: SignedTx) => void>;
+  events: Array<(event: any) => void>;
+} = {
+  blocks: [],
+  transactions: [],
+  events: []
+};
 
 /**
  * Constructs a new Blockchain instance.
@@ -132,6 +141,9 @@ async addTx(stx: SignedTx): Promise<void> {
     // Add to mempool
     this.mempool.push(stx);
     
+    // Notify subscribers
+    this.notifyTransactionSubscribers(stx);
+    
     console.log(`[mempool] Added tx ${stx.hash} from ${stx.tx.from} (pool size: ${this.mempool.length})`);
     
   } catch (error) {
@@ -176,15 +188,39 @@ async addBlock(b: Block): Promise<void> {
     }
     
     // Apply block to state and track gas usage
-    const gasUsed = await applyBlock(this.state, b);
+    const { totalGasUsed, txResults } = await applyBlock(this.state, b);
     
     // Verify reported gas usage matches actual
-    if (gasUsed !== b.header.gasUsed) {
-      console.warn(`Gas usage mismatch: reported ${b.header.gasUsed}, actual ${gasUsed}`);
+    if (totalGasUsed !== b.header.gasUsed) {
+      console.warn(`Gas usage mismatch: reported ${b.header.gasUsed}, actual ${totalGasUsed}`);
     }
     
     // Add to in-memory chain
     this.chain.push(b);
+    
+    // Save transaction receipts
+    const allEvents: any[] = [];
+    for (const { txHash, result } of txResults) {
+      await this.db.saveReceipt(txHash, {
+        ...result,
+        blockHeight: b.header.height,
+        blockHash: b.hash
+      });
+      
+      // Collect events for notification
+      if (result.events) {
+        allEvents.push(...result.events);
+      }
+    }
+    
+    // Notify subscribers
+    this.notifyBlockSubscribers(b);
+    for (const tx of b.txs) {
+      this.notifyTransactionSubscribers(tx);
+    }
+    if (allEvents.length > 0) {
+      this.notifyEventSubscribers(allEvents);
+    }
     
     // Persist to database
     await this.db.saveBlock(b);
@@ -198,7 +234,7 @@ async addBlock(b: Block): Promise<void> {
     const appliedHashes = new Set(b.txs.map(tx => tx.hash));
     this.mempool = this.mempool.filter(tx => !appliedHashes.has(tx.hash));
     
-    console.log(`[blockchain] Added block #${b.header.height} (${b.txs.length} txs, ${gasUsed} gas)`);
+    console.log(`[blockchain] Added block #${b.header.height} (${b.txs.length} txs, ${totalGasUsed} gas)`);
     
     // Create snapshot every 1000 blocks
     if (b.header.height % 1000 === 0) {
@@ -285,6 +321,34 @@ private calculateStateRoot(): string {
 }
 
 /**
+ * Get EVM statistics
+ */
+getEVMStats() {
+  return this.state.getEVMStats();
+}
+
+/**
+ * Get contract code by address
+ */
+getContractCode(address: string): string | null {
+  return this.state.getContractCode(address);
+}
+
+/**
+ * Get contract storage value by address and key
+ */
+getContractStorage(address: string, key: string): string | null {
+  return this.state.getContractStorage(address, key);
+}
+
+/**
+ * Get transaction receipt by hash
+ */
+async getReceipt(txHash: string) {
+  return await this.db.getReceipt(txHash);
+}
+
+/**
  * Prune old blocks from database
  */
 async pruneBlocks(keepBlocks: number = 10000): Promise<void> {
@@ -331,4 +395,87 @@ async shutdown(): Promise<void> {
     console.error('[blockchain] Shutdown error:', error);
   }
 }
+
+  /**
+   * Subscribe to block events
+   */
+  subscribeToBlocks(callback: (block: Block) => void) {
+    this.subscribers.blocks.push(callback);
+  }
+
+  /**
+   * Subscribe to transaction events
+   */
+  subscribeToTransactions(callback: (tx: SignedTx) => void) {
+    this.subscribers.transactions.push(callback);
+  }
+
+  /**
+   * Subscribe to event logs
+   */
+  subscribeToEvents(callback: (event: any) => void) {
+    this.subscribers.events.push(callback);
+  }
+
+  /**
+   * Unsubscribe from block events
+   */
+  unsubscribeFromBlocks(callback: (block: Block) => void) {
+    this.subscribers.blocks = this.subscribers.blocks.filter(cb => cb !== callback);
+  }
+
+  /**
+   * Unsubscribe from transaction events
+   */
+  unsubscribeFromTransactions(callback: (tx: SignedTx) => void) {
+    this.subscribers.transactions = this.subscribers.transactions.filter(cb => cb !== callback);
+  }
+
+  /**
+   * Unsubscribe from event logs
+   */
+  unsubscribeFromEvents(callback: (event: any) => void) {
+    this.subscribers.events = this.subscribers.events.filter(cb => cb !== callback);
+  }
+
+  /**
+   * Notify subscribers about a new block
+   */
+  private notifyBlockSubscribers(block: Block) {
+    for (const callback of this.subscribers.blocks) {
+      try {
+        callback(block);
+      } catch (error) {
+        console.error(`[blockchain] Error notifying block subscriber: ${(error as Error).message}`);
+      }
+    }
+  }
+
+  /**
+   * Notify subscribers about a new transaction
+   */
+  private notifyTransactionSubscribers(tx: SignedTx) {
+    for (const callback of this.subscribers.transactions) {
+      try {
+        callback(tx);
+      } catch (error) {
+        console.error(`[blockchain] Error notifying transaction subscriber: ${(error as Error).message}`);
+      }
+    }
+  }
+
+  /**
+   * Notify subscribers about new events
+   */
+  private notifyEventSubscribers(events: any[]) {
+    for (const event of events) {
+      for (const callback of this.subscribers.events) {
+        try {
+          callback(event);
+        } catch (error) {
+          console.error(`[blockchain] Error notifying event subscriber: ${(error as Error).message}`);
+        }
+      }
+    }
+  }
 }

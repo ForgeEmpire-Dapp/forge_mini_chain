@@ -169,7 +169,17 @@ startApi(cfg.apiPort, {
     );
   },
   getAccount: (addr: string) => chain.state.accounts.get(addr),
-  getHead: () => chain.head || null
+  getHead: () => chain.head || null,
+  getEVMStats: () => chain.getEVMStats(),
+  getContractCode: (address: string) => chain.getContractCode(address),
+  getContractStorage: (address: string, key: string) => chain.getContractStorage(address, key),
+  getReceipt: (txHash: string) => chain.getReceipt(txHash),
+  subscribeToBlocks: (callback) => chain.subscribeToBlocks(callback),
+  subscribeToTransactions: (callback) => chain.subscribeToTransactions(callback),
+  subscribeToEvents: (callback) => chain.subscribeToEvents(callback),
+  unsubscribeFromBlocks: (callback) => chain.unsubscribeFromBlocks(callback),
+  unsubscribeFromTransactions: (callback) => chain.unsubscribeFromTransactions(callback),
+  unsubscribeFromEvents: (callback) => chain.unsubscribeFromEvents(callback)
 });
   console.log(`[node] Node started successfully on chain ${cfg.chainId}`);
   console.log(`[node] Address: ${kp.address}`);

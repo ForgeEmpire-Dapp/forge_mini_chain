@@ -221,6 +221,38 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
     };
   }
 }
+
+
+  /**
+   * Get EVM statistics
+   */
+  getEVMStats() {
+    if (!this.evmManager) {
+      throw new Error("EVM not initialized");
+    }
+    return this.evmManager.getStats();
+  }
+
+  /**
+   * Get contract code by address
+   */
+  getContractCode(address: string): string | null {
+    if (!this.evmManager) {
+      throw new Error("EVM not initialized");
+    }
+    return this.evmManager.getContractCode(address);
+  }
+
+  /**
+   * Get contract storage value by address and key
+   */
+  getContractStorage(address: string, key: string): string | null {
+    if (!this.evmManager) {
+      throw new Error("EVM not initialized");
+    }
+    return this.evmManager.getContractStorage(address, key);
+  }
+
 }
 
 
@@ -228,14 +260,16 @@ async applyTx(tx: Tx, height: number, proposer: string): Promise<TxExecutionResu
  * Applies all transactions in a block to the given state with gas tracking.
  * @param state The state to apply the block to.
  * @param block The block containing the transactions to apply.
- * @returns Total gas used by all transactions in the block.
+ * @returns Total gas used by all transactions in the block and individual transaction results.
  */
-export async function applyBlock(state: State, block: { txs: SignedTx[]; header: { height: number; proposer: string } }): Promise<bigint> {
+export async function applyBlock(state: State, block: { txs: SignedTx[]; header: { height: number; proposer: string } }): Promise<{ totalGasUsed: bigint; txResults: Array<{ txHash: string; result: TxExecutionResult }> }> {
   let totalGasUsed = 0n;
+  const txResults: Array<{ txHash: string; result: TxExecutionResult }> = [];
   
   for (const stx of block.txs) {
     const result = await state.applyTx(stx.tx, block.header.height, block.header.proposer);
     totalGasUsed += result.gasUsed;
+    txResults.push({ txHash: stx.hash, result });
     
     // Log transaction result
     if (!result.success) {
@@ -243,5 +277,5 @@ export async function applyBlock(state: State, block: { txs: SignedTx[]; header:
     }
   }
   
-  return totalGasUsed;
+  return { totalGasUsed, txResults };
 }

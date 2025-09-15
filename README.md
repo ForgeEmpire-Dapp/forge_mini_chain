@@ -362,6 +362,10 @@ CMD ["npm", "start"]
    API_PORT=8082 LEADER_WS=ws://leader-ip:7071 npm start
    ```
 
+### Production Deployment Guide
+
+For detailed production deployment instructions, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+
 ## 📊 Monitoring & Analytics
 
 ### Health Endpoints
@@ -384,6 +388,28 @@ curl http://localhost:8080/head
 - **Contract Execution:** Full EVM compatibility
 - **Database:** LevelDB with automatic state snapshots
 
+## 🚀 Phase 3: Enhanced APIs & Developer Experience
+
+### New REST API Endpoints
+- `GET /evm/stats`: EVM execution statistics
+- `GET /contract/:address/code`: Contract bytecode retrieval
+- `GET /contract/:address/storage/:key`: Contract storage inspection
+- `GET /tx/:hash/receipt`: Transaction execution receipts
+
+### WebSocket Real-Time Subscriptions
+- `WS /subscribe/blocks`: Real-time block notifications
+- `WS /subscribe/transactions`: Real-time transaction notifications
+- `WS /subscribe/events`: Real-time smart contract event notifications
+
+### JavaScript/TypeScript SDK
+A comprehensive SDK is available in the `sdk/` directory for easier blockchain interaction:
+```javascript
+import { ForgeEmpireSDK } from '@forge-empire/sdk';
+
+const sdk = new ForgeEmpireSDK('http://localhost:8080');
+const account = await sdk.getAccount('0x...');
+```
+
 ## 🌟 Integration Notes (Forge Empire)
 
 ### Best Practices
@@ -402,13 +428,6 @@ curl http://localhost:8080/head
 - **🔒 Access Control:** Implement role-based permissions via contracts
 
 ## 🛣️ Roadmap & Future Upgrades
-
-### Phase 3: Enhanced APIs & Developer Experience
-- [ ] WebSocket subscriptions for real-time updates
-- [ ] GraphQL API for flexible queries
-- [ ] Developer SDKs (JavaScript, Python, Go)
-- [ ] Contract ABI management
-- [ ] Enhanced debugging tools
 
 ### Phase 4: Advanced Features
 - [ ] Multi-signature transactions

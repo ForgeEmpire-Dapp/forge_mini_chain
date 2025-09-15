@@ -1,0 +1,22 @@
+{
+  "chain": {
+    "chainId": "mainnet",
+    "blockTimeMs": 2000,
+    "blockGasLimit": "30000000",
+    "minGasPrice": "1000000000",
+    "baseFeePerGas": "1000000000"
+  },
+  "network": {
+    "apiPort": 8080,
+    "p2pPort": 7071,
+    "isLeader": true
+  },
+  "storage": {
+    "dataDir": "/var/lib/forge",
+    "snapshotInterval": 1000,
+    "pruneDepth": 10000
+  },
+  "security": {
+    "keyFile": "/var/lib/forge/.keys/ed25519.json"
+  }
+}

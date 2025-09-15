@@ -1,0 +1,202 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forge-leader
+  labels:
+    app: forge-blockchain
+    role: leader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forge-blockchain
+      role: leader
+  template:
+    metadata:
+      labels:
+        app: forge-blockchain
+        role: leader
+    spec:
+      containers:
+      - name: leader
+        image: forge-empire:latest
+        env:
+        - name: LEADER
+          value: "1"
+        - name: CHAIN_ID
+          value: "mainnet"
+        - name: API_PORT
+          value: "8080"
+        - name: P2P_PORT
+          value: "7071"
+        - name: DATA_DIR
+          value: "/var/lib/forge"
+        - name: BLOCK_MS
+          value: "2000"
+        - name: BLOCK_GAS_LIMIT
+          value: "30000000"
+        ports:
+        - containerPort: 8080
+          name: api
+        - containerPort: 7071
+          name: p2p
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/forge
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: forge-leader-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forge-leader-service
+spec:
+  selector:
+    app: forge-blockchain
+    role: leader
+  ports:
+  - name: api
+    port: 8080
+    targetPort: 8080
+  - name: p2p
+    port: 7071
+    targetPort: 7071
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forge-follower
+  labels:
+    app: forge-blockchain
+    role: follower
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: forge-blockchain
+      role: follower
+  template:
+    metadata:
+      labels:
+        app: forge-blockchain
+        role: follower
+    spec:
+      containers:
+      - name: follower
+        image: forge-empire:latest
+        env:
+        - name: CHAIN_ID
+          value: "mainnet"
+        - name: API_PORT
+          value: "8081"
+        - name: LEADER_WS
+          value: "ws://forge-leader-service:7071"
+        - name: DATA_DIR
+          value: "/var/lib/forge"
+        ports:
+        - containerPort: 8081
+          name: api
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/forge
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: forge-follower-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forge-follower-service
+spec:
+  selector:
+    app: forge-blockchain
+    role: follower
+  ports:
+  - name: api
+    port: 8081
+    targetPort: 8081
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forge-explorer
+  labels:
+    app: forge-explorer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forge-explorer
+  template:
+    metadata:
+      labels:
+        app: forge-explorer
+    spec:
+      containers:
+      - name: explorer
+        image: forge-explorer:latest
+        env:
+        - name: API_URL
+          value: "http://forge-leader-service:8080"
+        ports:
+        - containerPort: 3000
+          name: web
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forge-explorer-service
+spec:
+  selector:
+    app: forge-explorer
+  ports:
+  - name: web
+    port: 3000
+    targetPort: 3000
+  type: LoadBalancer

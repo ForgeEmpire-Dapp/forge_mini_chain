@@ -3,7 +3,7 @@
  */
 import { Level } from 'level';
 import type { AbstractSublevel } from 'abstract-level';
-import { Block, Account, ChainConfig, Hex } from './types.js';
+import { Block, Account, ChainConfig, Hex, TxExecutionResult } from './types.js';
 import { ErrorHandler } from './errors.js';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -26,6 +26,10 @@ export interface BlockchainDB {
   getAccount(address: string): Promise<Account | null>;
   saveSnapshot(height: number, stateRoot: Hex): Promise<void>;
   getSnapshot(height: number): Promise<Hex | null>;
+  
+  // Transaction receipt operations
+  saveReceipt(txHash: string, receipt: TxExecutionResult & { blockHeight: number, blockHash: string }): Promise<void>;
+  getReceipt(txHash: string): Promise<(TxExecutionResult & { blockHeight: number, blockHash: string }) | null>;
   
   // Maintenance operations
   pruneBlocks(beforeHeight: number): Promise<number>;
@@ -69,6 +73,7 @@ export class LevelBlockchainDB implements BlockchainDB {
   private accountsDB: any;
   private snapshotsDB: any;
   private metaDB: any;
+  private receiptsDB: any;
   
   constructor(private config: ChainConfig) {
     this.errorHandler = ErrorHandler.getInstance();
@@ -81,6 +86,7 @@ export class LevelBlockchainDB implements BlockchainDB {
     this.accountsDB = this.db.sublevel('accounts', { valueEncoding: 'json' });
     this.snapshotsDB = this.db.sublevel('snapshots', { valueEncoding: 'utf8' });
     this.metaDB = this.db.sublevel('meta', { valueEncoding: 'json' });
+    this.receiptsDB = this.db.sublevel('receipts', { valueEncoding: 'json' });
   }
 
   /**
@@ -288,6 +294,46 @@ export class LevelBlockchainDB implements BlockchainDB {
         return null;
       }
       this.errorHandler.logError(error as Error, 'Snapshot Retrieval', { height });
+      throw error;
+    }
+  }
+
+  /**
+   * Save a transaction receipt to the database
+   */
+  async saveReceipt(txHash: string, receipt: TxExecutionResult & { blockHeight: number, blockHash: string }): Promise<void> {
+    try {
+      // Convert BigInt to string for storage
+      const serializable = {
+        ...receipt,
+        gasUsed: receipt.gasUsed.toString()
+      };
+      
+      await this.receiptsDB.put(txHash, serializable);
+    } catch (error) {
+      this.errorHandler.logError(error as Error, 'Receipt Save', { txHash });
+      throw error;
+    }
+  }
+
+  /**
+   * Get a transaction receipt from the database
+   */
+  async getReceipt(txHash: string): Promise<(TxExecutionResult & { blockHeight: number, blockHash: string }) | null> {
+    try {
+      const receipt = await this.receiptsDB.get(txHash);
+      if (!receipt) return null;
+      
+      // Convert gasUsed back to BigInt
+      return {
+        ...receipt,
+        gasUsed: BigInt(receipt.gasUsed)
+      };
+    } catch (error) {
+      if ((error as any).code === 'LEVEL_NOT_FOUND') {
+        return null;
+      }
+      this.errorHandler.logError(error as Error, 'Receipt Retrieval', { txHash });
       throw error;
     }
   }
