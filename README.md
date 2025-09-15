@@ -457,4 +457,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-**🎉 Congratulations! You now have a fully functional, EVM-compatible blockchain with smart contract support!**
+**🎉 EVM-compatible blockchain with smart contract support!**
