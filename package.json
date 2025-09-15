@@ -7,6 +7,7 @@
     "dev": "tsx src/node.ts",
     "build": "tsc -p .",
     "start": "node dist/node.js",
+    "explorer": "node start-explorer.js",
     "test:phase1": "node test-phase1.js",
     "demo:phase1": "node demo-phase1.js",
     "demo:phase2": "node demo-phase2.js",
