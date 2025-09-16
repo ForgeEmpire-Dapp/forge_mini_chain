@@ -1,4 +1,4 @@
-# Forge Empire — Mini Blockchain (MVP)
+# Forge Empire — Blockchain 
 
 🚀 **A production-ready, EVM-compatible mini blockchain with smart contract support!**
 
