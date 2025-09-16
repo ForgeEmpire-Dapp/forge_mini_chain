@@ -11,7 +11,9 @@
     "dev:follower": "API_PORT=8081 P2P_PORT=0 LEADER_WS=ws://localhost:7071 tsx src/node.ts",
     "start": "node dist/node.js",
     "test": "tsx test/index.ts",
-    "dev:full": "node start-explorer-with-node.js"
+    "dev:full": "node start-explorer-with-node.js",
+    "dev:agents": "cd ai-agents && npm run dev",
+    "start:agents": "cd ai-agents && npm start"
   },
   "keywords": [
     "blockchain",
@@ -25,19 +27,31 @@
     "@ethereumjs/common": "^4.4.0",
     "@ethereumjs/evm": "^3.1.0",
     "@ethereumjs/util": "^9.1.0",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.7.4",
-    "@types/ws": "^8.5.12",
+    "axios": "^1.12.2",
     "body-parser": "^1.20.3",
-    "express": "^4.21.1",
+    "dotenv": "^17.2.2",
+    "ethereum-cryptography": "^3.2.0",
+    "express": "^4.21.2",
     "keccak": "^3.0.4",
     "level": "^8.0.1",
+    "pg": "^8.16.3",
     "prom-client": "^15.1.3",
     "secp256k1": "^5.0.0",
     "tsx": "^4.19.1",
-    "ws": "^8.18.0"
+    "winston": "^3.17.0",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
-    "@types/keccak": "^3.0.4"
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/keccak": "^3.0.4",
+    "@types/node": "^24.5.0",
+    "@types/secp256k1": "^4.0.6",
+    "@types/winston": "^2.4.4",
+    "@types/ws": "^8.18.1",
+    "jest": "^30.1.3",
+    "ts-jest": "^29.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }

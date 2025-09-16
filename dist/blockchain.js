@@ -12,6 +12,7 @@ import { TxValidator, RateLimiter } from "./validation.js";
 import { LevelBlockchainDB, DBMigration } from "./database.js";
 import logger from './logger.js';
 import { mempoolSizeGauge, totalTransactionsCounter, totalBlocksCounter, transactionGasUsedHistogram } from "./metrics.js";
+import { initializeGenesis } from "./genesis.js";
 /**
  * The main class representing the blockchain with enhanced database support.
  */
@@ -47,7 +48,7 @@ export class Blockchain {
     /**
      * Initialize the blockchain with database and migration
      */
-    async init() {
+    async init(genesisConfig) {
         if (this.isInitialized)
             return;
         try {
@@ -58,6 +59,11 @@ export class Blockchain {
             await migration.migrateFromJSONL(this.cfg.chainId);
             // Load blockchain state from database
             await this.loadFromDatabase();
+            // If no blocks found and genesis config provided, initialize genesis
+            if (this.chain.length === 0 && genesisConfig) {
+                await initializeGenesis(this.state, genesisConfig);
+                console.log('[blockchain] Genesis state initialized');
+            }
             this.isInitialized = true;
             logger.info('Blockchain initialized', {
                 blockCount: this.chain.length,
@@ -182,7 +188,7 @@ export class Blockchain {
                 }
             }
             // Apply block to state and track gas usage
-            const { totalGasUsed, txResults } = await applyBlock(this.state, b);
+            const { totalGasUsed, txResults } = await applyBlock(this.state, b, this.cfg.blockReward);
             // Verify reported gas usage matches actual
             if (totalGasUsed !== b.header.gasUsed) {
                 logger.warn('Gas usage mismatch', {
@@ -282,12 +288,38 @@ export class Blockchain {
         }
         const height = (this.head?.header.height ?? -1) + 1;
         const prev = this.head?.hash ?? "0x00";
+        // Calculate new base fee based on current head block
+        let newBaseFee = this.cfg.baseFeePerGas;
+        if (this.head) {
+            newBaseFee = this.calculateBaseFee(this.head);
+        }
         logger.info('Block built', {
             blockHeight: height,
             txCount: selectedTxs.length,
             gasUsed: blockGasUsed
         });
-        return buildBlock(height, prev, this.keys.address, this.keys.privateKey, selectedTxs, blockGasUsed, this.cfg.blockGasLimit, this.cfg.baseFeePerGas);
+        return buildBlock(height, prev, this.keys.address, this.keys.privateKey, selectedTxs, blockGasUsed, this.cfg.blockGasLimit, newBaseFee);
+    }
+    /**
+     * Calculates the base fee for a new block based on parent block utilization
+     * @param parentBlock The parent block to base calculations on
+     * @returns The calculated base fee in FORGE token wei
+     */
+    calculateBaseFee(parentBlock) {
+        // EIP-1559 parameters
+        const ELASTICITY_MULTIPLIER = 8n;
+        const gasTarget = parentBlock.header.gasLimit / 2n;
+        // If the parent block used exactly the target gas, keep the same base fee
+        if (parentBlock.header.gasUsed === gasTarget) {
+            return parentBlock.header.baseFeePerGas;
+        }
+        // Calculate the base fee delta
+        const gasUsedDelta = parentBlock.header.gasUsed - gasTarget;
+        const baseFeeDelta = (parentBlock.header.baseFeePerGas * gasUsedDelta) /
+            (gasTarget * ELASTICITY_MULTIPLIER);
+        // Ensure base fee doesn't go below minimum
+        const newBaseFee = parentBlock.header.baseFeePerGas + baseFeeDelta;
+        return newBaseFee > this.cfg.minGasPrice ? newBaseFee : this.cfg.minGasPrice;
     }
     /**
      * Creates a state snapshot at the given height

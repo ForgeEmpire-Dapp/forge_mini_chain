@@ -226,7 +226,7 @@ export class LevelBlockchainDB implements BlockchainDB {
       // Convert BigInt to string for storage
       const serializable = {
         ...account,
-        balance: account.balance.toString()
+        forgeBalance: account.forgeBalance.toString()
       };
       
       await this.accountsDB.put(address, serializable as any);
@@ -247,7 +247,7 @@ export class LevelBlockchainDB implements BlockchainDB {
       // Convert balance back to BigInt
       return {
         ...account,
-        balance: BigInt(account.balance)
+        forgeBalance: BigInt(account.forgeBalance)
       };
     } catch (error) {
       if ((error as any).code === 'LEVEL_NOT_FOUND') {

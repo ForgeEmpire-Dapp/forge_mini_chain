@@ -1,8 +1,5 @@
-/**
- * @fileoverview EVM manager for smart contract execution and state management
- */
 import { EVM } from '@ethereumjs/evm';
-import { Common, Mainnet, Hardfork } from '@ethereumjs/common';
+import { Common, Hardfork } from '@ethereumjs/common';
 import { Address, bytesToHex, hexToBytes } from '@ethereumjs/util';
 import { ErrorHandler } from './errors.js';
 import { keccak256 } from './crypto.js';
@@ -25,9 +22,54 @@ export class EVMManager {
         this.state = state;
         this.errorHandler = ErrorHandler.getInstance();
         // Initialize EthereumJS Common with mainnet configuration
-        this.common = new Common({ chain: Mainnet, hardfork: Hardfork.London });
-        // Initialize EVM
-        this.evm = new EVM({
+        this.common = Common.custom({
+            chainId: 1,
+            networkId: 1,
+            name: 'mainnet',
+            genesis: {
+                gasLimit: 30000000,
+                difficulty: 1,
+                nonce: '0x0000000000000042',
+                extraData: '0x3535353535353535353535353535353535353535353535353535353535353535',
+                timestamp: '0x00',
+                baseFeePerGas: '0x3b9aca00'
+            },
+            hardforks: [
+                { name: 'chainstart', block: 0 },
+                { name: 'homestead', block: 1150000 },
+                { name: 'dao', block: 1920000 },
+                { name: 'tangerineWhistle', block: 2463000 },
+                { name: 'spuriousDragon', block: 2675000 },
+                { name: 'byzantium', block: 4370000 },
+                { name: 'constantinople', block: 7280000 },
+                { name: 'petersburg', block: 7280000 },
+                { name: 'istanbul', block: 9069000 },
+                { name: 'muirGlacier', block: 9200000 },
+                { name: 'berlin', block: 12244000 },
+                { name: 'london', block: 12965000 },
+                { name: 'arrowGlacier', block: 13773000 },
+                { name: 'grayGlacier', block: 15050000 },
+                { name: 'mergeForkIdTransition', block: 15537394 },
+                { name: 'shanghai', block: 17034870 },
+                { name: 'cancun', block: null }
+            ],
+            bootstrapNodes: [],
+            consensus: {
+                type: 'pow',
+                algorithm: 'ethash',
+                ethash: {}
+            }
+        }, { hardfork: Hardfork.London });
+        // Initialize EVM using the async create method
+        this.initializeEVM().catch(error => {
+            logger.error('Failed to initialize EVM', { error: error.message });
+        });
+    }
+    /**
+     * Initialize EVM asynchronously
+     */
+    async initializeEVM() {
+        this.evm = await EVM.create({
             common: this.common,
         });
     }
@@ -36,6 +78,13 @@ export class EVMManager {
      */
     async deployContract(tx, blockContext) {
         try {
+            // Wait for EVM to be initialized
+            if (!this.evm) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                if (!this.evm) {
+                    throw new Error('EVM not initialized');
+                }
+            }
             logger.info('Deploying contract', { from: tx.from });
             // Calculate contract address
             const deployerAccount = this.state.getOrCreate(tx.from);
@@ -58,6 +107,7 @@ export class EVMManager {
                 block: {
                     header: {
                         number: BigInt(blockContext.height),
+                        cliqueSigner: () => new Address(new Uint8Array(20)),
                         coinbase: new Address(new Uint8Array(20)),
                         timestamp: BigInt(Math.floor(Date.now() / 1000)),
                         difficulty: 1n,
@@ -86,7 +136,7 @@ export class EVMManager {
             this.contractStorage.set(contractAddress, {});
             // Create contract account in our state
             const contractAccount = {
-                balance: tx.value || 0n,
+                forgeBalance: tx.value || 0n,
                 nonce: 0,
                 rep: 0,
                 codeHash: keccak256(Buffer.from(contractCode.replace('0x', ''), 'hex')),
@@ -131,6 +181,13 @@ export class EVMManager {
      */
     async callContract(tx, blockContext) {
         try {
+            // Wait for EVM to be initialized
+            if (!this.evm) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                if (!this.evm) {
+                    throw new Error('EVM not initialized');
+                }
+            }
             logger.info('Calling contract', { from: tx.from, to: tx.to });
             // Check if target is a contract
             const contractAccount = this.state.accounts.get(tx.to);
@@ -148,6 +205,7 @@ export class EVMManager {
                 block: {
                     header: {
                         number: BigInt(blockContext.height),
+                        cliqueSigner: () => new Address(new Uint8Array(20)),
                         coinbase: new Address(new Uint8Array(20)),
                         timestamp: BigInt(Math.floor(Date.now() / 1000)),
                         difficulty: 1n,

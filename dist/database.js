@@ -160,7 +160,7 @@ export class LevelBlockchainDB {
             // Convert BigInt to string for storage
             const serializable = {
                 ...account,
-                balance: account.balance.toString()
+                forgeBalance: account.forgeBalance.toString()
             };
             await this.accountsDB.put(address, serializable);
         }
@@ -180,7 +180,7 @@ export class LevelBlockchainDB {
             // Convert balance back to BigInt
             return {
                 ...account,
-                balance: BigInt(account.balance)
+                forgeBalance: BigInt(account.forgeBalance)
             };
         }
         catch (error) {

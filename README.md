@@ -591,6 +591,83 @@ For detailed information about the native FORGE token implementation, see:
 - [NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md](NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
 - [NATIVE_TOKEN_PROJECT_SUMMARY.md](NATIVE_TOKEN_PROJECT_SUMMARY.md) - Project completion summary
 
+### AI Agents Framework
+For detailed information about the AI Agents framework, see:
+- [AI_AGENTS_INTEGRATION_PLAN.md](AI_AGENTS_INTEGRATION_PLAN.md) - High-level integration plan
+- [AI_AGENT_FRAMEWORK_TECHNICAL_SPEC.md](AI_AGENT_FRAMEWORK_TECHNICAL_SPEC.md) - Detailed technical specification
+- [AI_AGENTS_IMPLEMENTATION_GUIDE.md](AI_AGENTS_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
+- [AI_AGENTS_FEATURE_SUMMARY.md](AI_AGENTS_FEATURE_SUMMARY.md) - Feature overview
+
+## 🤖 AI Agents Framework
+
+The Forge Empire now includes an AI Agents Framework that enables autonomous interactions with the blockchain.
+
+### Features
+
+- **Autonomous Agents**: Create agents that can automatically interact with smart contracts
+- **Transaction Agents**: Automate routine transfers and contract interactions
+- **Analytics Agents**: Analyze blockchain data for insights and patterns
+- **REST API**: Manage agents through a comprehensive API
+- **Explorer Integration**: Control agents directly from the blockchain explorer
+
+### Getting Started with AI Agents
+
+1. Navigate to the AI agents directory:
+   ```bash
+   cd ai-agents
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Build the agent framework:
+   ```bash
+   npm run build
+   ```
+
+4. Start the agent framework:
+   ```bash
+   npm start
+   ```
+
+The agent framework will be available at `http://localhost:3001`
+
+### Agent Management in Explorer
+
+The blockchain explorer includes an "Agents" tab where you can:
+- View all registered agents
+- Start/stop agents
+- Run agents immediately
+- Monitor agent status
+
+### Creating Custom Agents
+
+To create custom agents:
+
+1. Extend the `BaseAgent` class
+2. Implement the `perceive`, `plan`, and `execute` methods
+3. Register your agent with the `AgentManager`
+4. Schedule your agent to run at specified intervals
+
+Example:
+```typescript
+class CustomAgent extends BaseAgent {
+  async perceive(): Promise<any> {
+    // Implement perception logic
+  }
+  
+  async plan(perception: any): Promise<any> {
+    // Implement planning logic
+  }
+  
+  async execute(plan: any): Promise<any> {
+    // Implement execution logic
+  }
+}
+```
+
 ## 🛠️ Development Environment
 
 ### Terminal Usage

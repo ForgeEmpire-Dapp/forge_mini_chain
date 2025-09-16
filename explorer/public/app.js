@@ -40,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const tokenomicsInfo = document.getElementById('tokenomics-info');
     const refreshTokenomicsButton = document.getElementById('refresh-tokenomics');
     
+    // AI Agents elements
+    const refreshAgentsButton = document.getElementById('refresh-agents');
+    const agentsContainer = document.getElementById('agents-container');
+    
     // Tab elements
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -58,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 content.classList.remove('active');
                 if (content.id === `${tabId}-tab`) {
                     content.classList.add('active');
+                    
+                    // Load data for the active tab
+                    if (tabId === 'agents') {
+                        loadAgents();
+                    }
                 }
             });
         });
@@ -106,6 +115,140 @@ document.addEventListener('DOMContentLoaded', () => {
         const forge = parseFloat(wei) / 1e18;
         return forge.toFixed(2) + " FORGE";
     }
+
+    // Load AI Agents
+    async function loadAgents() {
+        agentsContainer.innerHTML = `
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading agents...</p>
+            </div>
+        `;
+
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/agents');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const agents = await response.json();
+            
+            if (agents.length === 0) {
+                agentsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-robot"></i>
+                        <p>No agents found</p>
+                        <p>The AI Agent Framework might not be running.</p>
+                        <p>Make sure it's running on port 3001.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let agentsHtml = '';
+            agents.forEach(agent => {
+                agentsHtml += `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-robot"></i>
+                                ${agent.name}
+                            </div>
+                            <div class="block-hash">${agent.id}</div>
+                        </div>
+                        
+                        <div class="block-info">
+                            <div class="info-item">
+                                <span class="info-label">Type</span>
+                                <span class="info-value">${agent.type}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status</span>
+                                <span class="info-value">${agent.status.running ? 'Running' : 'Stopped'}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Enabled</span>
+                                <span class="info-value">${agent.status.enabled ? 'Yes' : 'No'}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                            <button class="btn btn-primary" onclick="startAgent('${agent.id}')">
+                                <i class="fas fa-play"></i> Start
+                            </button>
+                            <button class="btn btn-warning" onclick="stopAgent('${agent.id}')">
+                                <i class="fas fa-stop"></i> Stop
+                            </button>
+                            <button class="btn btn-secondary" onclick="runAgent('${agent.id}')">
+                                <i class="fas fa-bolt"></i> Run Now
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            agentsContainer.innerHTML = agentsHtml;
+        } catch (error) {
+            console.error('Error loading agents:', error);
+            agentsContainer.innerHTML = `
+                <div class="error-message">
+                    <p>Error loading agents: ${error.message}</p>
+                    <p>Make sure the AI Agent Framework is running on port 3001.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Add agent control functions to global scope
+    window.startAgent = async function(agentId) {
+        try {
+            const response = await fetch(`http://localhost:3001/api/v1/agents/${agentId}/start`, {
+                method: 'POST'
+            });
+            
+            if (response.ok) {
+                showNotification('Agent started successfully');
+                loadAgents(); // Refresh the list
+            } else {
+                throw new Error('Failed to start agent');
+            }
+        } catch (error) {
+            showNotification(`Error starting agent: ${error.message}`, 'error');
+        }
+    };
+
+    window.stopAgent = async function(agentId) {
+        try {
+            const response = await fetch(`http://localhost:3001/api/v1/agents/${agentId}/stop`, {
+                method: 'POST'
+            });
+            
+            if (response.ok) {
+                showNotification('Agent stopped successfully');
+                loadAgents(); // Refresh the list
+            } else {
+                throw new Error('Failed to stop agent');
+            }
+        } catch (error) {
+            showNotification(`Error stopping agent: ${error.message}`, 'error');
+        }
+    };
+
+    window.runAgent = async function(agentId) {
+        try {
+            const response = await fetch(`http://localhost:3001/api/v1/agents/${agentId}/run`, {
+                method: 'POST'
+            });
+            
+            if (response.ok) {
+                showNotification('Agent run initiated successfully');
+            } else {
+                throw new Error('Failed to run agent');
+            }
+        } catch (error) {
+            showNotification(`Error running agent: ${error.message}`, 'error');
+        }
+    };
 
     // Load health information
     async function loadHealthInfo() {
@@ -468,6 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchButton.addEventListener('click', searchAccount);
     refreshBlocksButton.addEventListener('click', loadLatestBlocks);
     refreshTokenomicsButton.addEventListener('click', loadTokenomics);
+    refreshAgentsButton.addEventListener('click', loadAgents);
     
     // Wallet events
     generateWalletButton.addEventListener('click', generateWallet);

@@ -548,6 +548,7 @@
                     <div class="tab" data-tab="wallet">Wallet</div>
                     <div class="tab" data-tab="deploy">Deploy Contract</div>
                     <div class="tab" data-tab="tokenomics">Tokenomics</div>
+                    <div class="tab" data-tab="agents">Agents</div>
                 </div>
 
                 <!-- Blocks Tab -->
@@ -735,6 +736,24 @@
                                     <li>Network security through economic incentives</li>
                                 </ul>
                                 <p>The token has a fixed supply cap of 2 billion FORGE tokens with an initial allocation of 1 billion tokens.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Agents Tab -->
+                <div class="tab-content" id="agents-tab">
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-robot"></i> AI Agents</h2>
+                            <button class="refresh-btn" id="refresh-agents">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div id="agents-container">
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading agents...</p>
                             </div>
                         </div>
                     </div>

@@ -27,7 +27,11 @@ export class State {
         const a = this.accounts.get(addr);
         if (a)
             return a;
-        const fresh = { balance: 0n, nonce: 0, rep: 0 };
+        const fresh = {
+            forgeBalance: 0n,
+            nonce: 0,
+            rep: 0
+        };
         this.accounts.set(addr, fresh);
         return fresh;
     }
@@ -64,23 +68,23 @@ export class State {
                 throw new Error(`Gas limit too low: required ${gasCost.total}, provided ${tx.gasLimit}`);
             }
             // Deduct gas fee first
-            if (from.balance < totalFee) {
-                throw new Error(`Insufficient balance for gas: required ${totalFee}, available ${from.balance}`);
+            if (from.forgeBalance < totalFee) {
+                throw new Error(`Insufficient FORGE balance for gas: required ${totalFee}, available ${from.forgeBalance}`);
             }
-            from.balance -= totalFee;
+            from.forgeBalance -= totalFee;
             gasUsed = gasCost.total;
             // Credit gas fee to proposer
             const proposerAccount = this.getOrCreate(proposer);
-            proposerAccount.balance += totalFee;
+            proposerAccount.forgeBalance += totalFee;
             // Execute transaction-specific logic
             if (tx.type === "transfer") {
                 const transferTx = tx;
                 const to = this.getOrCreate(transferTx.to);
-                if (from.balance < transferTx.amount) {
-                    throw new Error(`Insufficient balance for transfer: required ${transferTx.amount}, available ${from.balance}`);
+                if (from.forgeBalance < transferTx.amount) {
+                    throw new Error(`Insufficient FORGE balance for transfer: required ${transferTx.amount}, available ${from.forgeBalance}`);
                 }
-                from.balance -= transferTx.amount;
-                to.balance += transferTx.amount;
+                from.forgeBalance -= transferTx.amount;
+                to.forgeBalance += transferTx.amount;
                 from.nonce++;
                 logger.info('Transfer transaction applied', {
                     from: tx.from,
@@ -167,8 +171,8 @@ export class State {
                 }
                 const callTx = tx;
                 // Check if sender has enough balance for the call value
-                if (from.balance < callTx.value) {
-                    throw new Error(`Insufficient balance for call: required ${callTx.value}, available ${from.balance}`);
+                if (from.forgeBalance < callTx.value) {
+                    throw new Error(`Insufficient FORGE balance for call: required ${callTx.value}, available ${from.forgeBalance}`);
                 }
                 // EVM handles the call and gas calculation
                 const result = await this.evmManager.callContract(callTx, { height, proposer });
@@ -176,9 +180,9 @@ export class State {
                     from.nonce++;
                     // Transfer value to contract (if any)
                     if (callTx.value > 0n) {
-                        from.balance -= callTx.value;
+                        from.forgeBalance -= callTx.value;
                         const contractAccount = this.getOrCreate(callTx.to);
-                        contractAccount.balance += callTx.value;
+                        contractAccount.forgeBalance += callTx.value;
                     }
                     logger.info('Contract call executed', {
                         from: tx.from,
@@ -198,7 +202,7 @@ export class State {
             const usedFee = minGas * tx.gasPrice;
             const refund = (tx.gasLimit - minGas) * tx.gasPrice;
             // Refund unused gas
-            from.balance += refund;
+            from.forgeBalance += refund;
             logger.error('Transaction execution failed', {
                 txType: tx.type,
                 from: tx.from,
@@ -238,14 +242,39 @@ export class State {
         }
         return this.evmManager.getContractStorage(address, key);
     }
+    /**
+     * Migrates existing accounts from old balance field to forgeBalance field
+     * Temporary function for backward compatibility
+     */
+    migrateAccountBalances() {
+        for (const [address, account] of this.accounts.entries()) {
+            // If account has old balance field but no forgeBalance, migrate it
+            if ('balance' in account && !('forgeBalance' in account)) {
+                account.forgeBalance = account.balance;
+                delete account.balance;
+                console.log(`[migration] Migrated account balance for ${address}`);
+            }
+        }
+    }
+    /**
+     * Distributes block rewards to the proposer
+     * @param proposer The address of the block proposer
+     * @param blockReward The amount of FORGE tokens to reward
+     */
+    distributeBlockReward(proposer, blockReward) {
+        const proposerAccount = this.getOrCreate(proposer);
+        proposerAccount.forgeBalance += blockReward;
+        console.log(`[state] Block reward distributed to ${proposer}: ${blockReward} FORGE`);
+    }
 }
 /**
  * Applies all transactions in a block to the given state with gas tracking.
  * @param state The state to apply the block to.
  * @param block The block containing the transactions to apply.
+ * @param blockReward Optional block reward to distribute to the proposer.
  * @returns Total gas used by all transactions in the block and individual transaction results.
  */
-export async function applyBlock(state, block) {
+export async function applyBlock(state, block, blockReward) {
     let totalGasUsed = 0n;
     const txResults = [];
     for (const stx of block.txs) {
@@ -256,6 +285,10 @@ export async function applyBlock(state, block) {
         if (!result.success) {
             console.warn(`Transaction ${stx.hash} failed: ${result.error}`);
         }
+    }
+    // Distribute block reward to proposer if specified
+    if (blockReward) {
+        state.distributeBlockReward(block.header.proposer, blockReward);
     }
     return { totalGasUsed, txResults };
 }
