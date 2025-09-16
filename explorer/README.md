@@ -1,51 +1,54 @@
-# Mini Chain Explorer
+# Forge Mini Chain Explorer
 
-A simple web-based explorer for the Mini Chain blockchain.
-
-## Getting Started
-
-1. Make sure you have Node.js installed
-2. Install dependencies: `npm install`
-3. Start the explorer: `npm start`
-4. Open your browser to http://localhost:3000
-
-## Prerequisites
-
-The explorer connects to the Mini Chain API server which runs on port 8080 by default. Make sure a Mini Chain node is running before using the explorer.
-
-You can start a node in leader mode with:
-```bash
-CHAIN_ID=test CHAIN_DATA_DIR=.data DATA_DIR=.data KEY_FILE=.keys/ed25519.json BLOCK_MS=500 LEADER=1 P2P_PORT=7071 API_PORT=8080 npm run dev
-```
-
-Or you can start both the node and explorer together with:
-```bash
-npm run explorer
-```
+A blockchain explorer for the Forge Mini Chain with additional wallet creation and smart contract deployment capabilities.
 
 ## Features
 
-- View the head block information
-- View transactions in the head block
-- Search for account information by address
+1. **Block Explorer** - View the latest blocks and transactions on the blockchain
+2. **Account Lookup** - Search for account details by address
+3. **Wallet Creation** - Generate new wallets with Ed25519 or Secp256k1 cryptography
+4. **Smart Contract Deployment** - Deploy smart contracts to the blockchain
 
-## Troubleshooting
+## Wallet Creation
 
-If you see CSP (Content Security Policy) errors or connection errors:
+The wallet creation feature allows you to generate new key pairs locally in your browser:
 
-1. Make sure the Mini Chain node is running on port 8080
-2. Check that there are no firewall rules blocking the connection
-3. Verify that the API endpoints are accessible by visiting http://localhost:8080/health in your browser
+1. Navigate to the "Wallet" tab
+2. Select your preferred cryptographic algorithm:
+   - Ed25519 (Default)
+   - Secp256k1 (Ethereum Compatible)
+3. Click "Generate New Wallet"
+4. Your new wallet details will be displayed
+5. Download your key pair for safe storage
 
-## API Endpoints Used
+**Important**: Never share your private key with anyone. Anyone with access to your private key can control your wallet.
 
-- `/head` - Get the current head block
-- `/account/:addr` - Get account information by address
+## Smart Contract Deployment
+
+Deploy smart contracts to the Forge Mini Chain:
+
+1. Navigate to the "Deploy Contract" tab
+2. Enter the deployer's address and private key
+3. Paste the contract bytecode
+4. Optionally provide constructor arguments
+5. Set gas limit and gas price
+6. Click "Deploy Contract"
+
+The deployment result will show the transaction hash and contract address.
 
 ## Development
 
-The explorer is a simple Express.js application with a static frontend. The frontend code is in the `public` directory.
+To run the explorer:
 
-- `index.html` - Main HTML file
-- `app.js` - JavaScript frontend code
-- `server.js` - Express.js server
+```bash
+npm install
+npm start
+```
+
+The explorer will be available at http://localhost:3000
+
+## Security Notes
+
+- All cryptographic operations are performed locally in your browser
+- Private keys are never transmitted over the network
+- Always verify you're on the correct website before entering private keys

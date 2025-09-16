@@ -1,0 +1,1 @@
+{"context":"Database Initialization","level":"error","message":"Application error Database failed to open","service":"forge-mini-chain","stack":"Error: Database failed to open\n    at C:\\Users\\dubci\\Desktop\\mini_chain\\node_modules\\abstract-level\\abstract-level.js:174:17","timestamp":"2025-09-16T03:34:15.593Z","type":"NotOpenError"}

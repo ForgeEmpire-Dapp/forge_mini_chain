@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forge Explorer - Blockchain Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --primary: #2563eb;
@@ -383,60 +384,6 @@
             margin-top: 2rem;
             border-top: 1px solid var(--border);
         }
-
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateX(120%);
-            transition: transform 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            background-color: var(--success);
-            color: white;
-        }
-
-        .notification.error {
-            background-color: var(--danger);
-            color: white;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
-        }
-
-        .tab {
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-
-        .tab.active {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -460,29 +407,154 @@
     <div class="container">
         <div class="main-content">
             <div class="content">
-                <div class="content-section">
-                    <div class="section-header">
-                        <h2><i class="fas fa-cubes"></i> Latest Blocks</h2>
-                        <button class="refresh-btn" id="refresh-blocks">
-                            <i class="fas fa-sync-alt"></i> Refresh
-                        </button>
+                <!-- Tabs for different sections -->
+                <div class="tabs">
+                    <div class="tab active" data-tab="blocks">Blocks</div>
+                    <div class="tab" data-tab="wallet">Wallet</div>
+                    <div class="tab" data-tab="deploy">Deploy Contract</div>
+                </div>
+
+                <!-- Blocks Tab -->
+                <div class="tab-content active" id="blocks-tab">
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-cubes"></i> Latest Blocks</h2>
+                            <button class="refresh-btn" id="refresh-blocks">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div id="blocks-container">
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading latest blocks...</p>
+                            </div>
+                        </div>
                     </div>
-                    <div id="blocks-container">
-                        <div class="loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Loading latest blocks...</p>
+
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-wallet"></i> Account Details</h2>
+                        </div>
+                        <div id="account-details">
+                            <div class="empty-state">
+                                <i class="fas fa-user"></i>
+                                <p>Search for an account address to view details</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="content-section">
-                    <div class="section-header">
-                        <h2><i class="fas fa-wallet"></i> Account Details</h2>
+                <!-- Wallet Creation Tab -->
+                <div class="tab-content" id="wallet-tab">
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-wallet"></i> Create New Wallet</h2>
+                        </div>
+                        <div class="card">
+                            <p style="margin-bottom: 1rem;">Generate a new wallet for use with the Forge Mini Chain. Your keys will be generated locally in your browser.</p>
+                            
+                            <div class="form-group">
+                                <label for="algorithm-select">Cryptographic Algorithm:</label>
+                                <select id="algorithm-select" class="form-control">
+                                    <option value="ed25519">Ed25519 (Default)</option>
+                                    <option value="secp256k1">Secp256k1 (Ethereum Compatible)</option>
+                                </select>
+                            </div>
+                            
+                            <button id="generate-wallet" class="btn btn-primary" style="width: 100%; margin: 1rem 0;">
+                                <i class="fas fa-key"></i> Generate New Wallet
+                            </button>
+                            
+                            <div id="wallet-result" style="display: none;">
+                                <div class="result-card">
+                                    <h3>Wallet Details</h3>
+                                    <div class="form-group">
+                                        <label>Address:</label>
+                                        <div class="key-display" id="wallet-address"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Public Key:</label>
+                                        <div class="key-display" id="wallet-public-key"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Private Key:</label>
+                                        <div class="key-display private-key" id="wallet-private-key"></div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 1rem; padding: 1rem; background-color: #fff3cd; border-radius: 6px; border: 1px solid #ffeaa7;">
+                                    <p style="font-weight: 500; color: #856404;"><i class="fas fa-exclamation-triangle"></i> Important</p>
+                                    <p style="color: #856404; font-size: 0.9rem;">Store your private key securely. Anyone with access to your private key can control your wallet.</p>
+                                    <button id="download-keys" class="btn btn-warning" style="margin-top: 0.5rem;">
+                                        <i class="fas fa-download"></i> Download Key Pair
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="account-details">
-                        <div class="empty-state">
-                            <i class="fas fa-user"></i>
-                            <p>Search for an account address to view details</p>
+                </div>
+
+                <!-- Contract Deployment Tab -->
+                <div class="tab-content" id="deploy-tab">
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-file-contract"></i> Deploy Smart Contract</h2>
+                        </div>
+                        <div class="card">
+                            <p style="margin-bottom: 1rem;">Deploy a smart contract to the Forge Mini Chain. You'll need a wallet with sufficient funds.</p>
+                            
+                            <div class="form-group">
+                                <label for="deployer-address">Deployer Address:</label>
+                                <input type="text" id="deployer-address" class="form-control" placeholder="0x...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="deployer-private-key">Deployer Private Key:</label>
+                                <input type="password" id="deployer-private-key" class="form-control" placeholder="Private key...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contract-bytecode">Contract Bytecode:</label>
+                                <textarea id="contract-bytecode" class="form-control" placeholder="0x..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="constructor-args">Constructor Arguments (optional):</label>
+                                <input type="text" id="constructor-args" class="form-control" placeholder="0x...">
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+                                <div class="form-group">
+                                    <label for="gas-limit">Gas Limit:</label>
+                                    <input type="number" id="gas-limit" class="form-control" value="3000000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gas-price">Gas Price:</label>
+                                    <input type="number" id="gas-price" class="form-control" value="1">
+                                </div>
+                            </div>
+                            
+                            <button id="deploy-contract" class="btn btn-primary" style="width: 100%; margin: 1rem 0;">
+                                <i class="fas fa-rocket"></i> Deploy Contract
+                            </button>
+                            
+                            <div id="deployment-result" style="display: none;">
+                                <div class="result-card">
+                                    <h3>Deployment Result</h3>
+                                    <div class="form-group">
+                                        <label>Transaction Hash:</label>
+                                        <div class="key-display" id="tx-hash"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Contract Address:</label>
+                                        <div class="key-display" id="contract-address"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status:</label>
+                                        <div class="key-display" id="deployment-status"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -543,6 +615,7 @@
         </div>
     </footer>
 
+    <script src="crypto.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

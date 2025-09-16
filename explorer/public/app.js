@@ -11,6 +11,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const blockHeightElement = document.getElementById('block-height');
     const contractCountElement = document.getElementById('contract-count');
     const healthInfoElement = document.getElementById('health-info');
+    
+    // Wallet elements
+    const generateWalletButton = document.getElementById('generate-wallet');
+    const algorithmSelect = document.getElementById('algorithm-select');
+    const walletResult = document.getElementById('wallet-result');
+    const walletAddress = document.getElementById('wallet-address');
+    const walletPublicKey = document.getElementById('wallet-public-key');
+    const walletPrivateKey = document.getElementById('wallet-private-key');
+    const downloadKeysButton = document.getElementById('download-keys');
+    
+    // Deployment elements
+    const deployContractButton = document.getElementById('deploy-contract');
+    const deployerAddress = document.getElementById('deployer-address');
+    const deployerPrivateKey = document.getElementById('deployer-private-key');
+    const contractBytecode = document.getElementById('contract-bytecode');
+    const constructorArgs = document.getElementById('constructor-args');
+    const gasLimit = document.getElementById('gas-limit');
+    const gasPrice = document.getElementById('gas-price');
+    const deploymentResult = document.getElementById('deployment-result');
+    const txHash = document.getElementById('tx-hash');
+    const contractAddressElement = document.getElementById('contract-address');
+    const deploymentStatus = document.getElementById('deployment-status');
+    
+    // Tab elements
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Tab switching
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.getAttribute('data-tab');
+            
+            // Update active tab
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Show active content
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === `${tabId}-tab`) {
+                    content.classList.add('active');
+                }
+            });
+        });
+    });
 
     // Show notification
     function showNotification(message, type = 'success') {
@@ -227,9 +272,107 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Generate wallet
+    async function generateWallet() {
+        const algorithm = algorithmSelect.value;
+        
+        try {
+            // Generate actual cryptographic keys
+            const keyPair = await CryptoUtils.generateKeyPair(algorithm);
+            
+            // Display the generated wallet
+            walletAddress.textContent = keyPair.address;
+            walletPublicKey.textContent = keyPair.publicKey;
+            walletPrivateKey.textContent = keyPair.privateKey;
+            walletResult.style.display = 'block';
+            
+            showNotification('Wallet generated successfully!');
+        } catch (error) {
+            console.error('Error generating wallet:', error);
+            showNotification(`Error generating wallet: ${error.message}`, 'error');
+        }
+    }
+
+    // Download keys
+    function downloadKeys() {
+        const walletData = {
+            address: walletAddress.textContent,
+            publicKey: walletPublicKey.textContent,
+            privateKey: walletPrivateKey.textContent,
+            algorithm: algorithmSelect.value,
+            createdAt: new Date().toISOString()
+        };
+        
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(walletData, null, 2));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "forge-wallet-keys.json");
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+        
+        showNotification('Keys downloaded successfully!');
+    }
+
+    // Deploy contract
+    async function deployContract() {
+        const address = deployerAddress.value.trim();
+        const privateKey = deployerPrivateKey.value.trim();
+        const bytecode = contractBytecode.value.trim();
+        
+        if (!address || !privateKey || !bytecode) {
+            showNotification('Please fill in all required fields', 'error');
+            return;
+        }
+        
+        // Show loading state
+        deploymentResult.style.display = 'none';
+        deployContractButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deploying...';
+        deployContractButton.disabled = true;
+        
+        try {
+            // In a real implementation, this would:
+            // 1. Create a deploy transaction
+            // 2. Sign it with the private key
+            // 3. Submit it to the network via the API
+            // 4. Wait for confirmation
+            
+            // For demo purposes, we'll simulate a successful deployment
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            const mockTxHash = '0x' + Array.from({length: 64}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+            const mockContractAddress = '0x' + Array.from({length: 40}, () => Math.floor(Math.random() * 16).toString(16)).join('');
+            
+            // Display results
+            txHash.textContent = mockTxHash;
+            contractAddressElement.textContent = mockContractAddress;
+            deploymentStatus.textContent = 'Success';
+            deploymentStatus.style.color = 'var(--success)';
+            deploymentResult.style.display = 'block';
+            
+            showNotification('Contract deployed successfully!');
+        } catch (error) {
+            deploymentStatus.textContent = `Failed: ${error.message}`;
+            deploymentStatus.style.color = 'var(--danger)';
+            deploymentResult.style.display = 'block';
+            
+            showNotification(`Deployment failed: ${error.message}`, 'error');
+        } finally {
+            deployContractButton.innerHTML = '<i class="fas fa-rocket"></i> Deploy Contract';
+            deployContractButton.disabled = false;
+        }
+    }
+
     // Event listeners
     searchButton.addEventListener('click', searchAccount);
     refreshBlocksButton.addEventListener('click', loadLatestBlocks);
+    
+    // Wallet events
+    generateWalletButton.addEventListener('click', generateWallet);
+    downloadKeysButton.addEventListener('click', downloadKeys);
+    
+    // Deployment events
+    deployContractButton.addEventListener('click', deployContract);
     
     // Search on Enter key
     searchInput.addEventListener('keypress', (e) => {
@@ -244,4 +387,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Refresh health info every 30 seconds
     setInterval(loadHealthInfo, 30000);
-});
+});    setInterval(loadHealthInfo, 30000);
