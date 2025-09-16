@@ -461,7 +461,7 @@ CMD ["npm", "start"]
 
 ### Production Deployment Guide
 
-For detailed production deployment instructions, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+For detailed production deployment instructions, see [DEPLOYMENT_GUIDE.md](docs/deployment/DEPLOYMENT_GUIDE.md)
 
 ## 📊 Monitoring & Analytics
 
@@ -586,17 +586,17 @@ const account = await sdk.getAccount('0x...');
 
 ### Native Token Integration
 For detailed information about the native FORGE token implementation, see:
-- [NATIVE_TOKEN_INTEGRATION_PLAN.md](NATIVE_TOKEN_INTEGRATION_PLAN.md) - Complete implementation plan
-- [NATIVE_TOKEN_FEATURE_SUMMARY.md](NATIVE_TOKEN_FEATURE_SUMMARY.md) - Feature overview
-- [NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md](NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
-- [NATIVE_TOKEN_PROJECT_SUMMARY.md](NATIVE_TOKEN_PROJECT_SUMMARY.md) - Project completion summary
+- [NATIVE_TOKEN_INTEGRATION_PLAN.md](docs/native-token/NATIVE_TOKEN_INTEGRATION_PLAN.md) - Complete implementation plan
+- [NATIVE_TOKEN_FEATURE_SUMMARY.md](docs/native-token/NATIVE_TOKEN_FEATURE_SUMMARY.md) - Feature overview
+- [NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md](docs/native-token/NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
+- [NATIVE_TOKEN_PROJECT_SUMMARY.md](docs/native-token/NATIVE_TOKEN_PROJECT_SUMMARY.md) - Project completion summary
 
 ### AI Agents Framework
 For detailed information about the AI Agents framework, see:
-- [AI_AGENTS_INTEGRATION_PLAN.md](AI_AGENTS_INTEGRATION_PLAN.md) - High-level integration plan
-- [AI_AGENT_FRAMEWORK_TECHNICAL_SPEC.md](AI_AGENT_FRAMEWORK_TECHNICAL_SPEC.md) - Detailed technical specification
-- [AI_AGENTS_IMPLEMENTATION_GUIDE.md](AI_AGENTS_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
-- [AI_AGENTS_FEATURE_SUMMARY.md](AI_AGENTS_FEATURE_SUMMARY.md) - Feature overview
+- [AI_AGENTS_INTEGRATION_PLAN.md](docs/ai-agents/AI_AGENTS_INTEGRATION_PLAN.md) - High-level integration plan
+- [AI_AGENT_FRAMEWORK_TECHNICAL_SPEC.md](docs/ai-agents/AI_AGENT_FRAMEWORK_TECHNICAL_SPEC.md) - Detailed technical specification
+- [AI_AGENTS_IMPLEMENTATION_GUIDE.md](docs/ai-agents/AI_AGENTS_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
+- [AI_AGENTS_FEATURE_SUMMARY.md](docs/ai-agents/AI_AGENTS_FEATURE_SUMMARY.md) - Feature overview
 
 ## 🤖 AI Agents Framework
 
