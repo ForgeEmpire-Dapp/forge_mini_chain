@@ -2454,3 +2454,624 @@
 {"blockHeight":808,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:38.829Z","txCount":0}
 {"level":"info","message":"Shutting down blockchain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:38.800Z"}
 {"level":"info","message":"Blockchain shutdown complete","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:38.852Z"}
+{"blockHeight":809,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:39.327Z","txCount":0}
+{"blockHeight":809,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:39.330Z","txCount":0}
+{"blockHeight":809,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:39.332Z","txCount":0}
+{"blockHeight":810,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:39.832Z","txCount":0}
+{"blockHeight":810,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:39.836Z","txCount":0}
+{"blockHeight":810,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:39.838Z","txCount":0}
+{"blockHeight":811,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:40.339Z","txCount":0}
+{"blockHeight":811,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:40.345Z","txCount":0}
+{"blockHeight":811,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:40.354Z","txCount":0}
+{"blockHeight":812,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:40.848Z","txCount":0}
+{"blockHeight":812,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:40.853Z","txCount":0}
+{"blockHeight":812,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:40.857Z","txCount":0}
+{"blockHeight":813,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:41.353Z","txCount":0}
+{"blockHeight":813,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:41.357Z","txCount":0}
+{"blockHeight":813,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:41.360Z","txCount":0}
+{"blockHeight":814,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:41.867Z","txCount":0}
+{"blockHeight":814,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:41.874Z","txCount":0}
+{"blockHeight":814,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:41.877Z","txCount":0}
+{"blockHeight":815,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:42.371Z","txCount":0}
+{"blockHeight":815,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:42.377Z","txCount":0}
+{"blockHeight":815,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:42.385Z","txCount":0}
+{"blockHeight":816,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:42.874Z","txCount":0}
+{"blockHeight":816,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:42.880Z","txCount":0}
+{"blockHeight":816,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:42.884Z","txCount":0}
+{"blockHeight":817,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:43.383Z","txCount":0}
+{"blockHeight":817,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:43.389Z","txCount":0}
+{"blockHeight":817,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:43.393Z","txCount":0}
+{"blockHeight":818,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:43.897Z","txCount":0}
+{"blockHeight":818,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:43.899Z","txCount":0}
+{"blockHeight":818,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:43.901Z","txCount":0}
+{"blockHeight":819,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:44.400Z","txCount":0}
+{"blockHeight":819,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:44.407Z","txCount":0}
+{"blockHeight":819,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:44.413Z","txCount":0}
+{"blockHeight":820,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:44.904Z","txCount":0}
+{"blockHeight":820,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:44.911Z","txCount":0}
+{"blockHeight":820,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:44.914Z","txCount":0}
+{"blockHeight":821,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:45.403Z","txCount":0}
+{"blockHeight":821,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:45.409Z","txCount":0}
+{"blockHeight":821,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:45.413Z","txCount":0}
+{"blockHeight":822,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:45.918Z","txCount":0}
+{"blockHeight":822,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:45.925Z","txCount":0}
+{"blockHeight":822,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:45.929Z","txCount":0}
+{"blockHeight":823,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:46.422Z","txCount":0}
+{"blockHeight":823,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:46.429Z","txCount":0}
+{"blockHeight":823,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:46.433Z","txCount":0}
+{"blockHeight":824,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:46.925Z","txCount":0}
+{"blockHeight":824,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:46.932Z","txCount":0}
+{"blockHeight":824,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:46.938Z","txCount":0}
+{"blockHeight":825,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:47.426Z","txCount":0}
+{"blockHeight":825,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:47.433Z","txCount":0}
+{"blockHeight":825,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:47.437Z","txCount":0}
+{"blockHeight":826,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:47.928Z","txCount":0}
+{"blockHeight":826,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:47.936Z","txCount":0}
+{"blockHeight":826,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:47.939Z","txCount":0}
+{"blockHeight":827,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:48.428Z","txCount":0}
+{"blockHeight":827,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:48.430Z","txCount":0}
+{"blockHeight":827,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:48.432Z","txCount":0}
+{"blockHeight":828,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:48.936Z","txCount":0}
+{"blockHeight":828,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:48.943Z","txCount":0}
+{"blockHeight":828,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:48.947Z","txCount":0}
+{"blockHeight":829,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:49.441Z","txCount":0}
+{"blockHeight":829,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:49.447Z","txCount":0}
+{"blockHeight":829,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:49.454Z","txCount":0}
+{"blockHeight":830,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:49.941Z","txCount":0}
+{"blockHeight":830,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:49.949Z","txCount":0}
+{"blockHeight":830,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:49.954Z","txCount":0}
+{"blockHeight":831,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:50.444Z","txCount":0}
+{"blockHeight":831,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:50.462Z","txCount":0}
+{"blockHeight":831,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:50.468Z","txCount":0}
+{"blockHeight":832,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:50.954Z","txCount":0}
+{"blockHeight":832,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:50.957Z","txCount":0}
+{"blockHeight":832,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:50.959Z","txCount":0}
+{"blockHeight":833,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:51.458Z","txCount":0}
+{"blockHeight":833,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:51.464Z","txCount":0}
+{"blockHeight":833,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:51.467Z","txCount":0}
+{"blockHeight":834,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:51.965Z","txCount":0}
+{"blockHeight":834,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:51.969Z","txCount":0}
+{"blockHeight":834,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:51.993Z","txCount":0}
+{"blockHeight":835,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:52.477Z","txCount":0}
+{"blockHeight":835,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:52.482Z","txCount":0}
+{"blockHeight":835,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:52.500Z","txCount":0}
+{"blockHeight":836,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:52.990Z","txCount":0}
+{"blockHeight":836,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:52.997Z","txCount":0}
+{"blockHeight":836,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:52.999Z","txCount":0}
+{"blockHeight":837,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:53.505Z","txCount":0}
+{"blockHeight":837,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:53.508Z","txCount":0}
+{"blockHeight":837,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:53.510Z","txCount":0}
+{"blockHeight":838,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:54.013Z","txCount":0}
+{"blockHeight":838,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:54.016Z","txCount":0}
+{"blockHeight":838,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:54.018Z","txCount":0}
+{"blockHeight":839,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:54.517Z","txCount":0}
+{"blockHeight":839,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:54.520Z","txCount":0}
+{"blockHeight":839,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:54.521Z","txCount":0}
+{"blockHeight":840,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:55.016Z","txCount":0}
+{"blockHeight":840,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:55.019Z","txCount":0}
+{"blockHeight":840,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:55.021Z","txCount":0}
+{"blockHeight":841,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:55.524Z","txCount":0}
+{"blockHeight":841,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:55.528Z","txCount":0}
+{"blockHeight":841,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:55.530Z","txCount":0}
+{"blockHeight":842,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:56.032Z","txCount":0}
+{"blockHeight":842,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:56.041Z","txCount":0}
+{"blockHeight":842,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:56.047Z","txCount":0}
+{"blockHeight":843,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:56.538Z","txCount":0}
+{"blockHeight":843,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:56.545Z","txCount":0}
+{"blockHeight":843,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:56.550Z","txCount":0}
+{"blockHeight":844,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:57.049Z","txCount":0}
+{"blockHeight":844,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:57.052Z","txCount":0}
+{"blockHeight":844,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:57.054Z","txCount":0}
+{"blockHeight":845,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:57.555Z","txCount":0}
+{"blockHeight":845,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:57.561Z","txCount":0}
+{"blockHeight":845,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:57.562Z","txCount":0}
+{"blockHeight":846,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:58.066Z","txCount":0}
+{"blockHeight":846,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:58.070Z","txCount":0}
+{"blockHeight":846,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:58.075Z","txCount":0}
+{"blockHeight":847,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:58.574Z","txCount":0}
+{"blockHeight":847,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:58.598Z","txCount":0}
+{"blockHeight":847,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:58.601Z","txCount":0}
+{"blockHeight":848,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:59.075Z","txCount":0}
+{"blockHeight":848,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:59.088Z","txCount":0}
+{"blockHeight":848,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:59.138Z","txCount":0}
+{"blockHeight":849,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:59.584Z","txCount":0}
+{"blockHeight":849,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:53:59.595Z","txCount":0}
+{"blockHeight":849,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:53:59.614Z","txCount":0}
+{"hasHead":true,"level":"info","message":"Health check performed","service":"forge-mini-chain","status":"ok","timestamp":"2025-09-16T03:53:59.649Z"}
+{"blockHeight":850,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:00.086Z","txCount":0}
+{"blockHeight":850,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:00.096Z","txCount":0}
+{"blockHeight":850,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:00.120Z","txCount":0}
+{"blockHeight":851,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:00.594Z","txCount":0}
+{"blockHeight":851,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:00.611Z","txCount":0}
+{"blockHeight":851,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:00.617Z","txCount":0}
+{"blockHeight":852,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:01.096Z","txCount":0}
+{"blockHeight":852,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:01.098Z","txCount":0}
+{"blockHeight":852,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:01.100Z","txCount":0}
+{"blockHeight":853,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:01.600Z","txCount":0}
+{"blockHeight":853,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:01.603Z","txCount":0}
+{"blockHeight":853,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:01.608Z","txCount":0}
+{"blockHeight":854,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:02.107Z","txCount":0}
+{"blockHeight":854,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:02.119Z","txCount":0}
+{"blockHeight":854,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:02.126Z","txCount":0}
+{"blockHeight":855,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:02.607Z","txCount":0}
+{"blockHeight":855,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:02.615Z","txCount":0}
+{"blockHeight":855,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:02.618Z","txCount":0}
+{"blockHeight":856,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:03.121Z","txCount":0}
+{"blockHeight":856,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:03.126Z","txCount":0}
+{"blockHeight":856,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:03.129Z","txCount":0}
+{"blockHeight":857,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:03.634Z","txCount":0}
+{"blockHeight":857,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:03.645Z","txCount":0}
+{"blockHeight":857,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:03.653Z","txCount":0}
+{"blockHeight":858,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:04.139Z","txCount":0}
+{"blockHeight":858,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:04.151Z","txCount":0}
+{"blockHeight":858,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:04.154Z","txCount":0}
+{"blockHeight":859,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:04.644Z","txCount":0}
+{"blockHeight":859,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:04.652Z","txCount":0}
+{"blockHeight":859,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:04.655Z","txCount":0}
+{"blockHeight":860,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:05.155Z","txCount":0}
+{"blockHeight":860,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:05.159Z","txCount":0}
+{"blockHeight":860,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:05.162Z","txCount":0}
+{"blockHeight":861,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:05.659Z","txCount":0}
+{"blockHeight":861,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:05.664Z","txCount":0}
+{"blockHeight":861,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:05.666Z","txCount":0}
+{"blockHeight":862,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:06.164Z","txCount":0}
+{"blockHeight":862,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:06.182Z","txCount":0}
+{"blockHeight":862,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:06.185Z","txCount":0}
+{"blockHeight":863,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:06.668Z","txCount":0}
+{"blockHeight":863,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:06.675Z","txCount":0}
+{"blockHeight":863,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:06.679Z","txCount":0}
+{"blockHeight":864,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:07.171Z","txCount":0}
+{"blockHeight":864,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:07.176Z","txCount":0}
+{"blockHeight":864,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:07.177Z","txCount":0}
+{"blockHeight":865,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:07.686Z","txCount":0}
+{"blockHeight":865,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:07.693Z","txCount":0}
+{"blockHeight":865,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:07.747Z","txCount":0}
+{"blockHeight":866,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:08.193Z","txCount":0}
+{"blockHeight":866,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:08.196Z","txCount":0}
+{"blockHeight":866,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:08.198Z","txCount":0}
+{"blockHeight":867,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:08.693Z","txCount":0}
+{"blockHeight":867,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:08.744Z","txCount":0}
+{"blockHeight":867,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:08.751Z","txCount":0}
+{"blockHeight":868,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:09.197Z","txCount":0}
+{"blockHeight":868,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:09.200Z","txCount":0}
+{"blockHeight":868,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:09.201Z","txCount":0}
+{"blockHeight":869,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:09.700Z","txCount":0}
+{"blockHeight":869,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:09.703Z","txCount":0}
+{"blockHeight":869,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:09.705Z","txCount":0}
+{"blockHeight":870,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:10.214Z","txCount":0}
+{"blockHeight":870,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:10.217Z","txCount":0}
+{"blockHeight":870,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:10.218Z","txCount":0}
+{"blockHeight":871,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:10.716Z","txCount":0}
+{"blockHeight":871,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:10.723Z","txCount":0}
+{"blockHeight":871,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:10.727Z","txCount":0}
+{"blockHeight":872,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:11.222Z","txCount":0}
+{"blockHeight":872,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:11.229Z","txCount":0}
+{"blockHeight":872,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:11.234Z","txCount":0}
+{"blockHeight":873,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:11.730Z","txCount":0}
+{"blockHeight":873,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:11.733Z","txCount":0}
+{"blockHeight":873,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:11.734Z","txCount":0}
+{"blockHeight":874,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:12.238Z","txCount":0}
+{"blockHeight":874,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:12.241Z","txCount":0}
+{"blockHeight":874,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:12.242Z","txCount":0}
+{"blockHeight":875,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:12.745Z","txCount":0}
+{"blockHeight":875,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:12.752Z","txCount":0}
+{"blockHeight":875,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:12.756Z","txCount":0}
+{"blockHeight":876,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:13.252Z","txCount":0}
+{"blockHeight":876,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:13.270Z","txCount":0}
+{"blockHeight":876,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:13.280Z","txCount":0}
+{"blockHeight":877,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:13.764Z","txCount":0}
+{"blockHeight":877,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:13.768Z","txCount":0}
+{"blockHeight":877,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:13.770Z","txCount":0}
+{"blockHeight":878,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:14.276Z","txCount":0}
+{"blockHeight":878,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:14.280Z","txCount":0}
+{"blockHeight":878,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:14.285Z","txCount":0}
+{"blockHeight":879,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:14.784Z","txCount":0}
+{"blockHeight":879,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:14.791Z","txCount":0}
+{"blockHeight":879,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:14.795Z","txCount":0}
+{"blockHeight":880,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:15.295Z","txCount":0}
+{"blockHeight":880,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:15.342Z","txCount":0}
+{"blockHeight":880,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:15.408Z","txCount":0}
+{"blockHeight":881,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:15.817Z","txCount":0}
+{"blockHeight":881,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:15.845Z","txCount":0}
+{"blockHeight":881,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:15.907Z","txCount":0}
+{"blockHeight":882,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:16.325Z","txCount":0}
+{"blockHeight":882,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:16.336Z","txCount":0}
+{"blockHeight":882,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:16.350Z","txCount":0}
+{"blockHeight":883,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:16.836Z","txCount":0}
+{"blockHeight":883,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:16.839Z","txCount":0}
+{"blockHeight":883,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:16.840Z","txCount":0}
+{"blockHeight":884,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:17.336Z","txCount":0}
+{"blockHeight":884,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:17.340Z","txCount":0}
+{"blockHeight":884,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:17.344Z","txCount":0}
+{"blockHeight":885,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:17.840Z","txCount":0}
+{"blockHeight":885,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:17.845Z","txCount":0}
+{"blockHeight":885,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:17.848Z","txCount":0}
+{"blockHeight":886,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:18.341Z","txCount":0}
+{"blockHeight":886,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:18.345Z","txCount":0}
+{"blockHeight":886,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:18.347Z","txCount":0}
+{"blockHeight":887,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:18.849Z","txCount":0}
+{"blockHeight":887,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:18.852Z","txCount":0}
+{"blockHeight":887,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:18.853Z","txCount":0}
+{"blockHeight":888,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:19.360Z","txCount":0}
+{"blockHeight":888,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:19.363Z","txCount":0}
+{"blockHeight":888,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:19.365Z","txCount":0}
+{"blockHeight":889,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:19.868Z","txCount":0}
+{"blockHeight":889,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:19.871Z","txCount":0}
+{"blockHeight":889,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:19.873Z","txCount":0}
+{"blockHeight":890,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:20.369Z","txCount":0}
+{"blockHeight":890,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:20.372Z","txCount":0}
+{"blockHeight":890,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:20.373Z","txCount":0}
+{"blockHeight":891,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:20.869Z","txCount":0}
+{"blockHeight":891,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:20.872Z","txCount":0}
+{"blockHeight":891,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:20.873Z","txCount":0}
+{"blockHeight":892,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:21.383Z","txCount":0}
+{"blockHeight":892,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:21.386Z","txCount":0}
+{"blockHeight":892,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:21.388Z","txCount":0}
+{"blockHeight":893,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:21.884Z","txCount":0}
+{"blockHeight":893,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:21.886Z","txCount":0}
+{"blockHeight":893,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:21.888Z","txCount":0}
+{"blockHeight":894,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:22.386Z","txCount":0}
+{"blockHeight":894,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:22.392Z","txCount":0}
+{"blockHeight":894,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:22.402Z","txCount":0}
+{"blockHeight":895,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:22.900Z","txCount":0}
+{"blockHeight":895,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:22.905Z","txCount":0}
+{"blockHeight":895,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:22.917Z","txCount":0}
+{"blockHeight":896,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:23.411Z","txCount":0}
+{"blockHeight":896,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:23.419Z","txCount":0}
+{"blockHeight":896,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:23.423Z","txCount":0}
+{"blockHeight":897,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:23.922Z","txCount":0}
+{"blockHeight":897,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:23.929Z","txCount":0}
+{"blockHeight":897,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:23.935Z","txCount":0}
+{"blockHeight":898,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:24.426Z","txCount":0}
+{"blockHeight":898,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:24.433Z","txCount":0}
+{"blockHeight":898,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:24.436Z","txCount":0}
+{"blockHeight":899,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:24.932Z","txCount":0}
+{"blockHeight":899,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:24.935Z","txCount":0}
+{"blockHeight":899,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:24.936Z","txCount":0}
+{"blockHeight":900,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:25.446Z","txCount":0}
+{"blockHeight":900,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:25.452Z","txCount":0}
+{"blockHeight":900,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:25.456Z","txCount":0}
+{"blockHeight":901,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:25.947Z","txCount":0}
+{"blockHeight":901,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:25.953Z","txCount":0}
+{"blockHeight":901,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:25.957Z","txCount":0}
+{"blockHeight":902,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:26.450Z","txCount":0}
+{"blockHeight":902,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:26.457Z","txCount":0}
+{"blockHeight":902,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:26.461Z","txCount":0}
+{"blockHeight":903,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:26.965Z","txCount":0}
+{"blockHeight":903,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:26.972Z","txCount":0}
+{"blockHeight":903,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:26.975Z","txCount":0}
+{"blockHeight":904,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:27.476Z","txCount":0}
+{"blockHeight":904,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:27.482Z","txCount":0}
+{"blockHeight":904,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:27.486Z","txCount":0}
+{"blockHeight":905,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:27.977Z","txCount":0}
+{"blockHeight":905,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:27.984Z","txCount":0}
+{"blockHeight":905,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:27.987Z","txCount":0}
+{"blockHeight":906,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:28.481Z","txCount":0}
+{"blockHeight":906,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:28.513Z","txCount":0}
+{"blockHeight":906,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:28.521Z","txCount":0}
+{"blockHeight":907,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:28.993Z","txCount":0}
+{"blockHeight":907,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:29.000Z","txCount":0}
+{"blockHeight":907,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:29.004Z","txCount":0}
+{"blockHeight":908,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:29.493Z","txCount":0}
+{"blockHeight":908,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:29.500Z","txCount":0}
+{"blockHeight":908,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:29.503Z","txCount":0}
+{"blockHeight":909,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:30.003Z","txCount":0}
+{"blockHeight":909,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:30.010Z","txCount":0}
+{"blockHeight":909,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:30.014Z","txCount":0}
+{"blockHeight":910,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:30.518Z","txCount":0}
+{"blockHeight":910,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:30.524Z","txCount":0}
+{"blockHeight":910,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:30.528Z","txCount":0}
+{"blockHeight":911,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:31.032Z","txCount":0}
+{"blockHeight":911,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:31.035Z","txCount":0}
+{"blockHeight":911,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:31.037Z","txCount":0}
+{"blockHeight":912,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:31.543Z","txCount":0}
+{"blockHeight":912,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:31.550Z","txCount":0}
+{"blockHeight":912,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:31.554Z","txCount":0}
+{"blockHeight":913,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:32.055Z","txCount":0}
+{"blockHeight":913,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:32.061Z","txCount":0}
+{"blockHeight":913,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:32.065Z","txCount":0}
+{"blockHeight":914,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:32.566Z","txCount":0}
+{"blockHeight":914,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:32.572Z","txCount":0}
+{"blockHeight":914,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:32.576Z","txCount":0}
+{"blockHeight":915,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:33.079Z","txCount":0}
+{"blockHeight":915,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:33.086Z","txCount":0}
+{"blockHeight":915,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:33.089Z","txCount":0}
+{"blockHeight":916,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:33.580Z","txCount":0}
+{"blockHeight":916,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:33.588Z","txCount":0}
+{"blockHeight":916,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:33.598Z","txCount":0}
+{"blockHeight":917,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:34.097Z","txCount":0}
+{"blockHeight":917,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:34.103Z","txCount":0}
+{"blockHeight":917,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:34.106Z","txCount":0}
+{"blockHeight":918,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:34.608Z","txCount":0}
+{"blockHeight":918,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:34.616Z","txCount":0}
+{"blockHeight":918,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:34.619Z","txCount":0}
+{"blockHeight":919,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:35.121Z","txCount":0}
+{"blockHeight":919,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:35.128Z","txCount":0}
+{"blockHeight":919,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:35.132Z","txCount":0}
+{"blockHeight":920,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:35.637Z","txCount":0}
+{"blockHeight":920,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:35.644Z","txCount":0}
+{"blockHeight":920,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:35.647Z","txCount":0}
+{"blockHeight":921,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:36.137Z","txCount":0}
+{"blockHeight":921,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:36.140Z","txCount":0}
+{"blockHeight":921,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:36.141Z","txCount":0}
+{"blockHeight":922,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:36.639Z","txCount":0}
+{"blockHeight":922,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:36.642Z","txCount":0}
+{"blockHeight":922,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:36.643Z","txCount":0}
+{"blockHeight":923,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:37.141Z","txCount":0}
+{"blockHeight":923,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:37.144Z","txCount":0}
+{"blockHeight":923,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:37.145Z","txCount":0}
+{"blockHeight":924,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:37.654Z","txCount":0}
+{"blockHeight":924,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:37.661Z","txCount":0}
+{"blockHeight":924,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:37.664Z","txCount":0}
+{"blockHeight":925,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:38.158Z","txCount":0}
+{"blockHeight":925,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:38.165Z","txCount":0}
+{"blockHeight":925,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:38.169Z","txCount":0}
+{"blockHeight":926,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:38.672Z","txCount":0}
+{"blockHeight":926,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:38.678Z","txCount":0}
+{"blockHeight":926,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:38.682Z","txCount":0}
+{"blockHeight":927,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:39.178Z","txCount":0}
+{"blockHeight":927,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:39.182Z","txCount":0}
+{"blockHeight":927,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:39.186Z","txCount":0}
+{"blockHeight":928,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:39.684Z","txCount":0}
+{"blockHeight":928,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:39.692Z","txCount":0}
+{"blockHeight":928,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:39.699Z","txCount":0}
+{"blockHeight":929,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:40.184Z","txCount":0}
+{"blockHeight":929,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:40.192Z","txCount":0}
+{"blockHeight":929,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:40.196Z","txCount":0}
+{"blockHeight":930,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:40.689Z","txCount":0}
+{"blockHeight":930,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:40.696Z","txCount":0}
+{"blockHeight":930,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:40.700Z","txCount":0}
+{"blockHeight":931,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:41.192Z","txCount":0}
+{"blockHeight":931,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:41.198Z","txCount":0}
+{"blockHeight":931,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:41.202Z","txCount":0}
+{"blockHeight":932,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:41.692Z","txCount":0}
+{"blockHeight":932,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:41.695Z","txCount":0}
+{"blockHeight":932,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:41.698Z","txCount":0}
+{"blockHeight":933,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:42.201Z","txCount":0}
+{"blockHeight":933,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:42.208Z","txCount":0}
+{"blockHeight":933,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:42.211Z","txCount":0}
+{"blockHeight":934,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:42.714Z","txCount":0}
+{"blockHeight":934,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:42.720Z","txCount":0}
+{"blockHeight":934,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:42.724Z","txCount":0}
+{"blockHeight":935,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:43.227Z","txCount":0}
+{"blockHeight":935,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:43.233Z","txCount":0}
+{"blockHeight":935,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:43.237Z","txCount":0}
+{"blockHeight":936,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:43.731Z","txCount":0}
+{"blockHeight":936,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:43.738Z","txCount":0}
+{"blockHeight":936,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:43.742Z","txCount":0}
+{"blockHeight":937,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:44.241Z","txCount":0}
+{"blockHeight":937,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:44.248Z","txCount":0}
+{"blockHeight":937,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:44.251Z","txCount":0}
+{"blockHeight":938,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:44.743Z","txCount":0}
+{"blockHeight":938,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:44.752Z","txCount":0}
+{"blockHeight":938,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:44.759Z","txCount":0}
+{"blockHeight":939,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:45.253Z","txCount":0}
+{"blockHeight":939,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:45.260Z","txCount":0}
+{"blockHeight":939,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:45.264Z","txCount":0}
+{"blockHeight":940,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:45.756Z","txCount":0}
+{"blockHeight":940,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:45.758Z","txCount":0}
+{"blockHeight":940,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:45.760Z","txCount":0}
+{"blockHeight":941,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:46.264Z","txCount":0}
+{"blockHeight":941,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:46.272Z","txCount":0}
+{"blockHeight":941,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:46.276Z","txCount":0}
+{"blockHeight":942,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:46.778Z","txCount":0}
+{"blockHeight":942,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:46.784Z","txCount":0}
+{"blockHeight":942,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:46.788Z","txCount":0}
+{"blockHeight":943,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:47.281Z","txCount":0}
+{"blockHeight":943,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:47.287Z","txCount":0}
+{"blockHeight":943,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:47.291Z","txCount":0}
+{"blockHeight":944,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:47.780Z","txCount":0}
+{"blockHeight":944,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:47.787Z","txCount":0}
+{"blockHeight":944,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:47.791Z","txCount":0}
+{"blockHeight":945,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:48.284Z","txCount":0}
+{"blockHeight":945,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:48.291Z","txCount":0}
+{"blockHeight":945,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:48.294Z","txCount":0}
+{"blockHeight":946,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:48.791Z","txCount":0}
+{"blockHeight":946,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:48.798Z","txCount":0}
+{"blockHeight":946,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:48.801Z","txCount":0}
+{"blockHeight":947,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:49.295Z","txCount":0}
+{"blockHeight":947,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:49.302Z","txCount":0}
+{"blockHeight":947,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:49.305Z","txCount":0}
+{"blockHeight":948,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:49.797Z","txCount":0}
+{"blockHeight":948,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:49.803Z","txCount":0}
+{"blockHeight":948,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:49.807Z","txCount":0}
+{"blockHeight":949,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:50.334Z","txCount":0}
+{"blockHeight":949,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:50.368Z","txCount":0}
+{"blockHeight":949,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:50.373Z","txCount":0}
+{"blockHeight":950,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:50.836Z","txCount":0}
+{"blockHeight":950,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:50.842Z","txCount":0}
+{"blockHeight":950,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:50.846Z","txCount":0}
+{"blockHeight":951,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:51.337Z","txCount":0}
+{"blockHeight":951,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:51.339Z","txCount":0}
+{"blockHeight":951,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:51.340Z","txCount":0}
+{"blockHeight":952,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:51.842Z","txCount":0}
+{"blockHeight":952,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:51.845Z","txCount":0}
+{"blockHeight":952,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:51.847Z","txCount":0}
+{"blockHeight":953,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:52.344Z","txCount":0}
+{"blockHeight":953,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:52.349Z","txCount":0}
+{"blockHeight":953,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:52.363Z","txCount":0}
+{"blockHeight":954,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:52.849Z","txCount":0}
+{"blockHeight":954,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:52.856Z","txCount":0}
+{"blockHeight":954,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:52.860Z","txCount":0}
+{"blockHeight":955,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:53.351Z","txCount":0}
+{"blockHeight":955,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:53.357Z","txCount":0}
+{"blockHeight":955,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:53.361Z","txCount":0}
+{"blockHeight":956,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:53.865Z","txCount":0}
+{"blockHeight":956,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:53.874Z","txCount":0}
+{"blockHeight":956,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:53.878Z","txCount":0}
+{"blockHeight":957,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:54.373Z","txCount":0}
+{"blockHeight":957,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:54.380Z","txCount":0}
+{"blockHeight":957,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:54.388Z","txCount":0}
+{"blockHeight":958,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:54.877Z","txCount":0}
+{"blockHeight":958,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:54.884Z","txCount":0}
+{"blockHeight":958,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:54.889Z","txCount":0}
+{"blockHeight":959,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:55.390Z","txCount":0}
+{"blockHeight":959,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:55.397Z","txCount":0}
+{"blockHeight":959,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:55.403Z","txCount":0}
+{"blockHeight":960,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:55.899Z","txCount":0}
+{"blockHeight":960,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:55.902Z","txCount":0}
+{"blockHeight":960,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:55.904Z","txCount":0}
+{"blockHeight":961,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:56.411Z","txCount":0}
+{"blockHeight":961,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:56.418Z","txCount":0}
+{"blockHeight":961,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:56.421Z","txCount":0}
+{"blockHeight":962,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:56.919Z","txCount":0}
+{"blockHeight":962,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:56.922Z","txCount":0}
+{"blockHeight":962,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:56.925Z","txCount":0}
+{"blockHeight":963,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:57.423Z","txCount":0}
+{"blockHeight":963,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:57.426Z","txCount":0}
+{"blockHeight":963,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:57.428Z","txCount":0}
+{"blockHeight":964,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:57.929Z","txCount":0}
+{"blockHeight":964,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:57.936Z","txCount":0}
+{"blockHeight":964,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:57.940Z","txCount":0}
+{"blockHeight":965,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:58.432Z","txCount":0}
+{"blockHeight":965,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:58.434Z","txCount":0}
+{"blockHeight":965,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:58.435Z","txCount":0}
+{"blockHeight":966,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:58.939Z","txCount":0}
+{"blockHeight":966,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:58.946Z","txCount":0}
+{"blockHeight":966,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:58.950Z","txCount":0}
+{"blockHeight":967,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:59.443Z","txCount":0}
+{"blockHeight":967,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:59.449Z","txCount":0}
+{"blockHeight":967,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:59.453Z","txCount":0}
+{"hasHead":true,"level":"info","message":"Health check performed","service":"forge-mini-chain","status":"ok","timestamp":"2025-09-16T03:54:59.611Z"}
+{"blockHeight":968,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:59.944Z","txCount":0}
+{"blockHeight":968,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:54:59.946Z","txCount":0}
+{"blockHeight":968,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:54:59.948Z","txCount":0}
+{"blockHeight":969,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:00.447Z","txCount":0}
+{"blockHeight":969,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:00.454Z","txCount":0}
+{"blockHeight":969,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:00.459Z","txCount":0}
+{"blockHeight":970,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:00.961Z","txCount":0}
+{"blockHeight":970,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:00.969Z","txCount":0}
+{"blockHeight":970,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.008Z","txCount":0}
+{"blockHeight":971,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.470Z","txCount":0}
+{"blockHeight":971,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.473Z","txCount":0}
+{"blockHeight":971,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.476Z","txCount":0}
+{"blockHeight":972,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.984Z","txCount":0}
+{"blockHeight":972,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.987Z","txCount":0}
+{"blockHeight":972,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:01.988Z","txCount":0}
+{"blockHeight":973,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:02.489Z","txCount":0}
+{"blockHeight":973,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:02.496Z","txCount":0}
+{"blockHeight":973,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:02.506Z","txCount":0}
+{"blockHeight":974,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:02.991Z","txCount":0}
+{"blockHeight":974,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:02.999Z","txCount":0}
+{"blockHeight":974,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:03.004Z","txCount":0}
+{"blockHeight":975,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:03.504Z","txCount":0}
+{"blockHeight":975,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:03.507Z","txCount":0}
+{"blockHeight":975,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:03.509Z","txCount":0}
+{"blockHeight":976,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:04.005Z","txCount":0}
+{"blockHeight":976,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:04.007Z","txCount":0}
+{"blockHeight":976,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:04.008Z","txCount":0}
+{"blockHeight":977,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:04.515Z","txCount":0}
+{"blockHeight":977,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:04.522Z","txCount":0}
+{"blockHeight":977,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:04.525Z","txCount":0}
+{"blockHeight":978,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:05.018Z","txCount":0}
+{"blockHeight":978,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:05.026Z","txCount":0}
+{"blockHeight":978,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:05.034Z","txCount":0}
+{"blockHeight":979,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:05.525Z","txCount":0}
+{"blockHeight":979,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:05.527Z","txCount":0}
+{"blockHeight":979,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:05.529Z","txCount":0}
+{"blockHeight":980,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:06.029Z","txCount":0}
+{"blockHeight":980,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:06.036Z","txCount":0}
+{"blockHeight":980,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:06.043Z","txCount":0}
+{"blockHeight":981,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:06.538Z","txCount":0}
+{"blockHeight":981,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:06.563Z","txCount":0}
+{"blockHeight":981,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:06.568Z","txCount":0}
+{"blockHeight":982,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:07.039Z","txCount":0}
+{"blockHeight":982,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:07.042Z","txCount":0}
+{"blockHeight":982,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:07.044Z","txCount":0}
+{"blockHeight":983,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:07.552Z","txCount":0}
+{"blockHeight":983,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:07.554Z","txCount":0}
+{"blockHeight":983,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:07.555Z","txCount":0}
+{"blockHeight":984,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:08.062Z","txCount":0}
+{"blockHeight":984,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:08.065Z","txCount":0}
+{"blockHeight":984,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:08.066Z","txCount":0}
+{"blockHeight":985,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:08.579Z","txCount":0}
+{"blockHeight":985,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:08.586Z","txCount":0}
+{"blockHeight":985,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:08.593Z","txCount":0}
+{"blockHeight":986,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:09.079Z","txCount":0}
+{"blockHeight":986,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:09.081Z","txCount":0}
+{"blockHeight":986,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:09.084Z","txCount":0}
+{"blockHeight":987,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:09.580Z","txCount":0}
+{"blockHeight":987,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:09.586Z","txCount":0}
+{"blockHeight":987,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:09.591Z","txCount":0}
+{"blockHeight":988,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:10.088Z","txCount":0}
+{"blockHeight":988,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:10.096Z","txCount":0}
+{"blockHeight":988,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:10.101Z","txCount":0}
+{"blockHeight":989,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:10.605Z","txCount":0}
+{"blockHeight":989,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:10.612Z","txCount":0}
+{"blockHeight":989,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:10.617Z","txCount":0}
+{"blockHeight":990,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:11.105Z","txCount":0}
+{"blockHeight":990,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:11.113Z","txCount":0}
+{"blockHeight":990,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:11.124Z","txCount":0}
+{"blockHeight":991,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:11.617Z","txCount":0}
+{"blockHeight":991,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:11.619Z","txCount":0}
+{"blockHeight":991,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:11.621Z","txCount":0}
+{"blockHeight":992,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:12.119Z","txCount":0}
+{"blockHeight":992,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:12.127Z","txCount":0}
+{"blockHeight":992,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:12.136Z","txCount":0}
+{"blockHeight":993,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:12.620Z","txCount":0}
+{"blockHeight":993,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:12.624Z","txCount":0}
+{"blockHeight":993,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:12.627Z","txCount":0}
+{"blockHeight":994,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:13.120Z","txCount":0}
+{"blockHeight":994,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:13.125Z","txCount":0}
+{"blockHeight":994,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:13.128Z","txCount":0}
+{"blockHeight":995,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:13.620Z","txCount":0}
+{"blockHeight":995,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:13.649Z","txCount":0}
+{"blockHeight":995,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:13.652Z","txCount":0}
+{"blockHeight":996,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:14.133Z","txCount":0}
+{"blockHeight":996,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:14.144Z","txCount":0}
+{"blockHeight":996,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:14.150Z","txCount":0}
+{"blockHeight":997,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:14.636Z","txCount":0}
+{"blockHeight":997,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:14.642Z","txCount":0}
+{"blockHeight":997,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:14.646Z","txCount":0}
+{"blockHeight":998,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:15.150Z","txCount":0}
+{"blockHeight":998,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:15.158Z","txCount":0}
+{"blockHeight":998,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:15.166Z","txCount":0}
+{"blockHeight":999,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:15.660Z","txCount":0}
+{"blockHeight":999,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:15.672Z","txCount":0}
+{"blockHeight":999,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:15.676Z","txCount":0}
+{"blockHeight":1000,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.174Z","txCount":0}
+{"blockHeight":1000,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.182Z","txCount":0}
+{"blockHeight":1000,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.191Z","txCount":0}
+{"height":1000,"level":"info","message":"Created snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.203Z"}
+{"blockHeight":1001,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.680Z","txCount":0}
+{"blockHeight":1001,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.683Z","txCount":0}
+{"blockHeight":1001,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:16.684Z","txCount":0}
+{"blockHeight":1002,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:17.185Z","txCount":0}
+{"blockHeight":1002,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:17.192Z","txCount":0}
+{"blockHeight":1002,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:17.220Z","txCount":0}
+{"blockHeight":1003,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:17.688Z","txCount":0}
+{"blockHeight":1003,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:17.691Z","txCount":0}
+{"blockHeight":1003,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:17.694Z","txCount":0}
+{"blockHeight":1004,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:18.200Z","txCount":0}
+{"blockHeight":1004,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:18.203Z","txCount":0}
+{"blockHeight":1004,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:18.205Z","txCount":0}
+{"blockHeight":1005,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:18.705Z","txCount":0}
+{"blockHeight":1005,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:18.707Z","txCount":0}
+{"blockHeight":1005,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:18.709Z","txCount":0}
+{"blockHeight":1006,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:19.212Z","txCount":0}
+{"blockHeight":1006,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:19.218Z","txCount":0}
+{"blockHeight":1006,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:19.219Z","txCount":0}
+{"blockHeight":1007,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:19.715Z","txCount":0}
+{"blockHeight":1007,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:19.721Z","txCount":0}
+{"blockHeight":1007,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:19.725Z","txCount":0}
+{"blockHeight":1008,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:20.227Z","txCount":0}
+{"blockHeight":1008,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:20.235Z","txCount":0}
+{"blockHeight":1008,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:20.252Z","txCount":0}
+{"blockHeight":1009,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:20.739Z","txCount":0}
+{"blockHeight":1009,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:20.746Z","txCount":0}
+{"blockHeight":1009,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:20.749Z","txCount":0}
+{"blockHeight":1010,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:21.250Z","txCount":0}
+{"blockHeight":1010,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:21.253Z","txCount":0}
+{"blockHeight":1010,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:21.254Z","txCount":0}
+{"blockHeight":1011,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:21.764Z","txCount":0}
+{"blockHeight":1011,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:21.766Z","txCount":0}
+{"blockHeight":1011,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:21.768Z","txCount":0}
+{"blockHeight":1012,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:22.268Z","txCount":0}
+{"blockHeight":1012,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:22.274Z","txCount":0}
+{"blockHeight":1012,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:22.292Z","txCount":0}
+{"blockHeight":1013,"gasUsed":"0","level":"info","message":"Block built","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:22.775Z","txCount":0}
+{"blockHeight":1013,"level":"info","message":"Adding block to chain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:22.783Z","txCount":0}
+{"blockHeight":1013,"gasUsed":"0","level":"info","message":"Block added successfully","poolSize":0,"service":"forge-mini-chain","timestamp":"2025-09-16T03:55:22.792Z","txCount":0}
+{"level":"info","message":"Executing shutdown callbacks...","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:23.134Z"}
+{"level":"info","message":"Shutting down blockchain","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:23.136Z"}
+{"level":"info","message":"Blockchain shutdown complete","service":"forge-mini-chain","timestamp":"2025-09-16T03:55:23.146Z"}
