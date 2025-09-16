@@ -17,6 +17,25 @@ export function startApi(port, handlers) {
     const app = express();
     const server = http.createServer(app);
     const wss = new WebSocketServer({ server });
+    // Add CORS headers to prevent CSP violations
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        res.header('Access-Control-Allow-Credentials', 'true');
+        // Handle preflight requests
+        if (req.method === 'OPTIONS') {
+            res.sendStatus(200);
+        }
+        else {
+            next();
+        }
+    });
+    // Add CSP headers to allow necessary connections
+    app.use((req, res, next) => {
+        res.header('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' ws: http: https:; img-src 'self' data: https:; font-src 'self' data: https:;");
+        next();
+    });
     // Store active WebSocket subscriptions
     const subscriptions = {
         blocks: [],

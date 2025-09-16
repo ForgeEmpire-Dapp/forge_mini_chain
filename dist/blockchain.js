@@ -287,7 +287,7 @@ export class Blockchain {
             txCount: selectedTxs.length,
             gasUsed: blockGasUsed
         });
-        return buildBlock(height, prev, this.keys.address, this.keys.priv, selectedTxs, blockGasUsed, this.cfg.blockGasLimit, this.cfg.baseFeePerGas);
+        return buildBlock(height, prev, this.keys.address, this.keys.privateKey, selectedTxs, blockGasUsed, this.cfg.blockGasLimit, this.cfg.baseFeePerGas);
     }
     /**
      * Creates a state snapshot at the given height

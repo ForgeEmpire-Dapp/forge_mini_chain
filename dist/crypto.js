@@ -2,6 +2,7 @@
  * @fileoverview Enhanced cryptographic utility functions with ECDSA support for Ethereum compatibility
  */
 import crypto from "node:crypto";
+import fs from "node:fs";
 import * as secp256k1 from "secp256k1";
 import keccak from "keccak";
 /**
@@ -26,6 +27,14 @@ export function toHex(buf) {
  * @returns The buffer.
  */
 export function fromHex(hex) {
+    // Handle undefined or null values
+    if (hex === undefined || hex === null) {
+        throw new Error('fromHex: hex value is undefined or null');
+    }
+    // Ensure hex is a string
+    if (typeof hex !== 'string') {
+        throw new Error('fromHex: hex value must be a string');
+    }
     return Buffer.from(hex.replace(/^0x/, ""), "hex");
 }
 /**
@@ -124,6 +133,18 @@ export function signMessage(privateKeyHex, msg, algorithm) {
  * @returns The signature in hexadecimal format.
  */
 export function signEd25519(privateKeyHex, msg) {
+    // Handle undefined or null private key
+    if (privateKeyHex === undefined || privateKeyHex === null) {
+        throw new Error('signEd25519: privateKeyHex is undefined or null');
+    }
+    // Ensure privateKeyHex is a string
+    if (typeof privateKeyHex !== 'string') {
+        throw new Error('signEd25519: privateKeyHex must be a string');
+    }
+    // Ensure it's not an empty string
+    if (privateKeyHex === '') {
+        throw new Error('signEd25519: privateKeyHex is empty');
+    }
     const keyObj = crypto.createPrivateKey({ key: fromHex(privateKeyHex), format: "der", type: "pkcs8" });
     const sig = crypto.sign(null, msg, keyObj); // ed25519 ignores hash algo
     return toHex(sig);
@@ -135,6 +156,18 @@ export function signEd25519(privateKeyHex, msg) {
  * @returns The signature in hexadecimal format
  */
 export function signSecp256k1(privateKeyHex, msg) {
+    // Handle undefined or null private key
+    if (privateKeyHex === undefined || privateKeyHex === null) {
+        throw new Error('signSecp256k1: privateKeyHex is undefined or null');
+    }
+    // Ensure privateKeyHex is a string
+    if (typeof privateKeyHex !== 'string') {
+        throw new Error('signSecp256k1: privateKeyHex must be a string');
+    }
+    // Ensure it's not an empty string
+    if (privateKeyHex === '') {
+        throw new Error('signSecp256k1: privateKeyHex is empty');
+    }
     const privateKeyBytes = fromHex(privateKeyHex);
     const msgHash = sha256(msg); // Hash the message
     const hashBytes = fromHex(msgHash);
@@ -165,6 +198,27 @@ export function verifySignature(publicKeyHex, msg, sigHex, algorithm) {
  * @returns True if the signature is valid, false otherwise.
  */
 export function verifyEd25519(publicKeyHex, msg, sigHex) {
+    // Handle undefined or null values
+    if (publicKeyHex === undefined || publicKeyHex === null) {
+        throw new Error('verifyEd25519: publicKeyHex is undefined or null');
+    }
+    if (sigHex === undefined || sigHex === null) {
+        throw new Error('verifyEd25519: sigHex is undefined or null');
+    }
+    // Ensure values are strings
+    if (typeof publicKeyHex !== 'string') {
+        throw new Error('verifyEd25519: publicKeyHex must be a string');
+    }
+    if (typeof sigHex !== 'string') {
+        throw new Error('verifyEd25519: sigHex must be a string');
+    }
+    // Ensure they're not empty strings
+    if (publicKeyHex === '') {
+        throw new Error('verifyEd25519: publicKeyHex is empty');
+    }
+    if (sigHex === '') {
+        throw new Error('verifyEd25519: sigHex is empty');
+    }
     const keyObj = crypto.createPublicKey({ key: fromHex(publicKeyHex), format: "der", type: "spki" });
     return crypto.verify(null, msg, keyObj, fromHex(sigHex));
 }
@@ -177,6 +231,27 @@ export function verifyEd25519(publicKeyHex, msg, sigHex) {
  */
 export function verifySecp256k1(publicKeyHex, msg, sigHex) {
     try {
+        // Handle undefined or null values
+        if (publicKeyHex === undefined || publicKeyHex === null) {
+            throw new Error('verifySecp256k1: publicKeyHex is undefined or null');
+        }
+        if (sigHex === undefined || sigHex === null) {
+            throw new Error('verifySecp256k1: sigHex is undefined or null');
+        }
+        // Ensure values are strings
+        if (typeof publicKeyHex !== 'string') {
+            throw new Error('verifySecp256k1: publicKeyHex must be a string');
+        }
+        if (typeof sigHex !== 'string') {
+            throw new Error('verifySecp256k1: sigHex must be a string');
+        }
+        // Ensure they're not empty strings
+        if (publicKeyHex === '') {
+            throw new Error('verifySecp256k1: publicKeyHex is empty');
+        }
+        if (sigHex === '') {
+            throw new Error('verifySecp256k1: sigHex is empty');
+        }
         const publicKeyBytes = fromHex(publicKeyHex);
         const msgHash = sha256(msg); // Hash the message
         const hashBytes = fromHex(msgHash);
@@ -232,12 +307,22 @@ export function addressFromSecp256k1Pub(pubHex) {
 export function keccak256(data) {
     return keccak('keccak256').update(Buffer.from(data)).digest('hex');
 }
-// Add the missing loadKeyPair function
+/**
+ * Loads a key pair from a file.
+ * @param filePath The path to the key pair file.
+ * @returns The loaded key pair.
+ */
 export function loadKeyPair(filePath) {
-    // For now, return a mock keypair since we don't have the full implementation
-    return {
-        publicKey: "0x00",
-        privateKey: "0x00",
-        address: "0x0000000000000000000000000000000000000000"
-    };
+    const data = fs.readFileSync(filePath, 'utf8');
+    const keypair = JSON.parse(data);
+    // Ensure all required fields are present
+    if (!keypair.publicKey || !keypair.address) {
+        throw new Error('Invalid keypair file: missing required fields');
+    }
+    // If privateKey is missing or empty, generate a new keypair
+    if (!keypair.privateKey || keypair.privateKey === '') {
+        console.warn('Private key missing or empty in keypair file, generating new keypair');
+        return generateKeyPair();
+    }
+    return keypair;
 }

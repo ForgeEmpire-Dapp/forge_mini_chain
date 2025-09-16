@@ -45,7 +45,7 @@ private subscribers: {
  * @param cfg The chain configuration.
  * @param keys The key pair for the node.
  */
-constructor(private cfg: ChainConfig, private keys: { pub: string; priv: string; address: string }) {
+constructor(private cfg: ChainConfig, private keys: { publicKey: string; privateKey: string; address: string }) {
   this.validator = new TxValidator(cfg, this.state);
   this.rateLimiter = new RateLimiter();
   this.db = new LevelBlockchainDB(cfg);
@@ -349,7 +349,7 @@ buildNextBlock(): Block {
     height, 
     prev, 
     this.keys.address, 
-    this.keys.priv, 
+    this.keys.privateKey, 
     selectedTxs,
     blockGasUsed,
     this.cfg.blockGasLimit,
