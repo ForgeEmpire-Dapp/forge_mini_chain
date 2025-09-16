@@ -73,6 +73,30 @@ $env:API_PORT="8081"; $env:P2P_PORT="0"; $env:LEADER_WS="ws://localhost:7071"; n
 API_PORT=8081 P2P_PORT=0 LEADER_WS=ws://localhost:7071 npm run dev
 ```
 
+### 6. Start the Enhanced Explorer
+
+The enhanced explorer includes wallet creation and smart contract deployment features:
+
+```bash
+cd explorer
+npm install
+npm start
+```
+
+Access the explorer at `http://localhost:3000`
+
+### 7. Start Both Node and Explorer Together
+
+For convenience, you can start both the blockchain node and explorer with a single command:
+
+```bash
+npm run dev:full
+```
+
+This will start:
+- Blockchain node on port 8080
+- Explorer on port 3000
+
 ## 📡 API Reference
 
 The EVM-enabled blockchain node exposes comprehensive HTTP API endpoints:
@@ -96,7 +120,7 @@ The EVM-enabled blockchain node exposes comprehensive HTTP API endpoints:
 
 ## 🌐 Block Explorer
 
-A comprehensive web-based block explorer for monitoring blockchain activity:
+A comprehensive web-based block explorer for monitoring blockchain activity with enhanced wallet creation and smart contract deployment capabilities:
 
 ```bash
 cd explorer
@@ -110,8 +134,48 @@ npm start
 - Account balance and contract state inspection
 - Gas usage analytics
 - EVM execution traces
+- **🆕 Wallet Creation**: Generate new wallets with Ed25519 or Secp256k1 cryptography directly in your browser
+- **🆕 Smart Contract Deployment**: Deploy smart contracts through a user-friendly web interface
+- **🆕 Tabbed Interface**: Easy navigation between blocks, wallet creation, and contract deployment
 
 **Available at:** `http://localhost:3000`
+
+### Wallet Creation in Explorer
+
+The enhanced explorer now includes a wallet creation feature that allows users to generate new key pairs locally in their browser:
+
+1. Navigate to the "Wallet" tab in the explorer
+2. Select your preferred cryptographic algorithm:
+   - Ed25519 (Default)
+   - Secp256k1 (Ethereum Compatible)
+3. Click "Generate New Wallet"
+4. Your new wallet details will be displayed:
+   - Address (public, can be shared)
+   - Public Key (public, can be shared)
+   - Private Key (private, keep secret!)
+5. Download your key pair for safe storage
+
+**Security Note**: All cryptographic operations are performed locally in your browser. Private keys are never transmitted over the network.
+
+### Smart Contract Deployment in Explorer
+
+Deploy smart contracts through the explorer with a simple web interface:
+
+1. Navigate to the "Deploy Contract" tab
+2. Enter the deployer's address and private key
+3. Paste the contract bytecode
+4. Optionally provide constructor arguments
+5. Set gas limit and gas price
+6. Click "Deploy Contract"
+7. View the deployment result showing transaction hash and contract address
+
+### Tabbed Interface
+
+The explorer features a tabbed interface for easy navigation:
+
+- **Blocks Tab**: View latest blockchain activity
+- **Wallet Tab**: Create new wallets with cryptographic key pairs
+- **Deploy Contract Tab**: Deploy smart contracts through a web form
 
 ## 🔐 Client-Side Signing & Smart Contract Deployment
 
@@ -195,9 +259,9 @@ curl -X POST -H "Content-Type: application/json" \
          "to": "0x742c3f0f6e8a14b9c7d5e2a3b8f6c4d8e9a1c7b5",
          "data": "0xa9059cbb000000000000000000000000...",
          "value": "0",
+         "nonce": 2,
          "gasLimit": "100000",
-         "gasPrice": "20000000000",
-         "nonce": 2
+         "gasPrice": "20000000000"
        },
        "signature": "0x...",
        "hash": "0x...",
@@ -317,6 +381,7 @@ npm run test:phase1  # Test basic functionality
 npm run demo:phase1  # Basic blockchain demo
 npm run demo:phase2  # EVM smart contract demo
 npm run demo:evm     # Alias for phase2 demo
+npm run dev:full     # Start both node and explorer
 ```
 
 ### Testing Smart Contracts
