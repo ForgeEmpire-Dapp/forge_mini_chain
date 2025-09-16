@@ -9,5 +9,5 @@ module.exports = {
     '!src/**/*.d.ts'
   ],
   coverageDirectory: 'coverage',
-  verbose: true
+  verbose: true,
 };

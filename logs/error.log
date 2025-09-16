@@ -12,3 +12,9 @@
 {"error":"Do not know how to serialize a BigInt","height":9000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T07:48:10.419Z"}
 {"error":"Do not know how to serialize a BigInt","height":10000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T07:56:50.062Z"}
 {"error":"Do not know how to serialize a BigInt","height":11000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T08:05:52.550Z"}
+{"error":"Do not know how to serialize a BigInt","height":12000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T08:14:33.451Z"}
+{"error":"Do not know how to serialize a BigInt","height":13000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T08:23:10.357Z"}
+{"error":"Do not know how to serialize a BigInt","height":14000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T08:31:44.030Z"}
+{"error":"Do not know how to serialize a BigInt","height":15000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T08:47:40.676Z"}
+{"error":"Do not know how to serialize a BigInt","height":16000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T08:56:13.002Z"}
+{"error":"Do not know how to serialize a BigInt","height":17000,"level":"error","message":"Failed to create snapshot","service":"forge-mini-chain","timestamp":"2025-09-16T09:04:48.157Z"}
