@@ -376,6 +376,114 @@
             color: var(--gray);
         }
 
+        /* Tabs styling */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background-color: #f1f5f9;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e69008;
+        }
+
+        .result-card {
+            background-color: #f8fafc;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .result-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .key-display {
+            padding: 10px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            font-family: monospace;
+            word-break: break-all;
+            margin-top: 0.25rem;
+        }
+
+        .private-key {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
         footer {
             text-align: center;
             padding: 2rem 0;
@@ -383,6 +491,33 @@
             font-size: 0.9rem;
             margin-top: 2rem;
             border-top: 1px solid var(--border);
+        }
+
+        /* Notification styling */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--success);
+        }
+
+        .notification.error {
+            background-color: var(--danger);
         }
     </style>
 </head>
@@ -412,6 +547,7 @@
                     <div class="tab active" data-tab="blocks">Blocks</div>
                     <div class="tab" data-tab="wallet">Wallet</div>
                     <div class="tab" data-tab="deploy">Deploy Contract</div>
+                    <div class="tab" data-tab="tokenomics">Tokenomics</div>
                 </div>
 
                 <!-- Blocks Tab -->
@@ -515,7 +651,7 @@
                             
                             <div class="form-group">
                                 <label for="contract-bytecode">Contract Bytecode:</label>
-                                <textarea id="contract-bytecode" class="form-control" placeholder="0x..."></textarea>
+                                <textarea id="contract-bytecode" class="form-control" placeholder="0x..." rows="5"></textarea>
                             </div>
                             
                             <div class="form-group">
@@ -529,7 +665,7 @@
                                     <input type="number" id="gas-limit" class="form-control" value="3000000">
                                 </div>
                                 <div class="form-group">
-                                    <label for="gas-price">Gas Price:</label>
+                                    <label for="gas-price">Gas Price (Gwei):</label>
                                     <input type="number" id="gas-price" class="form-control" value="1">
                                 </div>
                             </div>
@@ -554,6 +690,51 @@
                                         <div class="key-display" id="deployment-status"></div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tokenomics Tab -->
+                <div class="tab-content" id="tokenomics-tab">
+                    <div class="content-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-chart-pie"></i> Tokenomics Dashboard</h2>
+                            <button class="refresh-btn" id="refresh-tokenomics">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-coins"></i> FORGE Token Supply</h3>
+                            <div id="supply-info">
+                                <div class="loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading supply information...</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3><i class="fas fa-chart-line"></i> Tokenomics Parameters</h3>
+                            <div id="tokenomics-info">
+                                <div class="loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading tokenomics data...</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h3><i class="fas fa-info-circle"></i> About FORGE Token</h3>
+                            <div style="margin-top: 1rem;">
+                                <p>The FORGE token is the native utility token of the Forge Mini Chain. It is used for:</p>
+                                <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                    <li>Transaction fees (gas payments)</li>
+                                    <li>Block rewards for validators</li>
+                                    <li>Smart contract execution</li>
+                                    <li>Network security through economic incentives</li>
+                                </ul>
+                                <p>The token has a fixed supply cap of 2 billion FORGE tokens with an initial allocation of 1 billion tokens.</p>
                             </div>
                         </div>
                     </div>
@@ -599,6 +780,8 @@
                         <ul style="font-size: 0.9rem;">
                             <li><code>/head</code> - Latest block</li>
                             <li><code>/account/:addr</code> - Account details</li>
+                            <li><code>/supply</code> - Token supply</li>
+                            <li><code>/tokenomics</code> - Tokenomics data</li>
                             <li><code>/health</code> - Node status</li>
                         </ul>
                     </div>

@@ -30,6 +30,12 @@ export const GAS_COSTS = {
   STORAGE_CLEAR_REFUND: 15000n, // Refund for clearing storage
 } as const;
 
+// Helper function to format token amounts
+function formatForgeTokens(wei: bigint): string {
+  const forge = Number(wei) / 1e18;
+  return forge.toFixed(2) + " FORGE";
+}
+
 /**
  * Enhanced transaction validator with gas mechanism
  */
@@ -65,17 +71,18 @@ export class TxValidator {
       const gasCost = this.calculateGasCost(tx);
       const totalCost = gasCost.total * tx.gasPrice + this.getTransferAmount(tx);
       
-      if (account.balance < totalCost) {
+      if (account.forgeBalance < totalCost) {
         return {
           valid: false,
-          error: `Insufficient balance: required ${totalCost}, available ${account.balance}`
+          error: `Insufficient FORGE balance: required ${totalCost}, available ${account.forgeBalance}`
         };
       }
 
       return {
         valid: true,
         requiredGas: gasCost.total,
-        fee: gasCost.total * tx.gasPrice
+        fee: gasCost.total * tx.gasPrice,
+        feeFormatted: formatForgeTokens(gasCost.total * tx.gasPrice)
       };
 
     } catch (error) {

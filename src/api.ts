@@ -28,6 +28,7 @@ import {
 export function startApi(port: number, handlers: {
 submitTx: (stx: SignedTx) => Promise<void>;
 getAccount: (addr: string) => any;
+getAllAccounts: () => Map<string, any>;
 getHead: () => any;
 getEVMStats?: () => any;
 getContractCode?: (address: string) => string | null;
@@ -138,9 +139,21 @@ app.get("/head", (_req, res) => {
 });
 app.get("/account/:addr", (req, res) => {
   const account = handlers.getAccount(req.params.addr) || null;
-  res.json(JSON.parse(JSON.stringify(account, (key, value) => 
-    typeof value === 'bigint' ? value.toString() : value
-  )));
+  
+  // Format response with explicit token information
+  if (account) {
+    const formattedAccount = {
+      ...account,
+      forgeBalance: account.forgeBalance.toString(),
+      forgeBalanceFormatted: formatForgeTokens(account.forgeBalance)
+    };
+    
+    res.json(JSON.parse(JSON.stringify(formattedAccount, (key, value) => 
+      typeof value === 'bigint' ? value.toString() : value
+    )));
+  } else {
+    res.json(null);
+  }
 });
 
 // EVM stats endpoint
@@ -216,6 +229,77 @@ app.get("/tx/:hash/receipt", async (req, res) => {
     const errorMessage = (error as Error).message;
     console.error(`[api] Receipt retrieval failed: ${errorMessage}`);
     res.status(500).json({ error: errorMessage });
+  }
+});
+
+// Helper function to format token amounts
+function formatForgeTokens(wei: bigint): string {
+  const forge = Number(wei) / 1e18;
+  return forge.toFixed(2) + " FORGE";
+}
+
+// Token supply endpoint
+app.get("/supply", (req, res) => {
+  try {
+    // Calculate current total supply from all accounts
+    let totalSupply = 0n;
+    
+    // Get all accounts and sum their forgeBalance
+    if (handlers && typeof handlers.getAllAccounts === 'function') {
+      const accounts = handlers.getAllAccounts();
+      for (const [address, account] of accounts.entries()) {
+        totalSupply += account.forgeBalance;
+      }
+      
+      const supplyInfo = {
+        totalSupply: totalSupply.toString(),
+        totalSupplyFormatted: formatForgeTokens(totalSupply),
+        supplyCap: "2000000000000000000000000000", // 2B FORGE
+        supplyCapFormatted: "2,000,000,000.00 FORGE",
+        percentageMinted: totalSupply > 0 ? Number((totalSupply * 100n) / 2000000000000000000000000000n) : 0
+      };
+      
+      res.json(supplyInfo);
+    } else {
+      // Fallback response
+      const supplyInfo = {
+        totalSupply: "0",
+        totalSupplyFormatted: "0.00 FORGE",
+        supplyCap: "2000000000000000000000000000", // 2B FORGE
+        supplyCapFormatted: "2,000,000,000.00 FORGE",
+        percentageMinted: 0
+      };
+      
+      res.json(supplyInfo);
+    }
+  } catch (error) {
+    logger.error('Supply retrieval failed', { error: (error as Error).message });
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
+// Tokenomics endpoint
+app.get("/tokenomics", (req, res) => {
+  try {
+    const tokenomics = {
+      tokenName: "Forge Token",
+      tokenSymbol: "FORGE",
+      decimals: 18,
+      blockReward: "5000000000000000000", // 5 FORGE
+      blockRewardFormatted: "5.00 FORGE",
+      minGasPrice: "1000000000", // 1 Gwei
+      minGasPriceFormatted: "1.00 Gwei per gas",
+      blockGasLimit: "30000000", // 30M gas
+      supplyCap: "2000000000000000000000000000", // 2B FORGE
+      supplyCapFormatted: "2,000,000,000.00 FORGE",
+      initialSupply: "1000000000000000000000000000", // 1B FORGE
+      initialSupplyFormatted: "1,000,000,000.00 FORGE"
+    };
+    
+    res.json(tokenomics);
+  } catch (error) {
+    logger.error('Tokenomics retrieval failed', { error: (error as Error).message });
+    res.status(500).json({ error: (error as Error).message });
   }
 });
 

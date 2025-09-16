@@ -9,6 +9,7 @@
 - **🆕 Smart Contract Deployment & Execution**
 - **🆕 EVM Compatibility with Ethereum Virtual Machine**
 - **🆕 ECDSA (secp256k1) Signatures for Ethereum Compatibility**
+- **✅ Native FORGE Token with Comprehensive Tokenomics**
 
 ## 🏗️ Architecture Features
 
@@ -17,6 +18,8 @@
 - **🔐 Multi-Algorithm Cryptography:** Both Ed25519 and secp256k1 (Ethereum-compatible) signatures
 - **💾 LevelDB Database:** High-performance key-value storage with state snapshots
 - **⛽ Gas Mechanism:** EIP-1559 style gas pricing and execution limits
+- **💰 Native Token Integration:** FORGE token as native utility token with block rewards
+- **📈 Dynamic Fee Mechanism:** Base fee adjustment based on network congestion
 - **🌐 WebSocket P2P:** Efficient peer-to-peer communication
 - **🛡️ Robust Error Handling:** Circuit breakers, graceful shutdown, and recovery
 - **📊 Enhanced Validation:** Comprehensive transaction validation with rate limiting
@@ -75,7 +78,7 @@ API_PORT=8081 P2P_PORT=0 LEADER_WS=ws://localhost:7071 npm run dev
 
 ### 6. Start the Enhanced Explorer
 
-The enhanced explorer includes wallet creation and smart contract deployment features:
+The enhanced explorer includes wallet creation, smart contract deployment, and tokenomics dashboard:
 
 ```bash
 cd explorer
@@ -113,14 +116,19 @@ The EVM-enabled blockchain node exposes comprehensive HTTP API endpoints:
 - `GET /contract/:address/storage`: Contract storage inspection
 - `GET /evm/stats`: EVM execution statistics
 
+### Tokenomics Endpoints
+- `GET /supply`: Current FORGE token supply information
+- `GET /tokenomics`: Detailed tokenomics parameters
+
 ### Enhanced Features
 - **Gas Tracking**: All responses include gas usage information
 - **Event Logs**: Contract execution events in transaction receipts
 - **Multi-Algorithm Support**: Accepts both Ed25519 and secp256k1 signed transactions
+- **Native Token Support**: All balances and fees denominated in FORGE tokens
 
 ## 🌐 Block Explorer
 
-A comprehensive web-based block explorer for monitoring blockchain activity with enhanced wallet creation and smart contract deployment capabilities:
+A comprehensive web-based block explorer for monitoring blockchain activity with enhanced wallet creation, smart contract deployment, and tokenomics dashboard:
 
 ```bash
 cd explorer
@@ -134,9 +142,10 @@ npm start
 - Account balance and contract state inspection
 - Gas usage analytics
 - EVM execution traces
-- **🆕 Wallet Creation**: Generate new wallets with Ed25519 or Secp256k1 cryptography directly in your browser
-- **🆕 Smart Contract Deployment**: Deploy smart contracts through a user-friendly web interface
-- **🆕 Tabbed Interface**: Easy navigation between blocks, wallet creation, and contract deployment
+- **✅ Wallet Creation**: Generate new wallets with Ed25519 or Secp256k1 cryptography directly in your browser
+- **✅ Smart Contract Deployment**: Deploy smart contracts through a user-friendly web interface
+- **✅ Tokenomics Dashboard**: View FORGE token supply, inflation, and economic parameters
+- **✅ Tabbed Interface**: Easy navigation between blocks, wallet creation, contract deployment, and tokenomics
 
 **Available at:** `http://localhost:3000`
 
@@ -169,6 +178,23 @@ Deploy smart contracts through the explorer with a simple web interface:
 6. Click "Deploy Contract"
 7. View the deployment result showing transaction hash and contract address
 
+### Tokenomics Dashboard
+
+View comprehensive information about the native FORGE token:
+
+1. Navigate to the "Tokenomics" tab in the explorer
+2. View current token supply information:
+   - Total supply
+   - Supply cap
+   - Percentage of total supply minted
+3. View tokenomics parameters:
+   - Token name and symbol
+   - Decimals
+   - Block reward
+   - Minimum gas price
+   - Block gas limit
+4. Learn about the FORGE token utility
+
 ### Tabbed Interface
 
 The explorer features a tabbed interface for easy navigation:
@@ -176,6 +202,7 @@ The explorer features a tabbed interface for easy navigation:
 - **Blocks Tab**: View latest blockchain activity
 - **Wallet Tab**: Create new wallets with cryptographic key pairs
 - **Deploy Contract Tab**: Deploy smart contracts through a web form
+- **Tokenomics Tab**: View FORGE token supply and economic parameters
 
 ## 🔐 Client-Side Signing & Smart Contract Deployment
 
@@ -280,7 +307,7 @@ curl -X POST -H "Content-Type: application/json" \
   "type": "transfer",
   "from": "0x...",
   "to": "0x...",
-  "amount": "100",
+  "amount": "1000000000000000000",
   "nonce": 1,
   "gasLimit": "21000",
   "gasPrice": "1000000000"
@@ -362,9 +389,14 @@ P2P_PORT=7071                      # P2P WebSocket port
 LEADER_WS=ws://localhost:7071      # Leader node WebSocket URL
 
 # Gas Configuration
-BLOCK_GAS_LIMIT=10000000          # Max gas per block (10M)
-MIN_GAS_PRICE=1000000000          # Minimum gas price (1 Gwei)
-BASE_FEE=1000000000               # Base fee per gas (1 Gwei)
+BLOCK_GAS_LIMIT=30000000          # Max gas per block (30M)
+MIN_GAS_PRICE=1000000000          # Minimum gas price (1 Gwei FORGE)
+BASE_FEE=1000000000               # Base fee per gas (1 Gwei FORGE)
+
+# Native Token Configuration
+BLOCK_REWARD=5000000000000000000  # Block reward (5 FORGE)
+INITIAL_SUPPLY=1000000000000000000000000000  # Initial supply (1B FORGE)
+SUPPLY_CAP=2000000000000000000000000000      # Supply cap (2B FORGE)
 
 # Security
 KEY_FILE=.keys/ed25519.json       # Key file location
@@ -445,6 +477,12 @@ curl http://localhost:8080/evm/stats
 # Latest block
 curl http://localhost:8080/head
 
+# Token supply information
+curl http://localhost:8080/supply
+
+# Tokenomics parameters
+curl http://localhost:8080/tokenomics
+
 # Prometheus metrics
 curl http://localhost:8080/metrics
 ```
@@ -475,7 +513,7 @@ The health endpoint provides detailed status information:
 ### Performance Metrics
 
 - **Block Production:** ~500ms intervals (configurable)
-- **Transaction Throughput:** Limited by gas per block (10M gas default)
+- **Transaction Throughput:** Limited by gas per block (30M gas default)
 - **Contract Execution:** Full EVM compatibility
 - **Database:** LevelDB with automatic state snapshots
 
@@ -493,6 +531,8 @@ The application uses structured logging with Winston:
 - `GET /contract/:address/code`: Contract bytecode retrieval
 - `GET /contract/:address/storage/:key`: Contract storage inspection
 - `GET /tx/:hash/receipt`: Transaction execution receipts
+- `GET /supply`: Current FORGE token supply information
+- `GET /tokenomics`: Detailed tokenomics parameters
 
 ### WebSocket Real-Time Subscriptions
 - `WS /subscribe/blocks`: Real-time block notifications
@@ -515,6 +555,7 @@ const account = await sdk.getAccount('0x...');
 - **📁 Off-chain Storage:** Keep media on IPFS/S3, store only hashes via PostTx
 - **🔄 State Mirroring:** Mirror blockchain state to query-friendly databases
 - **⛽ Gas Management:** Monitor gas usage for cost-effective operations
+- **💰 Token Economics:** Understand FORGE token utility for transaction fees and block rewards
 - **🔐 Key Management:** Use hardware wallets or secure key stores in production
 - **📊 Monitoring:** Implement comprehensive logging and metrics
 
@@ -540,6 +581,15 @@ const account = await sdk.getAccount('0x...');
 - [ ] Slashing mechanisms
 - [ ] State channels for micropayments
 - [ ] Layer 2 scaling solutions
+
+## 📚 Documentation
+
+### Native Token Integration
+For detailed information about the native FORGE token implementation, see:
+- [NATIVE_TOKEN_INTEGRATION_PLAN.md](NATIVE_TOKEN_INTEGRATION_PLAN.md) - Complete implementation plan
+- [NATIVE_TOKEN_FEATURE_SUMMARY.md](NATIVE_TOKEN_FEATURE_SUMMARY.md) - Feature overview
+- [NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md](NATIVE_TOKEN_IMPLEMENTATION_GUIDE.md) - Step-by-step implementation guide
+- [NATIVE_TOKEN_PROJECT_SUMMARY.md](NATIVE_TOKEN_PROJECT_SUMMARY.md) - Project completion summary
 
 ## 🛠️ Development Environment
 
@@ -577,4 +627,4 @@ MIT License - see LICENSE file for details
 
 ---
 
-**🎉 EVM-compatible blockchain with smart contract support!**
+**🎉 EVM-compatible blockchain with smart contract support and native FORGE token!**

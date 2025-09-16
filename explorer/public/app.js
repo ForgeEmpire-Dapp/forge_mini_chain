@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const contractAddressElement = document.getElementById('contract-address');
     const deploymentStatus = document.getElementById('deployment-status');
     
+    // Tokenomics elements
+    const tokenomicsTab = document.getElementById('tokenomics-tab');
+    const supplyInfo = document.getElementById('supply-info');
+    const tokenomicsInfo = document.getElementById('tokenomics-info');
+    const refreshTokenomicsButton = document.getElementById('refresh-tokenomics');
+    
     // Tab elements
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -92,6 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!hash) return 'N/A';
         if (hash.length <= 20) return hash;
         return `${hash.substring(0, 10)}...${hash.substring(hash.length - 8)}`;
+    }
+
+    // Format FORGE tokens
+    function formatForgeTokens(wei) {
+        if (!wei) return "0.00 FORGE";
+        const forge = parseFloat(wei) / 1e18;
+        return forge.toFixed(2) + " FORGE";
     }
 
     // Load health information
@@ -183,6 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="info-label">Gas Limit</span>
                         <span class="info-value">${head.header.gasLimit || 0}</span>
                     </div>
+                    <div class="info-item">
+                        <span class="info-label">Base Fee</span>
+                        <span class="info-value">${formatForgeTokens(head.header.baseFeePerGas || 0)} per gas</span>
+                    </div>
                 </div>
                 
                 <div class="transactions-list">
@@ -204,11 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                                 <div class="tx-detail-item">
                                     <span class="info-label">Value</span>
-                                    <span class="info-value">${tx.tx.value || 0}</span>
+                                    <span class="info-value">${formatForgeTokens(tx.tx.value || 0)}</span>
                                 </div>
                                 <div class="tx-detail-item">
                                     <span class="info-label">Gas Price</span>
-                                    <span class="info-value">${tx.tx.gasPrice || 0}</span>
+                                    <span class="info-value">${formatForgeTokens(tx.tx.gasPrice || 0)} per gas</span>
                                 </div>
                             </div>
                         </div>
@@ -246,8 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="account-value">${address}</span>
                         </div>
                         <div class="account-item">
-                            <span class="account-label">Balance</span>
-                            <span class="account-value">${account.balance || 0}</span>
+                            <span class="account-label">FORGE Balance</span>
+                            <span class="account-value">${formatForgeTokens(account.forgeBalance || 0)}</span>
                         </div>
                         <div class="account-item">
                             <span class="account-label">Nonce</span>
@@ -269,6 +286,90 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             showNotification('Account not found', 'error');
+        }
+    }
+
+    // Load tokenomics data
+    async function loadTokenomics() {
+        // Show loading state
+        supplyInfo.innerHTML = `
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading supply information...</p>
+            </div>
+        `;
+        
+        tokenomicsInfo.innerHTML = `
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading tokenomics data...</p>
+            </div>
+        `;
+
+        // Load supply data
+        const supply = await fetchJson(`${API_URL}/supply`);
+        if (supply) {
+            supplyInfo.innerHTML = `
+                <div class="account-info">
+                    <div class="account-item">
+                        <span class="account-label">Total Supply</span>
+                        <span class="account-value">${supply.totalSupplyFormatted}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Supply Cap</span>
+                        <span class="account-value">${supply.supplyCapFormatted}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Percentage Minted</span>
+                        <span class="account-value">${supply.percentageMinted.toFixed(2)}%</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            supplyInfo.innerHTML = `
+                <div class="error-message">
+                    <p>Error loading supply information.</p>
+                </div>
+            `;
+        }
+
+        // Load tokenomics data
+        const tokenomics = await fetchJson(`${API_URL}/tokenomics`);
+        if (tokenomics) {
+            tokenomicsInfo.innerHTML = `
+                <div class="account-info">
+                    <div class="account-item">
+                        <span class="account-label">Token Name</span>
+                        <span class="account-value">${tokenomics.tokenName}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Symbol</span>
+                        <span class="account-value">${tokenomics.tokenSymbol}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Decimals</span>
+                        <span class="account-value">${tokenomics.decimals}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Block Reward</span>
+                        <span class="account-value">${tokenomics.blockRewardFormatted}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Min Gas Price</span>
+                        <span class="account-value">${tokenomics.minGasPriceFormatted}</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Block Gas Limit</span>
+                        <span class="account-value">${parseInt(tokenomics.blockGasLimit).toLocaleString()}</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            tokenomicsInfo.innerHTML = `
+                <div class="error-message">
+                    <p>Error loading tokenomics data.</p>
+                </div>
+            `;
         }
     }
 
@@ -366,6 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners
     searchButton.addEventListener('click', searchAccount);
     refreshBlocksButton.addEventListener('click', loadLatestBlocks);
+    refreshTokenomicsButton.addEventListener('click', loadTokenomics);
     
     // Wallet events
     generateWalletButton.addEventListener('click', generateWallet);
@@ -387,4 +489,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Refresh health info every 30 seconds
     setInterval(loadHealthInfo, 30000);
-});    setInterval(loadHealthInfo, 30000);
+});

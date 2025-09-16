@@ -29,9 +29,13 @@ function getChainConfig() {
     dataDir: process.env.DATA_DIR || (process.env.LEADER === "1" ? ".data" : `.data-follower-${process.env.API_PORT || "8081"}`),
     keypairFile: process.env.KEY_FILE || ".keys/ed25519.json",
     // Gas mechanism configuration
-    blockGasLimit: BigInt(process.env.BLOCK_GAS_LIMIT || "10000000"), // 10M gas per block
-    minGasPrice: BigInt(process.env.MIN_GAS_PRICE || "1000000000"), // 1 Gwei
-    baseFeePerGas: BigInt(process.env.BASE_FEE || "1000000000"), // 1 Gwei
+    blockGasLimit: BigInt(process.env.BLOCK_GAS_LIMIT || "30000000"), // 30M gas per block
+    minGasPrice: BigInt(process.env.MIN_GAS_PRICE || "1000000000"), // 1 Gwei FORGE
+    baseFeePerGas: BigInt(process.env.BASE_FEE || "1000000000"), // 1 Gwei FORGE
+    // Native token configuration
+    blockReward: BigInt(process.env.BLOCK_REWARD || "5000000000000000000"), // 5 FORGE
+    initialSupply: BigInt(process.env.INITIAL_SUPPLY || "1000000000000000000000000000"), // 1B FORGE
+    supplyCap: BigInt(process.env.SUPPLY_CAP || "2000000000000000000000000000") // 2B FORGE cap
   };
 }
 
@@ -122,6 +126,7 @@ async function startNode() {
         );
       },
       getAccount: (addr: string) => chain.state.accounts.get(addr),
+      getAllAccounts: () => chain.state.accounts,
       getHead: () => chain.head || null,
       getEVMStats: () => chain.getEVMStats(),
       getContractCode: (address: string) => chain.getContractCode(address),

@@ -18,6 +18,7 @@ import {
   totalBlocksCounter,
   transactionGasUsedHistogram
 } from "./metrics.js";
+import { initializeGenesis, GenesisConfig } from "./genesis.js";
 
 /**
  * The main class representing the blockchain with enhanced database support.
@@ -57,7 +58,7 @@ constructor(private cfg: ChainConfig, private keys: { publicKey: string; private
 /**
  * Initialize the blockchain with database and migration
  */
-async init(): Promise<void> {
+async init(genesisConfig?: GenesisConfig): Promise<void> {
   if (this.isInitialized) return;
   
   try {
@@ -70,6 +71,12 @@ async init(): Promise<void> {
     
     // Load blockchain state from database
     await this.loadFromDatabase();
+    
+    // If no blocks found and genesis config provided, initialize genesis
+    if (this.chain.length === 0 && genesisConfig) {
+      await initializeGenesis(this.state, genesisConfig);
+      console.log('[blockchain] Genesis state initialized');
+    }
     
     this.isInitialized = true;
     logger.info('Blockchain initialized', { 
@@ -219,7 +226,7 @@ async addBlock(b: Block): Promise<void> {
     }
     
     // Apply block to state and track gas usage
-    const { totalGasUsed, txResults } = await applyBlock(this.state, b);
+    const { totalGasUsed, txResults } = await applyBlock(this.state, b, this.cfg.blockReward);
     
     // Verify reported gas usage matches actual
     if (totalGasUsed !== b.header.gasUsed) {
@@ -339,6 +346,12 @@ buildNextBlock(): Block {
   const height = (this.head?.header.height ?? -1) + 1;
   const prev = this.head?.hash ?? "0x00";
   
+  // Calculate new base fee based on current head block
+  let newBaseFee = this.cfg.baseFeePerGas;
+  if (this.head) {
+    newBaseFee = this.calculateBaseFee(this.head);
+  }
+  
   logger.info('Block built', { 
     blockHeight: height,
     txCount: selectedTxs.length,
@@ -353,10 +366,34 @@ buildNextBlock(): Block {
     selectedTxs,
     blockGasUsed,
     this.cfg.blockGasLimit,
-    this.cfg.baseFeePerGas
+    newBaseFee
   );
 }
 
+/**
+ * Calculates the base fee for a new block based on parent block utilization
+ * @param parentBlock The parent block to base calculations on
+ * @returns The calculated base fee in FORGE token wei
+ */
+calculateBaseFee(parentBlock: Block): bigint {
+  // EIP-1559 parameters
+  const ELASTICITY_MULTIPLIER = 8n;
+  const gasTarget = parentBlock.header.gasLimit / 2n;
+  
+  // If the parent block used exactly the target gas, keep the same base fee
+  if (parentBlock.header.gasUsed === gasTarget) {
+    return parentBlock.header.baseFeePerGas;
+  }
+  
+  // Calculate the base fee delta
+  const gasUsedDelta = parentBlock.header.gasUsed - gasTarget;
+  const baseFeeDelta = (parentBlock.header.baseFeePerGas * gasUsedDelta) / 
+                      (gasTarget * ELASTICITY_MULTIPLIER);
+  
+  // Ensure base fee doesn't go below minimum
+  const newBaseFee = parentBlock.header.baseFeePerGas + baseFeeDelta;
+  return newBaseFee > this.cfg.minGasPrice ? newBaseFee : this.cfg.minGasPrice;
+}
 
 /**
  * Creates a state snapshot at the given height

@@ -125,6 +125,10 @@ keypairFile: string; // local key storage
 blockGasLimit: bigint; // maximum gas per block
 minGasPrice: bigint; // minimum gas price
 baseFeePerGas: bigint; // base fee for transactions
+// Native token configuration
+blockReward: bigint;      // FORGE tokens per block
+initialSupply: bigint;    // Initial token supply in wei
+supplyCap: bigint;        // Maximum token supply in wei
 };
 
 
@@ -132,7 +136,7 @@ baseFeePerGas: bigint; // base fee for transactions
  * Represents a user account or smart contract in the blockchain state.
  */
 export type Account = {
-balance: bigint;
+forgeBalance: bigint;
 nonce: number;
 rep: number;
 codeHash?: Hex; // for contract accounts - hash of the contract code
@@ -157,6 +161,7 @@ valid: boolean;
 error?: string;
 requiredGas?: bigint;
 fee?: bigint;
+feeFormatted?: string;
 };
 
 /**
