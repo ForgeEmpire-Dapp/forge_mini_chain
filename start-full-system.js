@@ -1,4 +1,4 @@
-const { spawn } = require('child_process');
+import { spawn } from 'child_process';
 
 console.log('Starting Forge Mini Chain with AI Agents...');
 
@@ -9,9 +9,8 @@ const blockchainProcess = spawn('npm', ['run', 'dev'], {
 });
 
 // Start the AI agents framework
-const agentsProcess = spawn('npm', ['run', 'start:agents'], {
+const agentsProcess = spawn('node', ['dist/index.js'], {
   stdio: 'inherit',
-  shell: true,
   cwd: 'ai-agents'
 });
 

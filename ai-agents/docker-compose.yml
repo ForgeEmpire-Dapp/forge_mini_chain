@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  ai-agents:
+    build: .
+    container_name: forge-ai-agents
+    environment:
+      - NODE_ENV=production
+      - BLOCKCHAIN_API_URL=http://leader:8080
+    ports:
+      - "3001:3001"
+    depends_on:
+      - leader
+    restart: unless-stopped
+    networks:
+      - forge-network
+
+networks:
+  forge-network:
+    external: true

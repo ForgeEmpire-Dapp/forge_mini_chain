@@ -690,6 +690,54 @@ This project was developed primarily on Windows. When running commands, be aware
 - npm
 - TypeScript
 
+## 🚀 Deployment Options
+
+Forge Empire can be deployed in multiple environments:
+
+### Docker Compose (Local Development)
+
+For local development and testing:
+
+```bash
+# Build all images
+docker-compose build
+
+# Start all services
+docker-compose up -d
+```
+
+Services will be available at:
+- Explorer: http://localhost:3000
+- Leader API: http://localhost:8080
+- Follower APIs: http://localhost:8081, http://localhost:8082
+- AI Agents: http://localhost:3001
+
+See [Docker Compose Deployment Guide](docs/DOCKER_COMPOSE_DEPLOYMENT.md) for detailed instructions.
+
+### Kubernetes (Production)
+
+For production deployment:
+
+1. Build Docker images:
+   ```bash
+   # Linux/macOS
+   ./scripts/build-images.sh
+   
+   # Windows
+   scripts\build-images.bat
+   ```
+
+2. Deploy to Kubernetes:
+   ```bash
+   # Linux/macOS
+   ./scripts/deploy-k8s.sh
+   
+   # Windows
+   scripts\deploy-k8s.bat
+   ```
+
+See [Kubernetes Deployment Guide](docs/KUBERNETES_DEPLOYMENT_GUIDE.md) for detailed instructions.
+
 ## 🤝 Contributing
 
 1. Fork the repository

@@ -30,3 +30,10 @@ spec:
             name: forge-follower-service
             port:
               number: 8081
+      - path: /agents
+        pathType: Prefix
+        backend:
+          service:
+            name: forge-ai-agents-service
+            port:
+              number: 3001

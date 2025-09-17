@@ -31,6 +31,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'explorer' });
+});
+
 app.listen(port, () => {
   console.log(`Explorer listening at http://localhost:${port}`);
 });

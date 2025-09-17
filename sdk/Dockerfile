@@ -12,22 +12,21 @@ RUN npm ci --only=production
 # Copy source code
 COPY . .
 
+# Build the SDK
+RUN npm run build
+
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs
-RUN adduser -S explorer -u 1001
+RUN adduser -S forge-sdk -u 1001
 
 # Change ownership of app directory
-RUN chown -R explorer:nodejs /app
+RUN chown -R forge-sdk:nodejs /app
 
 # Switch to non-root user
-USER explorer
+USER forge-sdk
 
-# Expose port
-EXPOSE 3000
+# Set environment variables
+ENV NODE_ENV=production
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node healthcheck.js || exit 1
-
-# Start the application
-CMD ["npm", "start"]
+# This is a library, so we don't expose ports or define entrypoints
+# It's meant to be used as a dependency in other services

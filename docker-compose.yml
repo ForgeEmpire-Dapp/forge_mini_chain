@@ -74,6 +74,21 @@ services:
     networks:
       - forge-network
 
+  # AI Agents service
+  ai-agents:
+    build: ./ai-agents
+    container_name: forge-ai-agents
+    environment:
+      - NODE_ENV=production
+      - BLOCKCHAIN_API_URL=http://leader:8080
+    ports:
+      - "3001:3001"
+    depends_on:
+      - leader
+    restart: unless-stopped
+    networks:
+      - forge-network
+
 volumes:
   leader-data:
   follower1-data:
