@@ -479,28 +479,6 @@ async getStats() {
   return await this.db.getStats();
 }
 
-/**
- * Graceful shutdown
- */
-async shutdown(): Promise<void> {
-  try {
-    logger.info('Shutting down blockchain');
-    
-    // Save current mempool
-    const mempoolPath = path.join(this.cfg.dataDir, this.cfg.chainId, 'mempool.json');
-    fs.writeFileSync(mempoolPath, JSON.stringify(this.mempool, (key, value) => 
-      typeof value === 'bigint' ? value.toString() : value
-    , 2));
-    
-    // Close database
-    await this.db.close();
-    
-    logger.info('Blockchain shutdown complete');
-  } catch (error) {
-    logger.error('Blockchain shutdown error', { error });
-  }
-}
-
   /**
    * Subscribe to block events
    */
@@ -541,6 +519,23 @@ async shutdown(): Promise<void> {
    */
   unsubscribeFromEvents(callback: (event: any) => void) {
     this.subscribers.events = this.subscribers.events.filter(cb => cb !== callback);
+  }
+
+  /**
+   * Shutdown the blockchain and close the database
+   */
+  async shutdown(): Promise<void> {
+    logger.info('Shutting down blockchain');
+    try {
+      // Close the database connection
+      if (this.db) {
+        await this.db.close();
+      }
+      logger.info('Blockchain shutdown complete');
+    } catch (error) {
+      logger.error('Error during blockchain shutdown', { error });
+      throw error;
+    }
   }
 
   /**
